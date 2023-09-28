@@ -1,0 +1,28 @@
+{
+  "[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[html]": {
+		"editor.defaultFormatter": "vscode.html-language-features"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"workbench.iconTheme": "vscode-icons",
+	"vsicons.dontShowNewVersionMessage": true,
+	"editor.formatOnSave": true,
+	"editor.quickSuggestions": {
+		"strings": "on"
+	},
+	"tailwind-fold.autoFold": false,
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+	"editor.detectIndentation": false,
+    "prettier.useTabs": true,
+    "editor.tabSize": 2,
+    "typescript.updateImportsOnFileMove.enabled": "always"
+}
