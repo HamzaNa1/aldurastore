@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
+import Footer from "@/components/Footer";
 
 const inter = Cairo({ subsets: ["arabic", "latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({
 			<body className={inter.className + " no-scrollbar"}>
 				<Navbar />
 				{children}
+				<Footer />
 			</body>
 		</html>
 	);

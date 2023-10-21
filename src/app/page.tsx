@@ -1,15 +1,27 @@
-import Image from "next/image";
+import Hero from "@/components/Hero";
+import ProductView from "@/components/ProductView";
+import Link from "next/link";
 
 export default function Home() {
 	return (
-		<main className="w-screen h-screen bg-slate-600 ">
-			<div className="container mx-auto flex h-full flex-col justify-center items-center gap-6 p-6">
-				<div className="relative aspect-square w-full max-w-xs">
-					<Image className="rounded-full" fill src="/logo.jpg" alt="" />
+		<main className="w-screen bg-secondary">
+			<div className="w-full h-fit flex flex-col items-center pb-10">
+				<Hero />
+			</div>
+			<div className="w-full h-fit bg-primary p-10 flex flex-col items-center gap-6">
+				<span className="text-7xl">منتجاتنا</span>
+				<div className="flex flex-row justify-center gap-10">
+					<ProductView></ProductView>
+					<ProductView></ProductView>
+					<ProductView></ProductView>
 				</div>
-				<span className="md:text-6xl text-4xl text-slate-400 drop-shadow-xl">
-					Coming soon...
-				</span>
+
+				<Link
+					href="/"
+					className="w-64 h-16 bg-white text-[#646464] rounded-3xl flex items-center justify-center drop-shadow-lg"
+				>
+					<span className="text-2xl">عرض الجميع</span>
+				</Link>
 			</div>
 		</main>
 	);

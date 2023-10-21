@@ -1,3 +1,7 @@
 export default function Footer() {
-	return <></>;
+	return (
+		<>
+			<div className="w-full bg-secondary">FOOTER</div>
+		</>
+	);
 }
