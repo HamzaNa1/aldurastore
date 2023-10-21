@@ -1,8 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Cairo } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Cairo({ subsets: ["arabic", "latin"] });
 
 export const metadata: Metadata = {
 	title: "Aldura Store",
@@ -17,6 +17,8 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={inter.className}>{children}</body>
+			<body className={inter.className + " no-scrollbar"}>
+			</body>
 		</html>
 	);
 }
