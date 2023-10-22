@@ -6,6 +6,8 @@ import { useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { GoDot, GoDotFill } from "react-icons/go";
 
+import Image from "next/image";
+
 interface HeroComponentProps {
 	images: string[];
 }
@@ -89,10 +91,12 @@ export default function Hero({ images }: HeroComponentProps) {
 			<div ref={sliderRef} className="keen-slider w-full h-full">
 				{images.map((src, i) => (
 					<div key={i} className="keen-slider__slide w-full h-full">
-						<div
-							style={{ backgroundImage: `url(${src})` }}
-							className="w-full h-full bg-center bg-contain bg-no-repeat"
-						></div>
+						<Image
+							src={src}
+							alt=""
+							className="h-full object-center object-contain"
+							fill
+						/>
 					</div>
 				))}
 			</div>
