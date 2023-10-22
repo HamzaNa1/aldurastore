@@ -3,10 +3,14 @@ import ProductView from "@/components/ProductView";
 import Link from "next/link";
 
 export default function Home() {
+	const images = ["/logo.png", "/logo.png", "/logo.png"];
+
 	return (
 		<main className="w-screen bg-secondary">
 			<div className="w-full h-fit flex flex-col items-center pb-10">
-				<Hero />
+				<div className="container max-h-screen aspect-video bg-[#777777]">
+					<Hero images={images} />
+				</div>
 			</div>
 			<div className="w-full h-fit bg-primary p-10 flex flex-col items-center gap-6">
 				<span className="text-7xl">منتجاتنا</span>
