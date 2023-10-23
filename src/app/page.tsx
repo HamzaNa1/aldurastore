@@ -4,6 +4,7 @@ import Link from "next/link";
 
 export default function Home() {
 	const images = ["/logo.png", "/logo.png", "/logo.png"];
+	const image = "/test.png";
 
 	return (
 		<main className="w-screen bg-secondary">
@@ -15,9 +16,9 @@ export default function Home() {
 			<div className="w-full h-fit bg-primary p-10 flex flex-col items-center gap-6">
 				<span className="text-7xl">منتجاتنا</span>
 				<div className="flex flex-row justify-center gap-10">
-					<ProductView></ProductView>
-					<ProductView></ProductView>
-					<ProductView></ProductView>
+					<ProductView imageURL={image}></ProductView>
+					<ProductView imageURL={image}></ProductView>
+					<ProductView imageURL={image}></ProductView>
 				</div>
 
 				<Link
