@@ -2,7 +2,7 @@
 
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { GoDot, GoDotFill } from "react-icons/go";
 
@@ -14,6 +14,7 @@ interface HeroComponentProps {
 
 export default function Hero({ images }: HeroComponentProps) {
 	const [currIndex, setCurrIndex] = useState(0);
+	const [loaded, setLoaded] = useState(false);
 
 	const prevSlide = () => {
 		instanceRef.current?.prev();
@@ -54,6 +55,10 @@ export default function Hero({ images }: HeroComponentProps) {
 		]
 	);
 
+	useEffect(() => {
+		setLoaded(true);
+	}, []);
+
 	return (
 		<div className="relative w-full h-full bg-[#B9B9B9]">
 			<div className="absolute w-full top-0 left-0 bottom-0 right-0">
@@ -88,18 +93,20 @@ export default function Hero({ images }: HeroComponentProps) {
 				</div>
 			</div>
 
-			<div ref={sliderRef} className="keen-slider w-full h-full">
-				{images.map((src, i) => (
-					<div key={i} className="keen-slider__slide w-full h-full">
-						<Image
-							src={src}
-							alt=""
-							className="h-full object-center object-contain"
-							fill
-						/>
-					</div>
-				))}
-			</div>
+			{loaded && (
+				<div ref={sliderRef} className="keen-slider w-full h-full">
+					{images.map((src, i) => (
+						<div key={i} className="keen-slider__slide w-full h-full">
+							<Image
+								src={src}
+								alt=""
+								className="h-full object-center object-contain"
+								fill
+							/>
+						</div>
+					))}
+				</div>
+			)}
 		</div>
 	);
 }
