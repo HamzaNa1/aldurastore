@@ -27,7 +27,7 @@ export const cartItems = mysqlTable(
 		id: varchar("id", { length: 255 }).notNull().unique().primaryKey(),
 		userId: varchar("userId", { length: 255 }).notNull(),
 		productId: varchar("productId", { length: 255 }).notNull(),
-		quantity: int("quantity"),
+		quantity: int("quantity").notNull(),
 	},
 	(table) => {
 		return {
