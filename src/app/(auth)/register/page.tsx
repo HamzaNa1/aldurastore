@@ -1,4 +1,3 @@
-import SignIn from "@/actions/auth/SignIn";
 import SignUp from "@/actions/auth/SignUp";
 import { getServerSession } from "@/lib/userUtils";
 import Link from "next/link";
@@ -17,7 +16,7 @@ export default async function Login() {
 		const email = formData.get("email") as string;
 		const password = formData.get("password") as string;
 
-		await SignUp({ name, email, password });
+		console.log(await SignUp({ name, email, password }));
 	}
 
 	return (

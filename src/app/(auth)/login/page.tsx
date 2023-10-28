@@ -1,4 +1,5 @@
 import SignIn from "@/actions/auth/SignIn";
+import { SubmitButton } from "@/components/ui/SubmitButton";
 import { getServerSession } from "@/lib/userUtils";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -38,12 +39,12 @@ export default async function Login() {
 					name="password"
 					required
 				/>
-				<button
-					className="w-full h-10 p-1 rounded-sm drop-shadow-md bg-primary disabled:bg-primarytext text-white"
-					type="submit"
+				<SubmitButton
+					className="w-full h-10 p-1 rounded-sm drop-shadow-md bg-primary text-white aria-disabled:bg-primarytext transition duration-500"
+					fallback={<>...</>}
 				>
 					تسجيل الدخول
-				</button>
+				</SubmitButton>
 			</form>
 			<Link className="text-black text-right w-64" href="/register">
 				تسجيل حساب جديد
