@@ -1,9 +1,15 @@
-import { Product } from "@/lib/schema";
-
 interface ProductBannerViewProps {
-	product: Product;
+	id: string;
+	name: string;
+	description: string;
+	imageURL: string;
 }
 
-export default function ProductBannerView({ product }: ProductBannerViewProps) {
+export default function ProductBannerView({
+	id,
+	name,
+	description,
+	imageURL,
+}: ProductBannerViewProps) {
 	return <></>;
 }

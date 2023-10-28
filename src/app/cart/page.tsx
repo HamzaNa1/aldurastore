@@ -37,7 +37,24 @@ export default function Cart() {
 				</div>
 				{/*left col */}
 				<div className="flex flex-col h-full flex-grow-0">
-					<ProductBannerView product={testProduct}></ProductBannerView>
+					<ProductBannerView
+						id={testProduct.id}
+						name={testProduct.name}
+						description={testProduct.description}
+						imageURL={testProduct.imageURL}
+					></ProductBannerView>
+					<ProductBannerView
+						id={testProduct.id}
+						name={testProduct.name}
+						description={testProduct.description}
+						imageURL={testProduct.imageURL}
+					></ProductBannerView>
+					<ProductBannerView
+						id={testProduct.id}
+						name={testProduct.name}
+						description={testProduct.description}
+						imageURL={testProduct.imageURL}
+					></ProductBannerView>
 				</div>
 				{/*right col */}
 			</div>
