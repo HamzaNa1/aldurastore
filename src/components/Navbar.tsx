@@ -2,7 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { VscAccount } from "react-icons/vsc";
+import { getServerSession } from "@/lib/userUtils";
+
 export default function Navbar() {
+	const user = getServerSession();
+
 	return (
 		<div className="w-full h-16 bg-secondary flex flex-row px-4 py-1">
 			<Link href="/" className="relative self-start aspect-square h-full p-1">
@@ -26,9 +30,15 @@ export default function Navbar() {
 				<Link href="/cart" className="w-full h-full aspect-square">
 					<AiOutlineShoppingCart className="fill-zinc-800 w-full h-full" />
 				</Link>
-				<Link href="/login" className="w-full h-full aspect-square">
-					<VscAccount className="fill-zinc-800 w-full h-full" />
-				</Link>
+				{user ? (
+					<button className="justify-center items-center">
+						<span className="text-zinc-800 font-semibold">{user.name}</span>
+					</button>
+				) : (
+					<Link href="/login" className="w-full h-full aspect-square">
+						<VscAccount className="fill-zinc-800 w-full h-full" />
+					</Link>
+				)}
 			</div>
 		</div>
 	);
