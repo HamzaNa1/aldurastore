@@ -1,26 +1,44 @@
+import ProductBannerView from "@/components/ProductBannerView";
+import { Product } from "@/lib/schema";
+
 export default function Cart() {
+	const testProduct: Product = {
+		id: "1",
+		name: "Shirt",
+		description: "Big Shirt",
+		imageURL: "/test.png",
+		showOnMain: false,
+		activated: true,
+	};
+
 	return (
 		<>
-			<div className="flex flex-row w-full h-full bg-secondary">
-				<div className="flex flex-col w-full h-full gap-7 p-20">
-					<span className="text-black text-3xl font-bold text-right h-10 w-[30%] justify-end">
+			<div className="flex flex-row w-full h-full bg-secondary px-64 justify-center items-center gap-16 p-20">
+				<div className="flex flex-col h-full flex-grow gap-7">
+					<span className="text-black text-3xl font-bold text-right w-full h-10 justify-end">
 						تفاصيل الفاتورة
 					</span>
-					<div className="flex flex-row h-7 w-[30%] outline rounded-sm p-1 bg-zinc-400 outline-zinc-400 ">
-						<span className="text-black text-sm text-right "> القيمة</span>
-						<span className="text-black text-sm text-left ml-auto"> الوصف</span>
+					<div className="flex flex-row h-7 w-full outline rounded-sm p-1 bg-zinc-400 outline-zinc-400">
+						<span className="text-black text-sm text-right flex-grow">
+							القيمة
+						</span>
+						<span className="text-black text-sm text-right flex-grow">
+							الوصف
+						</span>
 					</div>
-					<div className="flex flex-row h-7 w-[30%] outline rounded-sm p-3 bg-white outline-zinc-400 "></div>
-					<div className="flex flex-row h-7 w-[30%] outline rounded-sm p-3 bg-white outline-zinc-400 "></div>
-					<button className="bg-black h-7 w-[30%] rounded-md">
+					<div className="flex flex-row h-7 w-full outline rounded-sm p-3 bg-white outline-zinc-400"></div>
+					<div className="flex flex-row h-7 w-full outline rounded-sm p-3 bg-white outline-zinc-400"></div>
+					<button className="bg-black h-7 w-full rounded-md">
 						متابعة الشراء
 					</button>
-					<button className=" text-black bg-white h-7 w-[30%] rounded-md">
+					<button className=" text-black bg-white h-7 w-full rounded-md">
 						العودة للتسوق
 					</button>
 				</div>
 				{/*left col */}
-				<div className="flex flex-col"></div>
+				<div className="flex flex-col h-full flex-grow-0">
+					<ProductBannerView product={testProduct}></ProductBannerView>
+				</div>
 				{/*right col */}
 			</div>
 			{/* biggest div */}
