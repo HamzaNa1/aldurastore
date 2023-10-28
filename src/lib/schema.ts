@@ -6,6 +6,7 @@ import {
 	int,
 	index,
 	date,
+	primaryKey,
 } from "drizzle-orm/mysql-core";
 
 export const products = mysqlTable("product", {
@@ -17,9 +18,18 @@ export const products = mysqlTable("product", {
 	activated: boolean("activated").default(true).notNull(),
 });
 
-export const users = mysqlTable("user", {
-	id: varchar("id", { length: 255 }).notNull().unique().primaryKey(),
-});
+export const users = mysqlTable(
+	"user",
+	{
+		id: varchar("id", { length: 255 }).notNull().unique().primaryKey(),
+		name: varchar("name", { length: 255 }).notNull(),
+		email: varchar("email", { length: 255 }).unique().notNull(),
+		password: varchar("password", { length: 255 }).notNull(),
+	},
+	(table) => ({
+		emailIdx: index("emailIdx").on(table.email),
+	})
+);
 
 export const cartItems = mysqlTable(
 	"cartItem",
@@ -29,11 +39,9 @@ export const cartItems = mysqlTable(
 		productId: varchar("productId", { length: 255 }).notNull(),
 		quantity: int("quantity").notNull(),
 	},
-	(table) => {
-		return {
-			userIdx: index("userIdx").on(table.userId),
-		};
-	}
+	(table) => ({
+		userIdx: index("userIdx").on(table.userId),
+	})
 );
 
 export const orders = mysqlTable("orders", {
@@ -43,6 +51,19 @@ export const orders = mysqlTable("orders", {
 	boughtDate: date("boughtDate").default(new Date()).notNull(),
 	fulfilledDate: date("fulfilledDate"),
 });
+
+export const ordersToProducts = mysqlTable(
+	"ordersToProducts",
+	{
+		orderId: varchar("orderId", { length: 255 }).notNull(),
+		productId: varchar("productId", { length: 255 }).notNull(),
+	},
+	(table) => ({
+		pk: primaryKey(table.orderId, table.productId),
+	})
+);
+
+// export const productRelations = relations(products, ({ many }) => ({}));
 
 export const cartItemRelations = relations(cartItems, ({ one }) => ({
 	user: one(users, {
@@ -55,18 +76,31 @@ export const cartItemRelations = relations(cartItems, ({ one }) => ({
 	}),
 }));
 
-export const userRelations = relations(users, ({ many }) => ({
-	cartItems: many(cartItems),
-	orders: many(orders),
-}));
-
 export const orderRelations = relations(orders, ({ one, many }) => ({
 	user: one(users, {
 		fields: [orders.userId],
 		references: [users.id],
 	}),
-	products: many(products),
 }));
+
+export const userRelations = relations(users, ({ many }) => ({
+	cartItems: many(cartItems),
+	orders: many(orders),
+}));
+
+export const ordersToProductsRelations = relations(
+	ordersToProducts,
+	({ one }) => ({
+		order: one(orders, {
+			fields: [ordersToProducts.orderId],
+			references: [orders.id],
+		}),
+		product: one(products, {
+			fields: [ordersToProducts.productId],
+			references: [products.id],
+		}),
+	})
+);
 
 export type Product = typeof products.$inferSelect;
 export type NewProduct = typeof products.$inferInsert;
@@ -76,3 +110,6 @@ export type NewOrder = typeof orders.$inferInsert;
 
 export type CartItem = typeof cartItems.$inferSelect;
 export type NewCartItem = typeof cartItems.$inferInsert;
+
+export type User = typeof users.$inferSelect;
+export type NewUser = typeof users.$inferInsert;
