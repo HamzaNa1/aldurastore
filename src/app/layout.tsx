@@ -19,9 +19,15 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={inter.className + " no-scrollbar"}>
-				<Navbar />
-				{children}
-				<Footer />
+				<div className="min-h-screen w-full flex flex-col">
+					<div className="h-fit w-full justify-self-start flex-shrink-0">
+						<Navbar />
+					</div>
+					<div className="flex-grow flex bg-secondary">{children}</div>
+					<div className="h-fit w-full justify-self-start flex-shrink-0">
+						<Footer />
+					</div>
+				</div>
 			</body>
 		</html>
 	);
