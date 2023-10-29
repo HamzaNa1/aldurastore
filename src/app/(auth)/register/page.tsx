@@ -20,7 +20,7 @@ export default async function Login() {
 	}
 
 	return (
-		<div className="w-full flex flex-col items-center bg-secondary p-32 gap-2">
+		<div className="w-full flex flex-col justify-center items-center bg-secondary gap-2">
 			<form
 				className="container flex flex-col w-64 justify-center items-center gap-6"
 				action={register}

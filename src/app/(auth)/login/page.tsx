@@ -20,7 +20,7 @@ export default async function Login() {
 	}
 
 	return (
-		<div className="w-full flex flex-col items-center bg-secondary p-32 gap-2">
+		<div className="w-full flex flex-col justify-center items-center bg-secondary gap-2">
 			<form
 				className="container flex flex-col w-64 justify-center items-center gap-6"
 				action={login}
@@ -48,6 +48,9 @@ export default async function Login() {
 			</form>
 			<Link className="text-black text-right w-64" href="/register">
 				تسجيل حساب جديد
+			</Link>
+			<Link className="text-black text-right w-64" href="/forgot-password">
+				نسيت كلمة السر؟
 			</Link>
 		</div>
 	);
