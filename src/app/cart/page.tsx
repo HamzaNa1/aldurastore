@@ -3,7 +3,7 @@ import { Product } from "@/lib/schema";
 
 export default function Cart() {
 	const testProduct: Product = {
-		id: "1",
+		id: "100",
 		name: "Shirt",
 		description: "Big Shirt",
 		imageURL: "/test.png",
@@ -37,6 +37,21 @@ export default function Cart() {
 				</div>
 				{/*left col */}
 				<div className="flex flex-col h-full flex-grow-0">
+					<span className="text-black text-3xl font-bold text-right w-full h-10 justify-center">
+						المنتجات
+					</span>
+					<div className="flex flex-row h-7 w-full outline rounded-sm p-1 bg-zinc-400 outline-zinc-400">
+						<span className="text-black text-sm text-start flex-grow">
+							السعر
+						</span>
+						<span className="text-black text-sm text-center flex-grow">
+							الكمية
+						</span>
+						<span className="text-black text-sm text-end flex-grow">
+							المنتج
+						</span>
+					</div>
+
 					<ProductBannerView
 						id={testProduct.id}
 						name={testProduct.name}
