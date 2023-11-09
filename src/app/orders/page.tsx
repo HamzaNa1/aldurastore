@@ -1,6 +1,3 @@
-import OrderView from "@/components/OrderView";
-import { idText } from "typescript";
-
 export default function Orders() {
 	const testOrder = {
 		id: "AAAA-AAAA-AAAA-AAAA",

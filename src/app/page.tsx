@@ -3,7 +3,7 @@ import ProductView from "@/components/ProductView";
 import Link from "next/link";
 
 export default function Home() {
-	const images = ["/logo.png", "/logo.png", "/logo.png"];
+	const images = ["/test.png", "/test2.png", "/test.png", "/test2.png"];
 	const image = "/test.png";
 
 	return (

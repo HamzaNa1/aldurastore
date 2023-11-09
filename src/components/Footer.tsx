@@ -24,7 +24,7 @@ export default function Footer() {
 					</div>
 
 					<div>
-						<img className="h-48 w-48" src="logoNobg.png" alt="" />
+						<img className="h-48 w-48" src="logo.png" alt="" />
 						<div className="text-black flex flex-row gap-5 p-3 items-center justify-center">
 							<Link
 								href="https://www.facebook.com/aldurrastore?mibextid=LQQJ4d"
