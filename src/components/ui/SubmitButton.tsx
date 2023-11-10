@@ -15,7 +15,7 @@ export function SubmitButton({
 
 	return (
 		<button type="submit" className={className} aria-disabled={pending}>
-			{pending ? fallback : children}
+			{pending ? fallback ?? children : children}
 		</button>
 	);
 }
