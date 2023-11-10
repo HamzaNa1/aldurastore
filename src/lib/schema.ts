@@ -7,19 +7,26 @@ import {
 	index,
 	date,
 	primaryKey,
+	real,
 } from "drizzle-orm/mysql-core";
 
-export const products = mysqlTable("product", {
+export const heroImages = mysqlTable("heroImages", {
+	id: varchar("id", { length: 255 }).notNull().unique().primaryKey(),
+	imageURL: varchar("imageURL", { length: 255 }).notNull(),
+});
+
+export const products = mysqlTable("products", {
 	id: varchar("id", { length: 255 }).notNull().unique().primaryKey(),
 	name: varchar("name", { length: 255 }).notNull(),
 	description: varchar("description", { length: 255 }).notNull(),
-	imageURL: varchar("url", { length: 255 }).notNull(),
+	cost: real("cost").notNull(),
+	imageURL: varchar("imageURL", { length: 255 }).notNull(),
 	showOnMain: boolean("showOnMain").default(false).notNull(),
 	activated: boolean("activated").default(true).notNull(),
 });
 
 export const users = mysqlTable(
-	"user",
+	"users",
 	{
 		id: varchar("id", { length: 255 }).notNull().unique().primaryKey(),
 		name: varchar("name", { length: 255 }).notNull(),
@@ -32,7 +39,7 @@ export const users = mysqlTable(
 );
 
 export const cartItems = mysqlTable(
-	"cartItem",
+	"cartItems",
 	{
 		id: varchar("id", { length: 255 }).notNull().unique().primaryKey(),
 		userId: varchar("userId", { length: 255 }).notNull(),
@@ -63,7 +70,15 @@ export const ordersToProducts = mysqlTable(
 	})
 );
 
-// export const productRelations = relations(products, ({ many }) => ({}));
+export const productImages = mysqlTable("productImages", {
+	id: varchar("id", { length: 255 }).notNull().unique().primaryKey(),
+	productId: varchar("productId", { length: 255 }).notNull(),
+	imageURL: varchar("imageURL", { length: 255 }).notNull(),
+});
+
+export const productRelations = relations(products, ({ many }) => ({
+	productImages: many(productImages),
+}));
 
 export const cartItemRelations = relations(cartItems, ({ one }) => ({
 	user: one(users, {
@@ -101,6 +116,16 @@ export const ordersToProductsRelations = relations(
 		}),
 	})
 );
+
+export const productImageRelations = relations(productImages, ({ one }) => ({
+	product: one(products, {
+		fields: [productImages.productId],
+		references: [products.id],
+	}),
+}));
+
+export type HeroImage = typeof heroImages.$inferSelect;
+export type NewHeroImage = typeof heroImages.$inferInsert;
 
 export type Product = typeof products.$inferSelect;
 export type NewProduct = typeof products.$inferInsert;
