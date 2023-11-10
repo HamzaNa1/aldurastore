@@ -12,11 +12,20 @@ export default function Products() {
 		"/test2.png",
 	];
 
+	const products = images.map((x) => ({
+		id: "1",
+		name: "اسم المنتج",
+		description: "وصف المنتج",
+		imageURL: x,
+		showOnMain: true,
+		activated: true,
+	}));
+
 	return (
 		<>
 			<div className="w-full h-fit bg-secondary flex flex-row flex-wrap justify-start gap-10 px-80 py-10">
-				{images.map((image, i) => (
-					<ProductView key={i} imageURL={image}></ProductView>
+				{products.map((product, i) => (
+					<ProductView key={i} product={product}></ProductView>
 				))}
 			</div>
 		</>

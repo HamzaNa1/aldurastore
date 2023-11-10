@@ -1,16 +1,21 @@
+import { Product } from "@/lib/schema";
 import Image from "next/image";
+import Link from "next/link";
 
 interface ProductViewProp {
-	imageURL: string;
+	product: Product;
 }
 
-export default function ProductView({ imageURL }: ProductViewProp) {
+export default function ProductView({ product }: ProductViewProp) {
 	return (
 		<>
-			<div className="w-[400px] h-[700px] bg-white flex flex-col">
+			<Link
+				href={`/products/${product.id}`}
+				className="w-[400px] h-[700px] bg-white flex flex-col"
+			>
 				<div className="relative w-full aspect-square">
 					<Image
-						src={imageURL}
+						src={product.imageURL}
 						alt=""
 						fill
 						className="h-full object-center object-contain"
@@ -19,15 +24,14 @@ export default function ProductView({ imageURL }: ProductViewProp) {
 
 				<div className="w-full h-auto p-4 flex flex-col gap-4">
 					<div className="text-[#145654] right-0 text-right text-3xl">
-						اسم المنتج اسم المنتج اسم المنتج اسم المنتج
+						{product.name}
 					</div>
 
 					<div className="text-[#909090] right-0 text-right text-xl">
-						وصف المنتج وصف المنتج وصف المنتج وصف المنتج وصف المنتج وصف المنتج
-						وصف المنتج وصف المنتج وصف المنتج وصف المنتج وصف المنتج وصف
+						{product.description}
 					</div>
 				</div>
-			</div>
+			</Link>
 		</>
 	);
 }
