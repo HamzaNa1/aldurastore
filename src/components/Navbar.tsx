@@ -30,17 +30,11 @@ export default function Navbar() {
 				<Link href="/cart" className="w-full h-full aspect-square">
 					<AiOutlineShoppingCart className="fill-zinc-800 w-full h-full" />
 				</Link>
-				{user ? (
-					<button className="justify-center items-center">
-						<Link href="/account">
-							<span className="text-zinc-800 font-semibold">{user.name}</span>
-						</Link>
-					</button>
-				) : (
-					<Link href="/login" className="w-full h-full aspect-square">
+				<div className="w-full h-full aspect-square overflow-hidden whitespace-normal">
+					<Link href={user ? "/account" : "/login"} className="w-full h-full">
 						<VscAccount className="fill-zinc-800 w-full h-full" />
 					</Link>
-				)}
+				</div>
 			</div>
 		</div>
 	);
