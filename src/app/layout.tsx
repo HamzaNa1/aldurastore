@@ -23,7 +23,9 @@ export default function RootLayout({
 					<div className="h-fit w-full justify-self-start flex-shrink-0">
 						<Navbar />
 					</div>
-					<div className="flex-grow flex bg-secondary">{children}</div>
+					<div className="flex-grow flex justify-center bg-secondary">
+						{children}
+					</div>
 					<div className="h-fit w-full justify-self-start flex-shrink-0">
 						<Footer />
 					</div>
