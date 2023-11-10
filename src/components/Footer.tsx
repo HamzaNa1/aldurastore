@@ -2,25 +2,26 @@ import { BsFacebook } from "react-icons/bs";
 import { BsInstagram } from "react-icons/bs";
 import { BsWhatsapp } from "react-icons/bs";
 import Link from "next/link";
+
 export default function Footer() {
 	return (
 		<>
-			<div className="flex flex-col w-full h-full bg-white items-center justify-center ">
-				<div className="flex flex-row p-32 gap-40  ">
-					<div className=" text-black flex flex-col gap-4 text-right">
+			<div className="flex flex-col w-full h-full bg-white items-center justify-center">
+				<div className="flex flex-row p-32 gap-40">
+					<div className="text-black flex flex-col gap-4 text-right">
 						<span className="font-bold">تواصل</span>
 						<span>البريد الألكتروني</span>
 						<span>رقم الجوال</span>
 						<span>الموقع</span>
 					</div>
 
-					<div className=" text-black flex flex-col gap-4 text-right">
+					<div className="text-black flex flex-col gap-4 text-right">
 						<span className="font-bold">الصفحات</span>
-						<span>الصفحة الرئيسية</span>
-						<span>جميع المنتجات</span>
-						<span>السلة</span>
-						<span>الحساب</span>
-						<span>English | عربي</span>
+						<Link href="/">الصفحة الرئيسية</Link>
+						<Link href="/products">جميع المنتجات</Link>
+						<Link href="/cart">السلة</Link>
+						<Link href="/account">الحساب</Link>
+						<Link href="#">English | عربي</Link>
 					</div>
 
 					<div>
