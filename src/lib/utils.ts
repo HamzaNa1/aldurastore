@@ -27,7 +27,7 @@ export function SignToken(payload: any) {
 		issuer: "https://www.aldurastore.com/",
 		audience: "https://www.aldurastore.com/",
 		algorithm: "HS256",
-		expiresIn: "1h",
+		expiresIn: "5h",
 	});
 
 	return newToken;
