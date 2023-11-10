@@ -32,7 +32,9 @@ export default function Navbar() {
 				</Link>
 				{user ? (
 					<button className="justify-center items-center">
-						<span className="text-zinc-800 font-semibold">{user.name}</span>
+						<Link href="/account">
+							<span className="text-zinc-800 font-semibold">{user.name}</span>
+						</Link>
 					</button>
 				) : (
 					<Link href="/login" className="w-full h-full aspect-square">
