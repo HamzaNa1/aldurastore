@@ -1,25 +1,10 @@
 import ProductView from "@/components/ProductView";
+import db from "@/lib/db";
 
-export default function Products() {
-	const images = [
-		"/test.png",
-		"/test2.png",
-		"/test.png ",
-		"/test2.png",
-		"/test.png",
-		"/test2.png",
-		"/test.png",
-		"/test2.png",
-	];
-
-	const products = images.map((x) => ({
-		id: "1",
-		name: "اسم المنتج",
-		description: "وصف المنتج",
-		imageURL: x,
-		showOnMain: true,
-		activated: true,
-	}));
+export default async function Products() {
+	const products = await db.query.products.findMany({
+		where: (product, { eq }) => eq(product.activated, true),
+	});
 
 	return (
 		<>
