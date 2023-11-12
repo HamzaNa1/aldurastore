@@ -7,7 +7,7 @@ import {
 	index,
 	date,
 	primaryKey,
-	real,
+	double,
 } from "drizzle-orm/mysql-core";
 
 export const heroImages = mysqlTable("heroImages", {
@@ -19,7 +19,7 @@ export const products = mysqlTable("products", {
 	id: varchar("id", { length: 255 }).notNull().unique().primaryKey(),
 	name: varchar("name", { length: 255 }).notNull(),
 	description: varchar("description", { length: 255 }).notNull(),
-	cost: real("cost").notNull(),
+	cost: double("cost").notNull(),
 	imageURL: varchar("imageURL", { length: 255 }).notNull(),
 	showOnMain: boolean("showOnMain").default(false).notNull(),
 	activated: boolean("activated").default(true).notNull(),
