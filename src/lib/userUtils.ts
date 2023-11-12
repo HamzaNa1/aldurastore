@@ -17,12 +17,13 @@ export function getServerSession() {
 		return null;
 	}
 
+	const id = payload?.id as string | undefined;
 	const email = payload?.email as string | undefined;
 	const name = payload?.name as string | undefined;
 
-	if (!email || !name) {
+	if (!id || !email || !name) {
 		return null;
 	}
 
-	return { email: email, name: name, token: token };
+	return { id: id, email: email, name: name, token: token };
 }

@@ -49,7 +49,7 @@ export default async function SignUp({
 		throw new Error("JWT_KEY is not defined");
 	}
 
-	const token = SignToken({ email, name });
+	const token = SignToken({ id: newUser.id, email, name });
 
 	const cookiesStore = cookies();
 	cookiesStore.set("token", token);

@@ -34,10 +34,10 @@ export default async function SignIn({
 		throw new Error("JWT_KEY is not defined");
 	}
 
-	const token = SignToken({ email: email, name: user.name });
+	const token = SignToken({ id: user.id, email: email, name: user.name });
 
 	const cookiesStore = cookies();
 	cookiesStore.set("token", token);
 
-	return { email: user.email, name: user.name, token: token };
+	return { id: user.id, email: user.email, name: user.name, token: token };
 }
