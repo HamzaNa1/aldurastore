@@ -4,6 +4,7 @@ import db from "@/lib/db";
 import { cartItems, products } from "@/lib/schema";
 import { getServerSession } from "@/lib/userUtils";
 import { eq } from "drizzle-orm";
+import Link from "next/link";
 import { BsCartX } from "react-icons/bs";
 
 export const dynamic = "force-dynamic";
@@ -21,11 +22,17 @@ export default async function Cart() {
 
 	if (cart.length == 0) {
 		return (
-			<div className="flex flex-col gap-1 place-self-center">
-				<BsCartX className="w-48 h-48 fill-primary" />
-				<span className="text-zinc-900 text-xl italic font-semibold place-self-center">
-					Cart is Empty
+			<div className="flex flex-col gap-4 place-self-center items-center py-20">
+				<span className="text-zinc-800 text-3xl font-semibold place-self-center">
+					سلة التسوق فارغة
 				</span>
+				<BsCartX className="w-48 h-48 fill-primary" />
+				<Link
+					href="/products"
+					className="w-48 h-12 bg-white text-zinc-800 hover:brightness-95 rounded-lg flex items-center justify-center drop-shadow-lg"
+				>
+					<span className="text-2xl">أبدأ بالتسوق</span>
+				</Link>
 			</div>
 		);
 	}
