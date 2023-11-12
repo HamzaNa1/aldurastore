@@ -17,10 +17,18 @@ export default function Footer() {
 
 					<div className="text-black flex flex-col gap-4 text-right">
 						<span className="font-bold">الصفحات</span>
-						<Link href="/">الصفحة الرئيسية</Link>
-						<Link href="/products">جميع المنتجات</Link>
-						<Link href="/cart">السلة</Link>
-						<Link href="/account">الحساب</Link>
+						<Link href="/" prefetch={true}>
+							الصفحة الرئيسية
+						</Link>
+						<Link href="/products" prefetch={true}>
+							جميع المنتجات
+						</Link>
+						<Link href="/cart" prefetch={true}>
+							السلة
+						</Link>
+						<Link href="/account" prefetch={true}>
+							الحساب
+						</Link>
 						<Link href="#">English | عربي</Link>
 					</div>
 
