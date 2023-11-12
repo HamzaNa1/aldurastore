@@ -41,7 +41,7 @@ export default async function Login() {
 				/>
 				<SubmitButton
 					className="w-full h-10 p-1 rounded-sm drop-shadow-md bg-primary text-white aria-disabled:bg-primarytext transition duration-500"
-					fallback={<>...</>}
+					fallback={null}
 				>
 					تسجيل الدخول
 				</SubmitButton>
