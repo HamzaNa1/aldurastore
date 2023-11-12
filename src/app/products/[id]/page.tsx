@@ -1,8 +1,12 @@
 import ProductImageSlider from "@/components/ProductImageSlider";
 import BackButton from "@/components/ui/BackButton";
+import { SubmitButton } from "@/components/ui/SubmitButton";
 import db from "@/lib/db";
-import { productImages, products } from "@/lib/schema";
-import { eq } from "drizzle-orm";
+import { NewCartItem, cartItems, productImages, products } from "@/lib/schema";
+import { getServerSession } from "@/lib/userUtils";
+import { randomUUID } from "crypto";
+import { BiArrowBack } from "react-icons/bi";
+import { redirect } from "next/navigation";
 
 interface ProductPageProps {
 	params: {
@@ -11,6 +15,8 @@ interface ProductPageProps {
 }
 
 export default async function Product({ params: { id } }: ProductPageProps) {
+	const user = getServerSession();
+
 	const product = await db.query.products.findFirst({
 		where: (product, { eq }) => eq(product.id, id),
 	});
@@ -20,6 +26,25 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 			<span className="text-primarytext text-4xl">Product Not Found...</span>
 		);
 	}
+
+	const AddToCart = async () => {
+		"use server";
+
+		if (!user) {
+			redirect("/login");
+		}
+
+		const newCartItem: NewCartItem = {
+			id: randomUUID(),
+			userId: user?.id,
+			productId: product.id,
+			quantity: 1,
+		};
+
+		await db.insert(cartItems).values(newCartItem);
+
+		redirect("/cart");
+	};
 
 	const productImages = await db.query.productImages.findMany({
 		where: (productImage, { eq }) => eq(productImage.productId, id),
@@ -32,9 +57,14 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 
 	return (
 		<>
-			<div className="bg-secondary w-full h-fit flex flex-row justify-center p-[60px]">
-				<BackButton></BackButton>
-
+			<div className="relative bg-secondary container h-fit flex flex-row justify-center p-[60px]">
+				<div className="absolute left-0">
+					<BackButton>
+						<div className="w-8 h-8 outline outline-2 outline-zinc-800 rounded-full">
+							<BiArrowBack className="w-full h-full fill-zinc-800" />
+						</div>
+					</BackButton>
+				</div>
 				<ProductImageSlider imageUrls={images}></ProductImageSlider>
 				<div className="w-full flex flex-col gap-20 items-end">
 					<div className="w-full flex flex-col gap-2">
@@ -76,9 +106,14 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 					</div>
 
 					<div className="flex flex-row gap-10">
-						<button className="py-2 px-12 bg-primary rounded-md drop-shadow-lg hover:brightness-90 transition duration-300">
-							أضف إلى السلة
-						</button>
+						<form action={AddToCart}>
+							<SubmitButton
+								className="py-2 px-12 bg-primary rounded-md drop-shadow-lg hover:brightness-90 transition duration-300"
+								fallback={null}
+							>
+								<span>أضف إلى السلة</span>
+							</SubmitButton>
+						</form>
 					</div>
 				</div>
 			</div>
