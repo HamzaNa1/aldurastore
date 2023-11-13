@@ -60,8 +60,8 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 			<div className="relative bg-secondary container h-fit flex flex-row justify-center p-[60px]">
 				<div className="absolute left-0">
 					<BackButton>
-						<div className="w-8 h-8 outline outline-2 outline-zinc-800 rounded-full">
-							<BiArrowBack className="w-full h-full fill-zinc-800" />
+						<div className="w-8 h-8 border-2 border-zinc-800 rounded-full hover:border-primary transition duration-300">
+							<BiArrowBack className="w-full h-full fill-zinc-800 hover:fill-primary transition duration-300" />
 						</div>
 					</BackButton>
 				</div>
@@ -108,7 +108,7 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 					<div className="flex flex-row gap-10">
 						<form action={AddToCart}>
 							<SubmitButton
-								className="py-2 px-12 bg-primary rounded-md drop-shadow-lg hover:brightness-90 transition duration-300"
+								className="py-2 px-12 bg-primary rounded-md drop-shadow-lg brightness-100 hover:brightness-90 transition duration-300"
 								fallback={null}
 							>
 								<span>أضف إلى السلة</span>

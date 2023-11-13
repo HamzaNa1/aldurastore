@@ -17,20 +17,21 @@ export default async function Home() {
 					<Hero images={images.map((x) => x.imageURL)} />
 				</div>
 			</div>
-			<div className="w-full h-fit bg-primary p-10 flex flex-col items-center gap-6">
-				<span className="text-7xl">منتجاتنا</span>
-				<div className="flex flex-row justify-center gap-10">
-					{products.map((product, i) => (
-						<ProductView key={i} product={product}></ProductView>
-					))}
+			<div className="w-full h-fit bg-primary py-10 flex justify-center">
+				<div className="container flex flex-col items-center gap-6">
+					<span className="text-7xl">منتجاتنا</span>
+					<div className="flex flex-row justify-center gap-10">
+						{products.map((product, i) => (
+							<ProductView key={i} product={product}></ProductView>
+						))}
+					</div>
+					<Link
+						href="/products"
+						className="w-64 h-16 bg-white text-[#646464] rounded-3xl flex items-center justify-center drop-shadow-lg brightness-100 hover:brightness-90 transition duration-300"
+					>
+						<span className="text-2xl">عرض الجميع</span>
+					</Link>
 				</div>
-
-				<Link
-					href="/products"
-					className="w-64 h-16 bg-white text-[#646464] rounded-3xl flex items-center justify-center drop-shadow-lg"
-				>
-					<span className="text-2xl">عرض الجميع</span>
-				</Link>
 			</div>
 		</main>
 	);

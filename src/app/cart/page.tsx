@@ -29,7 +29,7 @@ export default async function Cart() {
 				<BsCartX className="w-48 h-48 fill-primary" />
 				<Link
 					href="/products"
-					className="w-48 h-12 bg-white text-zinc-800 hover:brightness-95 rounded-lg flex items-center justify-center drop-shadow-lg"
+					className="w-48 h-12 bg-white text-zinc-800 brightness-100 hover:brightness-95 rounded-lg flex items-center justify-center drop-shadow-lg transition"
 				>
 					<span className="text-2xl">أبدأ بالتسوق</span>
 				</Link>
@@ -39,8 +39,8 @@ export default async function Cart() {
 
 	return (
 		<>
-			<div className="flex flex-row w-full h-full bg-secondary px-64 justify-center gap-16 p-20">
-				<div className="flex flex-col h-full flex-grow gap-3">
+			<div className="flex flex-row w-full h-full flex-1 bg-secondary px-64 justify-center gap-16 p-20">
+				<div className="flex flex-col h-full w-full gap-3">
 					<span className="text-primarytext text-3xl font-bold text-right w-full h-10">
 						تفاصيل الفاتورة
 					</span>
@@ -68,21 +68,20 @@ export default async function Cart() {
 						</div>
 					</BackButton>
 				</div>
-				<div className="flex flex-col h-full flex-grow-0 min-w-[60%] gap-7">
+				<div className="flex flex-col h-full w-[150%] gap-7">
 					<span className="text-primarytext text-3xl font-bold text-right w-full h-10">
 						المنتجات
 					</span>
-					<table className="table-auto">
-						<thead className="text-zinc-50 text-sm text-right outline outline-[0.5px] rounded-tr-sm rounded-tl-sm bg-primary outline-primary h-fit">
+					<table className="table-fixed w-full">
+						<thead className="sticky text-zinc-50 text-sm text-right outline outline-[0.5px] rounded-tr-sm rounded-tl-sm bg-primary outline-primary h-fit">
 							<tr>
+								<th className="w-[7%]"></th>
 								<th className="w-[7%]"></th>
 								<th className="py-1 font-semibold">السعر</th>
 								<th className="font-semibold">المنتج</th>
 							</tr>
 						</thead>
-						<CartItemsTable
-							items={cart.map((x) => x.products)}
-						></CartItemsTable>
+						<CartItemsTable items={cart}></CartItemsTable>
 					</table>
 				</div>
 			</div>

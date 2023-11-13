@@ -53,11 +53,11 @@ export default function ProductImageSlider({
 					</div>
 				) : (
 					<div className="flex flex-col gap-3">
-						<div className="w-full aspect-square bg-white"></div>
-						<div className="w-full aspect-square bg-white"></div>
-						<div className="w-full aspect-square bg-white"></div>
-						<div className="w-full aspect-square bg-white"></div>
-						<div className="w-full aspect-square bg-white"></div>
+						<div className="w-full aspect-square bg-white animate-pulse"></div>
+						<div className="w-full aspect-square bg-white animate-pulse"></div>
+						<div className="w-full aspect-square bg-white animate-pulse"></div>
+						<div className="w-full aspect-square bg-white animate-pulse"></div>
+						<div className="w-full aspect-square bg-white animate-pulse"></div>
 					</div>
 				)}
 			</div>
