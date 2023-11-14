@@ -12,16 +12,6 @@ import { Suspense } from "react";
 export default async function Navbar() {
 	const user = getServerSession();
 
-	let cartCount: { count: number } | undefined = undefined;
-	if (user) {
-		cartCount = (
-			await db
-				.select({ count: sql<number>`count(${cartItems.id})` })
-				.from(cartItems)
-				.where(eq(cartItems.userId, user.id))
-		)[0];
-	}
-
 	return (
 		<div className="w-full h-16 bg-secondary flex flex-row px-4 py-1">
 			<Link
@@ -50,10 +40,7 @@ export default async function Navbar() {
 					className="flex flex-row items-center group space-x-[-6px]"
 				>
 					<Suspense fallback={<>A</>}>
-						<CartCount
-							className="text-lg font-semibold text-zinc-800 group-hover:text-primary transition"
-							count={cartCount?.count}
-						></CartCount>
+						<CartCount></CartCount>
 					</Suspense>
 					<div className="w-full h-full aspect-square">
 						<AiOutlineShoppingCart className="fill-zinc-800 w-full h-full group-hover:fill-primary transition" />
