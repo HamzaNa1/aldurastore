@@ -8,6 +8,7 @@ import {
 	date,
 	primaryKey,
 	double,
+	datetime,
 } from "drizzle-orm/mysql-core";
 
 export const heroImages = mysqlTable("heroImages", {
@@ -32,6 +33,8 @@ export const users = mysqlTable(
 		name: varchar("name", { length: 255 }).notNull(),
 		email: varchar("email", { length: 255 }).unique().notNull(),
 		password: varchar("password", { length: 255 }).notNull(),
+		createDate: datetime("createDate").default(new Date()).notNull(),
+		admin: boolean("admin").default(false).notNull(),
 	},
 	(table) => ({
 		emailIdx: index("emailIdx").on(table.email),
