@@ -1,29 +1,27 @@
 import Hero from "@/components/Hero";
-import ProductView from "@/components/ProductView";
+import ProductView, { ProductViewSkeleton } from "@/components/ProductView";
 import db from "@/lib/db";
+import { Product } from "@/lib/schema";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default async function Home() {
-	const images = await db.query.heroImages.findMany({});
-	const products = await db.query.products.findMany({
-		where: (product, { eq }) =>
-			eq(product.showOnMain, true) && eq(product.activated, true),
-	});
-
 	return (
 		<main className="w-screen bg-secondary">
 			<div className="w-full h-fit flex flex-col items-center pb-10">
 				<div className="container max-h-screen aspect-video bg-[#777777]">
-					<Hero images={images.map((x) => x.imageURL)} />
+					<Suspense fallback={<HeroSkeleton />}>
+						<HeroSection />
+					</Suspense>
 				</div>
 			</div>
 			<div className="w-full h-fit bg-primary py-10 flex justify-center">
 				<div className="container flex flex-col items-center gap-6">
 					<span className="text-7xl">منتجاتنا</span>
 					<div className="flex flex-row justify-center gap-10">
-						{products.map((product, i) => (
-							<ProductView key={i} product={product}></ProductView>
-						))}
+						<Suspense fallback={<ProductSkeleton />}>
+							<ProductSection />
+						</Suspense>
 					</div>
 					<Link
 						href="/products"
@@ -34,5 +32,40 @@ export default async function Home() {
 				</div>
 			</div>
 		</main>
+	);
+}
+
+async function HeroSection() {
+	const images = await db.query.heroImages.findMany({});
+
+	return <Hero images={images.map((x) => x.imageURL)} />;
+}
+
+async function HeroSkeleton() {
+	return <div className="w-full h-full bg-zinc-400 animate-pulse"></div>;
+}
+
+async function ProductSection() {
+	const products = await db.query.products.findMany({
+		where: (product, { eq }) =>
+			eq(product.showOnMain, true) && eq(product.activated, true),
+	});
+
+	return (
+		<>
+			{products.map((product, i) => (
+				<ProductView key={i} product={product}></ProductView>
+			))}
+		</>
+	);
+}
+
+async function ProductSkeleton() {
+	return (
+		<>
+			<ProductViewSkeleton />
+			<ProductViewSkeleton />
+			<ProductViewSkeleton />
+		</>
 	);
 }

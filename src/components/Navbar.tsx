@@ -7,6 +7,7 @@ import CartCount from "./ui/CartCount";
 import db from "@/lib/db";
 import { eq, sql } from "drizzle-orm";
 import { cartItems } from "@/lib/schema";
+import { Suspense } from "react";
 
 export default async function Navbar() {
 	const user = getServerSession();
@@ -48,10 +49,12 @@ export default async function Navbar() {
 					href="/cart"
 					className="flex flex-row items-center group space-x-[-6px]"
 				>
-					<CartCount
-						className="text-lg font-semibold text-zinc-800 group-hover:text-primary transition"
-						count={cartCount?.count}
-					></CartCount>
+					<Suspense fallback={<>A</>}>
+						<CartCount
+							className="text-lg font-semibold text-zinc-800 group-hover:text-primary transition"
+							count={cartCount?.count}
+						></CartCount>
+					</Suspense>
 					<div className="w-full h-full aspect-square">
 						<AiOutlineShoppingCart className="fill-zinc-800 w-full h-full group-hover:fill-primary transition" />
 					</div>
