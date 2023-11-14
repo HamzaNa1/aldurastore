@@ -97,11 +97,10 @@ export default function Hero({ images }: HeroComponentProps) {
 				<div ref={sliderRef} className="keen-slider w-full h-full">
 					{images.map((src, i) => (
 						<div key={i} className="keen-slider__slide w-full h-full">
-							<Image
+							<img
 								src={src}
 								alt=""
-								className="h-full object-center object-contain"
-								fill
+								className="w-full h-full object-center object-contain"
 							/>
 						</div>
 					))}
