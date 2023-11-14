@@ -37,8 +37,8 @@ export default function ProductView({ product }: ProductViewProp) {
 export function ProductViewSkeleton() {
 	return (
 		<div className="w-[400px] h-[700px] bg-white flex flex-col">
-			<div className="relative w-full aspect-square">
-				<div className="w-full h-full bg-secondary animate-pulse"></div>
+			<div className="relative w-full aspect-square bg-secondary">
+				<div className="w-full h-full bg-white animate-pulse"></div>
 			</div>
 
 			<div className="w-full h-auto p-4 flex flex-col gap-10 items-end">

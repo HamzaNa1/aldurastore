@@ -1,7 +1,6 @@
 import Hero from "@/components/Hero";
 import ProductView, { ProductViewSkeleton } from "@/components/ProductView";
 import db from "@/lib/db";
-import { Product } from "@/lib/schema";
 import Link from "next/link";
 import { Suspense } from "react";
 
@@ -9,7 +8,7 @@ export default async function Home() {
 	return (
 		<main className="w-screen bg-secondary">
 			<div className="w-full h-fit flex flex-col items-center pb-10">
-				<div className="container max-h-screen aspect-video bg-[#777777]">
+				<div className="container max-h-screen aspect-video bg-zinc-500">
 					<Suspense fallback={<HeroSkeleton />}>
 						<HeroSection />
 					</Suspense>
