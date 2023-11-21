@@ -4,8 +4,6 @@ import { config } from "dotenv";
 
 config({ path: ".env.local" });
 
-console.log(process.env.DATABASE_URL);
-
 if (!process.env.DATABASE_URL) {
 	throw new Error("DATABASE_URL environment variable is required.");
 }
