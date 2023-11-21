@@ -5,6 +5,7 @@ import { CartItem, Product } from "@/lib/schema";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { useEffect, useState } from "react";
 import { FaSquareXmark } from "react-icons/fa6";
+import { SubmitButton } from "./SubmitButton";
 
 interface CartItemsTableProps {
 	items: { products: Product; cartItems: CartItem }[];
@@ -82,9 +83,9 @@ export default function CartItemsTable({ items }: CartItemsTableProps) {
 											await DeleteItem(x.cartItems.id);
 										}}
 									>
-										<button type="submit" className="w-4 h-4">
+										<SubmitButton className="w-4 h-4" fallback={undefined}>
 											<FaSquareXmark className="w-full h-full fill-primary hover:brightness-90 transition duration-300" />
-										</button>
+										</SubmitButton>
 									</form>
 								</div>
 							</td>

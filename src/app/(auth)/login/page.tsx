@@ -40,7 +40,7 @@ export default async function Login() {
 					required
 				/>
 				<SubmitButton
-					className="w-full h-10 p-1 rounded-sm drop-shadow-md bg-primary text-white aria-disabled:bg-primarytext transition duration-500"
+					className="w-full h-10 p-1 rounded-sm drop-shadow-md bg-primary text-white disabled:bg-primarytext transition duration-500"
 					fallback={null}
 				>
 					تسجيل الدخول

@@ -67,20 +67,43 @@ export const ordersToProducts = mysqlTable(
 	{
 		orderId: varchar("orderId", { length: 255 }).notNull(),
 		productId: varchar("productId", { length: 255 }).notNull(),
+		cost: double("cost").notNull(),
 	},
 	(table) => ({
 		pk: primaryKey(table.orderId, table.productId),
 	})
 );
 
-export const productImages = mysqlTable("productImages", {
-	id: varchar("id", { length: 255 }).notNull().unique().primaryKey(),
-	productId: varchar("productId", { length: 255 }).notNull(),
-	imageURL: varchar("imageURL", { length: 255 }).notNull(),
-});
+export const productImages = mysqlTable(
+	"productImages",
+	{
+		id: varchar("id", { length: 255 }).notNull().unique().primaryKey(),
+		productId: varchar("productId", { length: 255 }).notNull(),
+		imageURL: varchar("imageURL", { length: 255 }).notNull(),
+		order: int("order").notNull().default(0),
+	},
+	(table) => ({
+		productIdx: index("productIdx").on(table.productId),
+	})
+);
+
+export const productSettings = mysqlTable(
+	"productSettings",
+	{
+		id: varchar("id", { length: 255 }).notNull().unique().primaryKey(),
+		productId: varchar("productId", { length: 255 }).notNull(),
+		size: varchar("size", { length: 255 }).notNull(),
+		quantity: int("quantity").notNull().default(0),
+	},
+	(table) => ({
+		productIdx: index("productIdx").on(table.productId),
+	})
+);
 
 export const productRelations = relations(products, ({ many }) => ({
 	productImages: many(productImages),
+	productSettings: many(productSettings),
+	ordersToProducts: many(ordersToProducts),
 }));
 
 export const cartItemRelations = relations(cartItems, ({ one }) => ({
@@ -99,6 +122,7 @@ export const orderRelations = relations(orders, ({ one, many }) => ({
 		fields: [orders.userId],
 		references: [users.id],
 	}),
+	ordersToProducts: many(ordersToProducts),
 }));
 
 export const userRelations = relations(users, ({ many }) => ({
@@ -127,14 +151,29 @@ export const productImageRelations = relations(productImages, ({ one }) => ({
 	}),
 }));
 
+export const productSettingsRelations = relations(
+	productSettings,
+	({ one }) => ({
+		product: one(products, {
+			fields: [productSettings.productId],
+			references: [products.id],
+		}),
+	})
+);
+
 export type HeroImage = typeof heroImages.$inferSelect;
 export type NewHeroImage = typeof heroImages.$inferInsert;
 
 export type Product = typeof products.$inferSelect;
 export type NewProduct = typeof products.$inferInsert;
 
+export type ProductImage = typeof productImages.$inferSelect;
+export type ProductSettings = typeof productSettings.$inferSelect;
+
 export type Order = typeof orders.$inferSelect;
 export type NewOrder = typeof orders.$inferInsert;
+
+export type OrdersToProducts = typeof ordersToProducts.$inferSelect;
 
 export type CartItem = typeof cartItems.$inferSelect;
 export type NewCartItem = typeof cartItems.$inferInsert;

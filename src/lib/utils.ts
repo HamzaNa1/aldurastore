@@ -1,3 +1,5 @@
+import "server-only";
+
 import { JwtPayload, verify, sign } from "jsonwebtoken";
 
 export function ValidateToken(token: string) {

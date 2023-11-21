@@ -50,10 +50,15 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 		where: (productImage, { eq }) => eq(productImage.productId, id),
 	});
 
-	const images = [product.imageURL, ...productImages.map((x) => x.imageURL)];
+	const images = [
+		product.imageURL,
+		...productImages.sort((a, b) => a.order - b.order).map((x) => x.imageURL),
+	];
 
-	const colors = ["F8F8F8", "232323", "A9B0AA"];
-	const sizes = ["S", "M", "L", "XL"];
+	// const colors = ["F8F8F8", "232323", "A9B0AA"];
+	const settings = await db.query.productSettings.findMany({
+		where: (productSettings, { eq }) => eq(productSettings.productId, id),
+	});
 
 	return (
 		<>
@@ -78,7 +83,7 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 					</div>
 
 					<div className="flex flex-col gap-5 text-zinc-800 text-right">
-						<div className="flex flex-col gap-2">
+						{/* <div className="flex flex-col gap-2">
 							<span className="font-bold text-xl">:اللون</span>
 							<div className="flex flex-row gap-2 justify-end">
 								{colors.map((color, i) => (
@@ -89,16 +94,16 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 									></button>
 								))}
 							</div>
-						</div>
+						</div> */}
 						<div className="flex flex-col gap-2">
 							<span className="font-bold text-xl">:المقاس</span>
 							<div className="flex flex-row gap-2 justify-end">
-								{sizes.map((size, i) => (
+								{settings.map((size, i) => (
 									<button
 										key={i}
 										className="w-16 rounded-md bg-[#D9D9D9] py-1 hover:brightness-90 transition duration-300"
 									>
-										{size}
+										{size.size}
 									</button>
 								))}
 							</div>
@@ -108,7 +113,7 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 					<div className="flex flex-row gap-10">
 						<form action={AddToCart}>
 							<SubmitButton
-								className="py-2 px-12 bg-primary rounded-md drop-shadow-lg brightness-100 hover:brightness-90 transition duration-300"
+								className="py-2 px-12 bg-primary rounded-md drop-shadow-lg brightness-100 hover:brightness-90 transition duration-300 disabled:brightness-90"
 								fallback={null}
 							>
 								<span>أضف إلى السلة</span>

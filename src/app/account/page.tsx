@@ -82,7 +82,7 @@ export default function Account() {
 				</div>
 				<form action={logout}>
 					<SubmitButton
-						className="bg-[#D93737] px-20 py-1 rounded-xl drop-shadow-lg hover:brightness-95 aria-disabled:brightness-90"
+						className="bg-[#D93737] px-20 py-1 rounded-xl drop-shadow-lg hover:brightness-95 disabled:brightness-90"
 						fallback={null}
 					>
 						<span>Logout</span>

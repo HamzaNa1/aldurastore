@@ -19,6 +19,10 @@ export default async function CartCount({}: CartCountProps) {
 			.where(eq(cartItems.userId, user.id))
 	)[0];
 
+	if (count == 0) {
+		return <></>;
+	}
+
 	return (
 		<>
 			<span className="text-lg font-semibold text-zinc-800 group-hover:text-primary transition">

@@ -1,3 +1,5 @@
+import "server-only";
+
 import { cookies } from "next/headers";
 import { ValidateToken } from "./utils";
 
@@ -20,10 +22,11 @@ export function getServerSession() {
 	const id = payload?.id as string | undefined;
 	const email = payload?.email as string | undefined;
 	const name = payload?.name as string | undefined;
+	const admin = payload?.admin as boolean | undefined;
 
 	if (!id || !email || !name) {
 		return null;
 	}
 
-	return { id: id, email: email, name: name, token: token };
+	return { id: id, email: email, name: name, admin: admin, token: token };
 }

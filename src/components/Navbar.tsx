@@ -4,9 +4,6 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { VscAccount } from "react-icons/vsc";
 import { getServerSession } from "@/lib/userUtils";
 import CartCount from "./ui/CartCount";
-import db from "@/lib/db";
-import { eq, sql } from "drizzle-orm";
-import { cartItems } from "@/lib/schema";
 import { Suspense } from "react";
 
 export default async function Navbar() {
@@ -35,11 +32,17 @@ export default async function Navbar() {
 				</div>
 			</div>
 			<div className="w-fit h-full p-2 flex flex-row gap-4 justify-center flex-shrink-0 z-10">
+				{user?.admin && (
+					<div className="flex justify-center items-center h-full text-zinc-800">
+						<Link href="/dashboard">Dashboard</Link>
+					</div>
+				)}
+
 				<Link
 					href="/cart"
 					className="flex flex-row items-center group space-x-[-6px]"
 				>
-					<Suspense fallback={<>A</>}>
+					<Suspense fallback={<> </>}>
 						<CartCount></CartCount>
 					</Suspense>
 					<div className="w-full h-full aspect-square">

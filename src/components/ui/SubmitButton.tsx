@@ -14,7 +14,11 @@ export function SubmitButton({
 	const { pending } = useFormStatus();
 
 	return (
-		<button type="submit" className={className} aria-disabled={pending}>
+		<button
+			type="submit"
+			className={className + " disabled:cursor-pointer"}
+			disabled={pending}
+		>
 			{pending ? fallback ?? children : children}
 		</button>
 	);

@@ -16,7 +16,7 @@ export default async function Login() {
 		const email = formData.get("email") as string;
 		const password = formData.get("password") as string;
 
-		console.log(await SignUp({ name, email, password }));
+		await SignUp({ name, email, password });
 	}
 
 	return (
