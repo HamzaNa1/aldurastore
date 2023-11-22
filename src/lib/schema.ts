@@ -47,6 +47,7 @@ export const cartItems = mysqlTable(
 		id: varchar("id", { length: 255 }).notNull().unique().primaryKey(),
 		userId: varchar("userId", { length: 255 }).notNull(),
 		productId: varchar("productId", { length: 255 }).notNull(),
+		productSettingsId: varchar("productSettingsId", { length: 255 }).notNull(),
 		quantity: int("quantity").notNull(),
 	},
 	(table) => ({
@@ -67,6 +68,7 @@ export const ordersToProducts = mysqlTable(
 	{
 		orderId: varchar("orderId", { length: 255 }).notNull(),
 		productId: varchar("productId", { length: 255 }).notNull(),
+		productSettingsId: varchar("productSettingsId", { length: 255 }).notNull(),
 		cost: double("cost").notNull(),
 	},
 	(table) => ({
@@ -114,6 +116,10 @@ export const cartItemRelations = relations(cartItems, ({ one }) => ({
 	product: one(products, {
 		fields: [cartItems.productId],
 		references: [products.id],
+	}),
+	productSettings: one(productSettings, {
+		fields: [cartItems.productSettingsId],
+		references: [productSettings.id],
 	}),
 }));
 
