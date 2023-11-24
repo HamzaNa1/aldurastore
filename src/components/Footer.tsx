@@ -48,7 +48,7 @@ export default function Footer() {
 							</Link>
 
 							<Link
-								href="https://instagram.com/aldurrastore?igshid=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr"
+								href="https://www.instagram.com/aldurra__store?igshid=NGVhN2U2NjQ0Yg%3D%3D"
 								rel="noopener noreferrer"
 								target="_blank"
 								className="group"
