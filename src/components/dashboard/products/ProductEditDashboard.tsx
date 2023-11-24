@@ -1,16 +1,13 @@
 "use client";
 
 import { DashboardUpdateProduct } from "@/actions/DashboardActions";
-import {
-	Product,
-	ProductImage,
-	ProductSettings,
-	productSettings,
-} from "@/lib/schema";
+import { Product, ProductImage, ProductSettings } from "@/lib/schema";
 import Link from "next/link";
 import { useState } from "react";
 import ProductImagesForm from "./ProductImagesForm";
 import ProductSettingsForm from "./ProductSettingsForm";
+import { useRouter } from "next/navigation";
+import { useFormStatus } from "react-dom";
 
 interface ProductEditDashboardProps {
 	product: Product;
@@ -23,6 +20,7 @@ export default function ProductEditDashboard({
 	productImages,
 	productSettings,
 }: ProductEditDashboardProps) {
+	const router = useRouter();
 	const [imageURL, setImageURL] = useState(product.imageURL);
 
 	return (
@@ -81,6 +79,16 @@ export default function ProductEditDashboard({
 					/>
 				</div>
 				<div className="flex flex-col gap-2 text-zinc-800">
+					<label>Type</label>
+					<input
+						className="w-96 px-1 invalid:border invalid:border-red-400"
+						name="type"
+						pattern="^(women|men)$"
+						defaultValue={String(product.type)}
+						required
+					/>
+				</div>
+				<div className="flex flex-col gap-2 text-zinc-800">
 					<label>Image</label>
 					<input
 						className="w-96 px-1"
@@ -94,27 +102,10 @@ export default function ProductEditDashboard({
 					</div>
 				</div>
 				<div className="w-96 flex flex-row gap-1">
+					<UpdateButton productId={product.id} />
 					<button
-						type="submit"
-						formAction={async (formData: FormData) => {
-							let newProduct: Product = {
-								id: product.id,
-								name: formData.get("name") as string,
-								description: formData.get("description") as string,
-								cost: Number(formData.get("cost")),
-								activated: Boolean(formData.get("active")),
-								showOnMain: Boolean(formData.get("showOnMain")),
-								imageURL: formData.get("image") as string,
-							};
-
-							await DashboardUpdateProduct(newProduct);
-						}}
-						className="bg-zinc-300 hover:brightness-90 flex-1"
-					>
-						Update
-					</button>
-					<button
-						onClick={() => {}}
+						type="button"
+						onClick={() => router.back()}
 						className="bg-zinc-300 hover:brightness-90 flex-1"
 					>
 						Back
@@ -134,5 +125,33 @@ export default function ProductEditDashboard({
 				productSettings={productSettings}
 			/>
 		</div>
+	);
+}
+
+function UpdateButton({ productId }: { productId: string }) {
+	const { pending } = useFormStatus();
+
+	return (
+		<button
+			type="submit"
+			formAction={async (formData: FormData) => {
+				let newProduct: Product = {
+					id: productId,
+					name: formData.get("name") as string,
+					description: formData.get("description") as string,
+					type: formData.get("type") as "women" | "men",
+					cost: Number(formData.get("cost")),
+					activated: Boolean(formData.get("active")),
+					showOnMain: Boolean(formData.get("showOnMain")),
+					imageURL: formData.get("image") as string,
+				};
+
+				await DashboardUpdateProduct(newProduct);
+			}}
+			className="bg-zinc-300 hover:brightness-90 flex-1 disabled:brightness-90"
+			disabled={pending}
+		>
+			{pending ? "Updating..." : "Update"}
+		</button>
 	);
 }

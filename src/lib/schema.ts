@@ -9,6 +9,7 @@ import {
 	primaryKey,
 	double,
 	datetime,
+	mysqlEnum,
 } from "drizzle-orm/mysql-core";
 
 export const heroImages = mysqlTable("heroImages", {
@@ -20,6 +21,7 @@ export const products = mysqlTable("products", {
 	id: varchar("id", { length: 255 }).notNull().unique().primaryKey(),
 	name: varchar("name", { length: 255 }).notNull(),
 	description: varchar("description", { length: 255 }).notNull(),
+	type: mysqlEnum("type", ["women", "men"]).notNull(),
 	cost: double("cost").notNull(),
 	imageURL: varchar("imageURL", { length: 255 }).notNull(),
 	showOnMain: boolean("showOnMain").default(false).notNull(),
@@ -35,6 +37,7 @@ export const users = mysqlTable(
 		password: varchar("password", { length: 255 }).notNull(),
 		createDate: datetime("createDate").default(new Date()).notNull(),
 		admin: boolean("admin").default(false).notNull(),
+		emailConfirmed: boolean("emailConfirmed").default(false).notNull(),
 	},
 	(table) => ({
 		emailIdx: index("emailIdx").on(table.email),
