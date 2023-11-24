@@ -8,7 +8,7 @@ export default async function Home() {
 	return (
 		<main className="w-screen bg-secondary">
 			<div className="w-full h-fit flex flex-col items-center pb-10">
-				<div className="container max-h-screen aspect-video bg-zinc-500">
+				<div className="container max-h-screen aspect-video p-20">
 					<Suspense fallback={<HeroSkeleton />}>
 						<HeroSection />
 					</Suspense>
@@ -41,7 +41,7 @@ async function HeroSection() {
 }
 
 async function HeroSkeleton() {
-	return <div className="w-full h-full bg-zinc-400 animate-pulse"></div>;
+	return <div className="w-full h-full bg-[#B9B9B9] animate-pulse"></div>;
 }
 
 async function ProductSection() {

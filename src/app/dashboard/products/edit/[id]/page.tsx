@@ -21,7 +21,7 @@ export default async function EditProductPage({
 
 	return (
 		<div className="container flex flex-col m-10 gap-1 text-zinc-800">
-			<Suspense>
+			<Suspense fallback={<h1 className="m-auto text-4xl">LOADING...</h1>}>
 				<EditDashboard productId={params.id} />
 			</Suspense>
 		</div>

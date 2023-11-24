@@ -1,14 +1,16 @@
 "use client";
 
-import { DeleteItem } from "@/actions/Cart";
-import { CartItem, Product } from "@/lib/schema";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { CartItem, Product, ProductSettings } from "@/lib/schema";
 import { useEffect, useState } from "react";
-import { FaSquareXmark } from "react-icons/fa6";
-import { SubmitButton } from "./SubmitButton";
+import CartItemsTableItem from "./CartItemsTableItem";
+
+type CartItemWithProduct = CartItem & {
+	product: Product;
+	productSettings: ProductSettings;
+};
 
 interface CartItemsTableProps {
-	items: { products: Product; cartItems: CartItem }[];
+	items: CartItemWithProduct[];
 }
 
 export default function CartItemsTable({ items }: CartItemsTableProps) {
@@ -72,35 +74,7 @@ export default function CartItemsTable({ items }: CartItemsTableProps) {
 			{isLoaded && (
 				<tbody>
 					{items.map((x, i) => (
-						<tr
-							key={i}
-							className="text-zinc-800 text-sm text-right outline outline-[0.5px] last:rounded-b-sm bg-white outline-zinc-400 h-fit"
-						>
-							<td className="h-full aspect-square text-left">
-								<div className="w-full h-full flex justify-center items-center">
-									<form
-										action={async () => {
-											await DeleteItem(x.cartItems.id);
-										}}
-									>
-										<SubmitButton className="w-4 h-4" fallback={undefined}>
-											<FaSquareXmark className="w-full h-full fill-primary hover:brightness-90 transition duration-300" />
-										</SubmitButton>
-									</form>
-								</div>
-							</td>
-							<td className="relative flex items-center justify-center h-full aspect-square">
-								<div className="absolute w-full h-full p-1 flex justify-center items-center">
-									<img
-										src={x.products.imageURL}
-										alt=""
-										className="h-full object-center object-contain"
-									/>
-								</div>
-							</td>
-							<td className="pr-1 font-semibold">${x.products.cost}</td>
-							<td className="pr-1 py-2">{x.products.name}</td>
-						</tr>
+						<CartItemsTableItem cartItemWithProduct={x} />
 					))}
 				</tbody>
 			)}

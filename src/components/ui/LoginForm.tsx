@@ -3,10 +3,11 @@
 import SignIn from "@/actions/auth/SignIn";
 import { SubmitButton } from "./SubmitButton";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function LoginForm() {
 	const [showError, setShowError] = useState(false);
+	const [password, setPassword] = useState("");
 
 	return (
 		<form
@@ -22,6 +23,7 @@ export default function LoginForm() {
 						<span className="w-full text-right">تم تسجيل الدخول</span>
 					);
 				} else {
+					setPassword("");
 					setShowError(true);
 				}
 			}}
@@ -31,6 +33,9 @@ export default function LoginForm() {
 				placeholder="البريد الألكتروني"
 				type="email"
 				name="email"
+				onReset={(e) => {
+					e.preventDefault();
+				}}
 				required
 			/>
 			<input
@@ -38,6 +43,8 @@ export default function LoginForm() {
 				placeholder="كلمة السر"
 				type="password"
 				name="password"
+				value={password}
+				onChange={(e) => setPassword(e.currentTarget.value)}
 				required
 			/>
 			<SubmitButton

@@ -24,10 +24,14 @@ export default async function SignUp({
 	email,
 	password,
 }: SignUpProps): Promise<SignUpError | undefined> {
-	if (!isEmailValid(email)) {
-		return { invalidEmail: true, invalidPassword: false, emailUsed: false };
-	} else if (password.length < 8) {
-		return { invalidEmail: false, invalidPassword: true, emailUsed: false };
+	const emailInvalid = !isEmailValid(email);
+	const passwordInvalid = password.length < 8;
+	if (emailInvalid || passwordInvalid) {
+		return {
+			invalidEmail: emailInvalid,
+			invalidPassword: passwordInvalid,
+			emailUsed: false,
+		};
 	}
 
 	const saltedPassword = hash(password);

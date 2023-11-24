@@ -19,6 +19,9 @@ const config: Config = {
 				primarytext: "#145654",
 				secondarytext: "#909090",
 			},
+			boxShadow: {
+				inside: "inset 0px 0px 10px rgb(0 0 0 / 0.05)",
+			},
 		},
 	},
 	plugins: [],

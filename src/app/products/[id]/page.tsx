@@ -1,12 +1,8 @@
 import ProductImageSlider from "@/components/ProductImageSlider";
 import BackButton from "@/components/ui/BackButton";
-import { SubmitButton } from "@/components/ui/SubmitButton";
 import db from "@/lib/db";
-import { NewCartItem, cartItems, productImages, products } from "@/lib/schema";
-import { getServerSession } from "@/lib/userUtils";
-import { randomUUID } from "crypto";
 import { BiArrowBack } from "react-icons/bi";
-import { redirect } from "next/navigation";
+import AddToCartForm from "@/components/ui/AddToCartForm";
 
 interface ProductPageProps {
 	params: {
@@ -15,10 +11,12 @@ interface ProductPageProps {
 }
 
 export default async function Product({ params: { id } }: ProductPageProps) {
-	const user = getServerSession();
-
 	const product = await db.query.products.findFirst({
 		where: (product, { eq }) => eq(product.id, id),
+		with: {
+			productImages: true,
+			productSettings: true,
+		},
 	});
 
 	if (!product) {
@@ -27,38 +25,12 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 		);
 	}
 
-	const AddToCart = async () => {
-		"use server";
-
-		if (!user) {
-			redirect("/login");
-		}
-
-		const newCartItem: NewCartItem = {
-			id: randomUUID(),
-			userId: user?.id,
-			productId: product.id,
-			quantity: 1,
-		};
-
-		await db.insert(cartItems).values(newCartItem);
-
-		redirect("/cart");
-	};
-
-	const productImages = await db.query.productImages.findMany({
-		where: (productImage, { eq }) => eq(productImage.productId, id),
-	});
-
 	const images = [
 		product.imageURL,
-		...productImages.sort((a, b) => a.order - b.order).map((x) => x.imageURL),
+		...product.productImages
+			.sort((a, b) => a.order - b.order)
+			.map((x) => x.imageURL),
 	];
-
-	// const colors = ["F8F8F8", "232323", "A9B0AA"];
-	const settings = await db.query.productSettings.findMany({
-		where: (productSettings, { eq }) => eq(productSettings.productId, id),
-	});
 
 	return (
 		<>
@@ -82,44 +54,7 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 						</div>
 					</div>
 
-					<div className="flex flex-col gap-5 text-zinc-800 text-right">
-						{/* <div className="flex flex-col gap-2">
-							<span className="font-bold text-xl">:اللون</span>
-							<div className="flex flex-row gap-2 justify-end">
-								{colors.map((color, i) => (
-									<button
-										key={i}
-										className="w-8 h-8 rounded-md outline-black outline-[1px] outline hover:brightness-90 transition duration-300"
-										style={{ backgroundColor: `#${color}` }}
-									></button>
-								))}
-							</div>
-						</div> */}
-						<div className="flex flex-col gap-2">
-							<span className="font-bold text-xl">:المقاس</span>
-							<div className="flex flex-row gap-2 justify-end">
-								{settings.map((size, i) => (
-									<button
-										key={i}
-										className="w-16 rounded-md bg-[#D9D9D9] py-1 hover:brightness-90 transition duration-300"
-									>
-										{size.size}
-									</button>
-								))}
-							</div>
-						</div>
-					</div>
-
-					<div className="flex flex-row gap-10">
-						<form action={AddToCart}>
-							<SubmitButton
-								className="py-2 px-12 bg-primary rounded-md drop-shadow-lg brightness-100 hover:brightness-90 transition duration-300 disabled:brightness-90"
-								fallback={null}
-							>
-								<span>أضف إلى السلة</span>
-							</SubmitButton>
-						</form>
-					</div>
+					<AddToCartForm settings={product.productSettings} />
 				</div>
 			</div>
 		</>

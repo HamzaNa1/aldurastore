@@ -3,18 +3,14 @@ import db from "@/lib/db";
 import { Suspense } from "react";
 
 export default async function Products() {
-	const products = await db.query.products.findMany({
-		where: (product, { eq }) => eq(product.activated, true),
-	});
-
 	return (
-		<>
-			<div className="w-full h-fit bg-secondary flex flex-row flex-wrap justify-start gap-10 px-80 py-10">
+		<div className="w-full flex justify-center items-center">
+			<div className="productsContainer h-fit bg-secondary flex flex-row flex-wrap justify-start gap-10 px-2 py-10">
 				<Suspense fallback={<ProductSkeleton />}>
 					<ProductSection />
 				</Suspense>
 			</div>
-		</>
+		</div>
 	);
 }
 

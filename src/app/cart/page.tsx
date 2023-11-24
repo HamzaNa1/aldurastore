@@ -1,23 +1,21 @@
 import BackButton from "@/components/ui/BackButton";
 import CartItemsTable from "@/components/ui/CartItemsTable";
 import db from "@/lib/db";
-import { cartItems, products } from "@/lib/schema";
 import { getServerSession } from "@/lib/userUtils";
-import { eq } from "drizzle-orm";
 import Link from "next/link";
 import { BsCartX } from "react-icons/bs";
-
-export const dynamic = "force-dynamic";
 
 export default async function Cart() {
 	const user = getServerSession();
 
 	const cart = user
-		? await db
-				.select()
-				.from(cartItems)
-				.where(eq(cartItems.userId, user.id))
-				.innerJoin(products, eq(cartItems.productId, products.id))
+		? await db.query.cartItems.findMany({
+				where: (item, { eq }) => eq(item.userId, user.id),
+				with: {
+					product: true,
+					productSettings: true,
+				},
+		  })
 		: [];
 
 	if (cart.length == 0) {
@@ -39,8 +37,8 @@ export default async function Cart() {
 
 	return (
 		<>
-			<div className="flex flex-row w-full h-full flex-1 bg-secondary px-64 justify-center gap-16 p-20">
-				<div className="flex flex-col h-full w-full gap-3">
+			<div className="flex flex-row container h-full bg-secondary justify-center gap-16 py-20 px-2 flex-wrap">
+				<div className="flex flex-col flex-[1_1_200px] h-full gap-3">
 					<span className="text-primarytext text-3xl font-bold text-right w-full h-10">
 						تفاصيل الفاتورة
 					</span>
@@ -53,8 +51,7 @@ export default async function Cart() {
 						<tbody>
 							<tr className="text-black text-sm text-right outline outline-zinc-300 bg-white rounded-sm">
 								<td className="pr-1">
-									$
-									{cart.reduce((acc, x) => acc + x.products.cost, 0).toFixed(2)}
+									${cart.reduce((acc, x) => acc + x.product.cost, 0).toFixed(2)}
 								</td>
 							</tr>
 						</tbody>
@@ -68,7 +65,7 @@ export default async function Cart() {
 						</div>
 					</BackButton>
 				</div>
-				<div className="flex flex-col h-full w-[150%] gap-7">
+				<div className="flex flex-col h-full gap-7 flex-[2_2_350px] ">
 					<span className="text-primarytext text-3xl font-bold text-right w-full h-10">
 						المنتجات
 					</span>

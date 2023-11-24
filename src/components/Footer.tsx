@@ -7,7 +7,7 @@ export default function Footer() {
 	return (
 		<>
 			<div className="flex flex-col w-full h-full bg-white items-center justify-center">
-				<div className="flex flex-row p-32 gap-40">
+				<div className="flex flex-row py-40 px-5 gap-40 flex-wrap justify-center">
 					<div className="text-black flex flex-col gap-4 text-right">
 						<span className="font-bold">تواصل</span>
 						<span>البريد الألكتروني</span>
@@ -32,9 +32,9 @@ export default function Footer() {
 						<Link href="#">English | عربي</Link>
 					</div>
 
-					<div>
-						<img className="h-48 w-48" src="/logo.png" alt="" />
-						<div className="text-black flex flex-row gap-5 p-3 items-center justify-center">
+					<div className="flex flex-col w-48 shrink">
+						<img className="w-full aspect-square" src="/logo.png" alt="" />
+						<div className="flex flex-row gap-5 p-3 items-center justify-center">
 							<Link
 								href="https://www.facebook.com/aldurrastore?mibextid=LQQJ4d"
 								rel="noopener noreferrer"
@@ -43,7 +43,7 @@ export default function Footer() {
 							>
 								<BsFacebook
 									size={40}
-									className="fill-black  group-hover:fill-primary transition duration-200"
+									className="fill-zinc-800  group-hover:fill-primary transition duration-200"
 								/>
 							</Link>
 
@@ -55,7 +55,7 @@ export default function Footer() {
 							>
 								<BsInstagram
 									size={40}
-									className="fill-black  group-hover:fill-primary transition duration-200"
+									className="fill-zinc-800  group-hover:fill-primary transition duration-200"
 								/>
 							</Link>
 
@@ -67,7 +67,7 @@ export default function Footer() {
 							>
 								<BsWhatsapp
 									size={40}
-									className="fill-black  group-hover:fill-primary transition duration-200"
+									className="fill-zinc-800  group-hover:fill-primary transition duration-200"
 								/>
 							</Link>
 						</div>

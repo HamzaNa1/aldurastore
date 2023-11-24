@@ -1,6 +1,6 @@
 "use client";
 
-import { DashboardUpdateProduct } from "@/actions/GeneralActions";
+import { DashboardUpdateProduct } from "@/actions/DashboardActions";
 import {
 	Product,
 	ProductImage,

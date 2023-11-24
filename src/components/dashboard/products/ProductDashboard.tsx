@@ -1,6 +1,6 @@
 import { Product } from "@/lib/schema";
 import { redirect } from "next/navigation";
-import { DashboardCreateProduct } from "@/actions/GeneralActions";
+import { DashboardCreateProduct } from "@/actions/DashboardActions";
 import Slider from "../Slider";
 import ProductBanner from "./ProductBanner";
 

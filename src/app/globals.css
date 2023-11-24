@@ -40,3 +40,27 @@ body {
 		)
 		rgb(var(--background-start-rgb));
 }
+
+.productsContainer {
+	width: 100%;
+}
+@media (min-width: 640px) {
+	.productsContainer {
+		max-width: 640px;
+	}
+}
+@media (min-width: 768px) {
+	.productsContainer {
+		max-width: 768px;
+	}
+}
+@media (min-width: 1024px) {
+	.productsContainer {
+		max-width: 1024px;
+	}
+}
+@media (min-width: 1280px) {
+	.productsContainer {
+		max-width: 1280px;
+	}
+}

@@ -23,7 +23,7 @@ export default function OrderBanner({ order }: OrderBannerProps) {
 				</button>
 			</div>
 			<div className="flex flex-col p-2 w-full justify-start text-zinc-700">
-				<span className="text-zinc-800">
+				<span className="text-zinc-800" suppressHydrationWarning>
 					Bought Date: {order.boughtDate.toLocaleString()}
 				</span>
 			</div>
@@ -32,7 +32,7 @@ export default function OrderBanner({ order }: OrderBannerProps) {
 					Is Processed: {String(order.isProcessed)}
 				</span>
 				{order.fulfilledDate && (
-					<span className="text-zinc-800">
+					<span className="text-zinc-800" suppressHydrationWarning>
 						Fulfilled Date: {order.fulfilledDate.toLocaleString()}
 					</span>
 				)}

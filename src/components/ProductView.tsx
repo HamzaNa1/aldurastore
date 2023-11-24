@@ -10,7 +10,7 @@ export default function ProductView({ product }: ProductViewProp) {
 	return (
 		<Link
 			href={`/products/${product.id}`}
-			className="w-[400px] h-[700px] bg-white flex flex-col"
+			className="w-[30%] lg aspect-[1/1.75] hover:shadow-inside hover:shadow-[#39777A]/60 bg-white flex flex-col transition duration-300"
 		>
 			<div className="relative w-full aspect-square">
 				<Image

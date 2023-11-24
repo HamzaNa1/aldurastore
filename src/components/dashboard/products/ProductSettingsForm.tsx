@@ -1,11 +1,9 @@
 "use client";
 
-import {
-	DashboardAddProductSettings,
-	DashboardDeleteProductSettings,
-} from "@/actions/GeneralActions";
+import { DashboardAddProductSettings } from "@/actions/DashboardActions";
 import { ProductSettings } from "@/lib/schema";
 import { useState } from "react";
+import ProductSettingsEditor from "./ProductSettingsEditor";
 
 interface ProductSettingsFormProps {
 	productId: string;
@@ -24,19 +22,13 @@ export default function ProductSettingsForm({
 				{productSettings.map((settings, i) => (
 					<div key={settings.id}>
 						<div className="w-full h-12 bg-zinc-300 flex flex-row items-center px-4 gap-5">
-							<span>{settings.size}</span>
-							<span>{settings.quantity}</span>
-
-							<form className="ml-auto">
-								<button
-									formAction={async () => {
-										await DashboardDeleteProductSettings(settings.id);
-									}}
-									className="text-primarytext underline"
-								>
-									Delete
-								</button>
-							</form>
+							<div className="w-4 shrink-0">
+								<span>{settings.size}</span>
+							</div>
+							<div className="w-4 shrink-0">
+								<span>{settings.quantity}</span>
+							</div>
+							<ProductSettingsEditor settings={settings} />
 						</div>
 					</div>
 				))}

@@ -8,10 +8,7 @@ interface SliderProps {
 	children: React.ReactNode;
 }
 
-export default function ProductBannerSlider({
-	perView,
-	children,
-}: SliderProps) {
+export default function Slider({ perView, children }: SliderProps) {
 	const [sliderRef, instanceRef] = useKeenSlider(
 		{
 			vertical: true,

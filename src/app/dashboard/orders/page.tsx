@@ -1,5 +1,5 @@
+import { GetOrders } from "@/actions/DashboardActions";
 import OrderDashboard from "@/components/dashboard/orders/OrderDashboard";
-import db from "@/lib/db";
 import { getServerSession } from "@/lib/userUtils";
 import { notFound } from "next/navigation";
 
@@ -10,11 +10,9 @@ export default async function ManageProducts() {
 		notFound();
 	}
 
-	const orders = await db.query.orders.findMany();
-
 	return (
 		<div className="container flex flex-col m-10 gap-1 text-zinc-800">
-			<OrderDashboard orders={orders}></OrderDashboard>
+			<OrderDashboard action={GetOrders} />
 		</div>
 	);
 }

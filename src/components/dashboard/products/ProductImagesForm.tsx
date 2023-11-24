@@ -4,7 +4,7 @@ import {
 	DashboardDeleteProductImage,
 	DashboardUpdateProductImageOrders,
 	DashboardAddImageToProduct,
-} from "@/actions/GeneralActions";
+} from "@/actions/DashboardActions";
 import { ProductImage } from "@/lib/schema";
 import { useState } from "react";
 

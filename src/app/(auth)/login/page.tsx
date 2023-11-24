@@ -13,7 +13,7 @@ export default async function Login() {
 	}
 
 	return (
-		<div className="w-full flex flex-col justify-center items-center bg-secondary gap-2">
+		<div className="container flex flex-col justify-center items-center bg-secondary gap-2 p-10">
 			<LoginForm />
 			<Link className="text-black text-right w-64" href="/register">
 				تسجيل حساب جديد
