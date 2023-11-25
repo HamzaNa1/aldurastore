@@ -25,7 +25,7 @@ export default function ProductView({ product }: ProductViewProp) {
 					{product.name}
 				</div>
 
-				<div className="text-[#909090] right-0 text-right text-xl">
+				<div className="text-[#909090] right-0 text-right text-xl truncate">
 					{product.description}
 				</div>
 			</div>
