@@ -124,18 +124,21 @@ export default function ProductEditDashboard({
 
 function UpdateButton({ productId }: { productId: string }) {
 	const { pending } = useFormStatus();
-
 	return (
 		<button
 			type="submit"
 			formAction={async (formData: FormData) => {
+				console.log(Boolean(formData.get("active")).valueOf());
+
 				let newProduct: Product = {
 					id: productId,
 					name: formData.get("name") as string,
 					description: formData.get("description") as string,
 					type: formData.get("type") as "women" | "men",
-					activated: Boolean(formData.get("active")),
-					showOnMain: Boolean(formData.get("showOnMain")),
+					activated: (formData.get("active") as string) == "true",
+					showOnMain:
+						(formData.get("showOnMain") as string) == "true" &&
+						(formData.get("active") as string) == "true",
 					imageURL: formData.get("image") as string,
 				};
 
