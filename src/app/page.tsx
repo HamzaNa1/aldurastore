@@ -15,9 +15,9 @@ export default async function Home() {
 				</div>
 			</div>
 			<div className="w-full h-fit bg-primary py-10 flex justify-center">
-				<div className="container flex flex-col items-center gap-6">
+				<div className="container flex flex-col items-center gap-6 p-2">
 					<span className="text-7xl">منتجاتنا</span>
-					<div className="flex flex-row justify-center gap-10">
+					<div className="w-full flex flex-row justify-center gap-10 flex-wrap">
 						<Suspense fallback={<ProductSkeleton />}>
 							<ProductSection />
 						</Suspense>
@@ -53,7 +53,9 @@ async function ProductSection() {
 	return (
 		<>
 			{products.map((product, i) => (
-				<ProductView key={i} product={product}></ProductView>
+				<div key={i} className="w-[70%]  sm:w-[47%] md:w-[35%] lg:w-[30%]">
+					<ProductView product={product}></ProductView>
+				</div>
 			))}
 		</>
 	);
