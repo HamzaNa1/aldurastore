@@ -34,7 +34,6 @@ export default async function DeleteProductPage({
 					const id = formData.get("id") as string;
 
 					if (product.id != id) {
-						console.log(product.id);
 						return;
 					}
 

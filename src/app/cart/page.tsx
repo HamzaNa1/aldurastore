@@ -1,5 +1,6 @@
 import BackButton from "@/components/ui/BackButton";
 import CartItemsTable from "@/components/ui/CartItemsTable";
+import getCountry from "@/lib/country";
 import db from "@/lib/db";
 import { getServerSession } from "@/lib/userUtils";
 import Link from "next/link";
@@ -7,12 +8,19 @@ import { BsCartX } from "react-icons/bs";
 
 export default async function Cart() {
 	const user = getServerSession();
+	const country = getCountry();
 
 	const cart = user
 		? await db.query.cartItems.findMany({
 				where: (item, { eq }) => eq(item.userId, user.id),
 				with: {
-					product: true,
+					product: {
+						with: {
+							productPrices: {
+								where: (price, { eq }) => eq(price.country, country),
+							},
+						},
+					},
 					productSettings: true,
 				},
 		  })

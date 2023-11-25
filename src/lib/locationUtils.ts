@@ -31,3 +31,7 @@ export const locations: { [id: string]: { regions: string[] } } = {
 export function localizePrice(price: ProductPrice) {
 	return `${currencies[price.country]} ${price.cost.toFixed(2)}`;
 }
+
+export function localizePrices(price: ProductPrice[]) {
+	return `${currencies[price.country]} ${price.cost.toFixed(2)}`;
+}

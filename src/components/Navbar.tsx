@@ -6,9 +6,11 @@ import { getServerSession } from "@/lib/userUtils";
 import CartCount from "./ui/CartCount";
 import { Suspense } from "react";
 import CountrySelector from "./ui/CountrySelector";
+import getCountry from "@/lib/country";
 
 export default async function Navbar() {
 	const user = getServerSession();
+	const country = getCountry();
 
 	return (
 		<div className="w-full h-16 bg-secondary flex flex-row px-4 py-1">
@@ -18,7 +20,7 @@ export default async function Navbar() {
 			>
 				<Image src="/logo.png" alt="" fill className="h-full object-contain" />
 			</Link>
-			<CountrySelector />
+			<CountrySelector country={country} />
 			<div className="h-full flex-1">
 				<div className="absolute top-0 py-1 w-screen h-16 flex gap-12 left-[50%] -translate-x-[50%] justify-center items-center text-black text-xl select-none">
 					<Link href="/products">

@@ -11,6 +11,7 @@ import {
 	double,
 	datetime,
 	mysqlEnum,
+	text,
 } from "drizzle-orm/mysql-core";
 
 export const heroImages = mysqlTable("heroImages", {
@@ -45,7 +46,7 @@ export const emailConfirmations = mysqlTable("emailConfirmations", {
 export const products = mysqlTable("products", {
 	id: varchar("id", { length: 255 }).notNull().unique().primaryKey(),
 	name: varchar("name", { length: 255 }).notNull(),
-	description: varchar("description", { length: 255 }).notNull(),
+	description: text("description").notNull(),
 	type: mysqlEnum("type", ["women", "men"]).notNull(),
 	imageURL: varchar("imageURL", { length: 255 }).notNull(),
 	showOnMain: boolean("showOnMain").default(false).notNull(),
@@ -210,15 +211,22 @@ export const ordersToProductsRelations = relations(
 );
 
 export type User = typeof users.$inferSelect;
+export type NewUser = typeof users.$inferInsert;
 
 export type HeroImage = typeof heroImages.$inferSelect;
+export type NewHeroImage = typeof heroImages.$inferInsert;
 
 export type Product = typeof products.$inferSelect;
+export type NewProduct = typeof products.$inferInsert;
+
 export type ProductImage = typeof productImages.$inferSelect;
 export type ProductSettings = typeof productSettings.$inferSelect;
 export type ProductPrice = typeof productPrices.$inferSelect;
 
 export type Order = typeof orders.$inferSelect;
+export type NewOrder = typeof orders.$inferInsert;
+
 export type OrdersToProducts = typeof ordersToProducts.$inferSelect;
 
 export type CartItem = typeof cartItems.$inferSelect;
+export type NewCartItem = typeof cartItems.$inferInsert;

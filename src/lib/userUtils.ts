@@ -35,9 +35,12 @@ export function getServerSession() {
 	return { id: id, email: email, name: name, admin: admin, token: token };
 }
 
-export async function sendEmailConfirmationAsync(user: User) {
+export async function sendEmailConfirmationAsync(
+	userId: string,
+	email: string
+) {
 	const confirmation = await db.query.emailConfirmations.findFirst({
-		where: (confirmation, { eq }) => eq(confirmation.id, user.id),
+		where: (confirmation, { eq }) => eq(confirmation.id, userId),
 	});
 
 	if (confirmation && new Date(confirmation.expiresBy) < new Date()) {
@@ -48,13 +51,13 @@ export async function sendEmailConfirmationAsync(user: User) {
 		if (confirmation) {
 			await tx
 				.delete(emailConfirmations)
-				.where(eq(emailConfirmations.id, user.id));
+				.where(eq(emailConfirmations.id, userId));
 		}
 
 		const key = generateKey();
-		await tx.insert(emailConfirmations).values({ id: user.id, key: key });
+		await tx.insert(emailConfirmations).values({ id: userId, key: key });
 
-		await sendVerificationEmail(user.email, key);
+		await sendVerificationEmail(email, key);
 	});
 }
 

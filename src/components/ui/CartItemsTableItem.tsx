@@ -4,7 +4,6 @@ import { CartItem, Product, ProductSettings } from "@/lib/schema";
 import { SubmitButton } from "./SubmitButton";
 import { FaSquareXmark } from "react-icons/fa6";
 import { DeleteCartItem } from "@/actions/GeneralActions";
-import { useFormState } from "react-dom";
 import { useState } from "react";
 
 type CartItemWithProduct = CartItem & {
@@ -20,8 +19,6 @@ export default function CartItemsTableItem({
 	cartItemWithProduct,
 }: CartItemsTableItemProps) {
 	const [pending, setPending] = useState(false);
-
-	console.log(pending);
 
 	return (
 		<tr

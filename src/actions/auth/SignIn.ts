@@ -3,7 +3,7 @@
 import db from "@/lib/db";
 import hash from "@/lib/salt";
 import UserToken from "@/lib/types/UserToken";
-import { getServerSession, sendEmailConfirmationAsync } from "@/lib/userUtils";
+import { sendEmailConfirmationAsync } from "@/lib/userUtils";
 import { SignToken, isEmailValid } from "@/lib/utils";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -37,7 +37,7 @@ export default async function SignIn({
 	}
 
 	if (!user.emailConfirmed) {
-		await sendEmailConfirmationAsync(user);
+		await sendEmailConfirmationAsync(user.id, user.email);
 		redirect("/confirm?id=" + user.id);
 	}
 

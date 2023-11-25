@@ -55,10 +55,6 @@ export default async function SignUp({
 		throw new Error("JWT_KEY is not defined");
 	}
 
-	await sendEmailConfirmationAsync(newUser);
+	await sendEmailConfirmationAsync(newUser.id, newUser.email);
 	redirect("/confirm?id=" + newUser.id);
-	// const token = SignToken({ id: newUser.id, email, name });
-
-	// const cookiesStore = cookies();
-	// cookiesStore.set("token", token);
 }

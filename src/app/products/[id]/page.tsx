@@ -4,6 +4,7 @@ import db from "@/lib/db";
 import { BiArrowBack } from "react-icons/bi";
 import AddToCartForm from "@/components/ui/AddToCartForm";
 import { localizePrice } from "@/lib/locationUtils";
+import getCountry from "@/lib/country";
 
 interface ProductPageProps {
 	params: {
@@ -12,12 +13,14 @@ interface ProductPageProps {
 }
 
 export default async function Product({ params: { id } }: ProductPageProps) {
+	const country = getCountry();
+
 	const product = await db.query.products.findFirst({
 		where: (product, { eq }) => eq(product.id, id),
 		with: {
 			productImages: true,
 			productSettings: true,
-			productPrices: { where: (price, { eq }) => eq(price.country, "om") },
+			productPrices: { where: (price, { eq }) => eq(price.country, country) },
 		},
 	});
 
