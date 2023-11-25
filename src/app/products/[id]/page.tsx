@@ -3,6 +3,7 @@ import BackButton from "@/components/ui/BackButton";
 import db from "@/lib/db";
 import { BiArrowBack } from "react-icons/bi";
 import AddToCartForm from "@/components/ui/AddToCartForm";
+import { localizePrice } from "@/lib/locationUtils";
 
 interface ProductPageProps {
 	params: {
@@ -16,6 +17,7 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 		with: {
 			productImages: true,
 			productSettings: true,
+			productPrices: { where: (price, { eq }) => eq(price.country, "om") },
 		},
 	});
 
@@ -48,9 +50,14 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 						<div className="w-full text-right font-bold text-3xl">
 							<span className="text-primary">{product.name}</span>
 						</div>
-						<div className="h-[2px] w-full bg-zinc-800 mx-2"></div>
+						<div className="h-[2px] w-full bg-zinc-800 mx-2" />
 						<div className="w-full h-fit text-right text-xl">
-							<span className="text-zinc-800">${product.cost}</span>
+							<span className="text-zinc-800">
+								{localizePrice(product.productPrices[0])}
+							</span>
+						</div>
+						<div className="w-full h-fit text-right text-l">
+							<span className="text-zinc-800">{product.description}</span>
 						</div>
 					</div>
 
