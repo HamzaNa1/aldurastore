@@ -1,7 +1,15 @@
-export type countries = "عمان" | "السعودية";
+export const countries = ["ae", "bh", "kw", "om", "qa", "sa"];
+export const currencies: { [id: string]: string } = {
+	ae: "AED",
+	bh: "BHD",
+	kw: "KWD",
+	om: "OMR",
+	qa: "QR",
+	sa: "SR",
+};
 
 export const locations: { [id: string]: { regions: string[] } } = {
-	عمان: {
+	om: {
 		regions: [
 			"الداخلية",
 			"الظاهرة",

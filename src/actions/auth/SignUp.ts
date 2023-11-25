@@ -6,6 +6,7 @@ import { NewUser, users } from "@/lib/schema";
 import { SignToken, isEmailValid } from "@/lib/utils";
 import { randomUUID } from "crypto";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 interface SignUpProps {
 	name: string;
@@ -53,8 +54,9 @@ export default async function SignUp({
 		throw new Error("JWT_KEY is not defined");
 	}
 
-	const token = SignToken({ id: newUser.id, email, name });
+	redirect("/confirm?id=" + newUser.id);
+	// const token = SignToken({ id: newUser.id, email, name });
 
-	const cookiesStore = cookies();
-	cookiesStore.set("token", token);
+	// const cookiesStore = cookies();
+	// cookiesStore.set("token", token);
 }

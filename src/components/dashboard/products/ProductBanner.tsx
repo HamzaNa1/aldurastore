@@ -29,7 +29,6 @@ export default function ProductBanner({ product }: ProductBannerProps) {
 				<span className="text-primarytext text-xl font-bold">
 					{product.name}
 				</span>
-				<span className="font-semibold">${product.cost}</span>
 				<span className="text-md font-bold overflow-hidden">
 					{product.description}
 				</span>

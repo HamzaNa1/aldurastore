@@ -3,8 +3,10 @@
 import db from "@/lib/db";
 import hash from "@/lib/salt";
 import UserToken from "@/lib/types/UserToken";
+import { sendEmailConfirmationAsync } from "@/lib/userUtils";
 import { SignToken, isEmailValid } from "@/lib/utils";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 interface SignInProps {
 	email: string;
@@ -32,6 +34,11 @@ export default async function SignIn({
 
 	if (!process.env.JWT_KEY) {
 		throw new Error("JWT_KEY is not defined");
+	}
+
+	if (!user.emailConfirmed) {
+		await sendEmailConfirmationAsync(user);
+		redirect("/confirm?id=" + user.id);
 	}
 
 	const token = SignToken({

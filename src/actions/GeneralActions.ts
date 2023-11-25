@@ -4,7 +4,7 @@ import db from "@/lib/db";
 import { CartItem, cartItems } from "@/lib/schema";
 import { getServerSession } from "@/lib/userUtils";
 import { randomUUID } from "crypto";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -32,6 +32,14 @@ export async function AddCartItem(
 }
 
 export async function DeleteCartItem(cartItemId: string) {
-	await db.delete(cartItems).where(eq(cartItems.id, cartItemId));
+	const user = getServerSession();
+
+	if (!user) {
+		redirect("/login");
+	}
+
+	await db
+		.delete(cartItems)
+		.where(and(eq(cartItems.userId, user.id), eq(cartItems.id, cartItemId)));
 	revalidatePath("/");
 }

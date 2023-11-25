@@ -5,6 +5,7 @@ import { VscAccount } from "react-icons/vsc";
 import { getServerSession } from "@/lib/userUtils";
 import CartCount from "./ui/CartCount";
 import { Suspense } from "react";
+import CountrySelector from "./ui/CountrySelector";
 
 export default async function Navbar() {
 	const user = getServerSession();
@@ -17,6 +18,7 @@ export default async function Navbar() {
 			>
 				<Image src="/logo.png" alt="" fill className="h-full object-contain" />
 			</Link>
+			<CountrySelector />
 			<div className="h-full flex-1">
 				<div className="absolute top-0 py-1 w-screen h-16 flex gap-12 left-[50%] -translate-x-[50%] justify-center items-center text-black text-xl select-none">
 					<Link href="/products">
@@ -42,7 +44,7 @@ export default async function Navbar() {
 					href="/cart"
 					className="flex flex-row items-center group space-x-[-6px]"
 				>
-					<Suspense fallback={<> </>}>
+					<Suspense fallback={<></>}>
 						<CartCount></CartCount>
 					</Suspense>
 					<div className="w-full h-full aspect-square">

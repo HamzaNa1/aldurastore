@@ -1,18 +1,21 @@
 "use server";
 
 import db from "@/lib/db";
+import { countries } from "@/lib/locationUtils";
 import {
 	Product,
 	ProductImage,
 	ProductSettings,
 	orders,
 	productImages,
+	productPrices,
 	productSettings,
 	products,
 } from "@/lib/schema";
 import { getServerSession } from "@/lib/userUtils";
 import { randomUUID } from "crypto";
 import { eq } from "drizzle-orm";
+import { uuid } from "drizzle-orm/pg-core";
 import { revalidatePath } from "next/cache";
 
 export async function DashboardDeleteProduct(productId: string) {
@@ -30,6 +33,9 @@ export async function DashboardDeleteProduct(productId: string) {
 		await tx
 			.delete(productSettings)
 			.where(eq(productSettings.productId, productId));
+		await tx
+			.delete(productPrices)
+			.where(eq(productPrices.productId, productId));
 	});
 
 	revalidatePath("/dashboard/products");
@@ -58,13 +64,24 @@ export async function DashboardCreateProduct(): Promise<Product | undefined> {
 		id: GenerateId(),
 		name: "New Product",
 		description: "Product Description",
-		cost: 0,
 		imageURL: "/test.png",
+		type: "women",
 		showOnMain: false,
 		activated: false,
 	};
 
-	await db.insert(products).values(product);
+	await db.transaction(async (tx) => {
+		await tx.insert(products).values(product);
+
+		for (let i = 0; i < countries.length; i++) {
+			await tx.insert(productPrices).values({
+				id: randomUUID(),
+				productId: product.id,
+				country: countries[i],
+				cost: 9999,
+			});
+		}
+	});
 	revalidatePath("/dashboard/products");
 
 	return product;
@@ -186,6 +203,23 @@ export async function DashboardDeleteProductSettings(settingId: string) {
 	}
 
 	await db.delete(productSettings).where(eq(productSettings.id, settingId));
+	revalidatePath("/dashboard/products/edit");
+}
+
+export async function DashboardUpdateProductPrice(
+	priceId: string,
+	cost: number
+) {
+	const user = getServerSession();
+
+	if (!user?.admin) {
+		return undefined;
+	}
+
+	await db
+		.update(productPrices)
+		.set({ cost: cost })
+		.where(eq(productPrices.id, priceId));
 	revalidatePath("/dashboard/products/edit");
 }
 

@@ -34,6 +34,7 @@ export default async function DeleteProductPage({
 					const id = formData.get("id") as string;
 
 					if (product.id != id) {
+						console.log(product.id);
 						return;
 					}
 
@@ -44,11 +45,16 @@ export default async function DeleteProductPage({
 			>
 				<label>{"Product Name: " + product.name}</label>
 				<label className="select-none">{"Product ID: " + product.id}</label>
+				<label className="select-none">
+					{"PRODUCT ID: " + product.id.toUpperCase()}
+				</label>
 				<input
+					id="id"
 					name="id"
 					className="px-1"
 					placeholder="Enter product ID"
 					required
+					autoComplete="off"
 				></input>
 				<SubmitButton
 					className="w-full bg-red-400 hover:brightness-95 disabled:brightness-50"

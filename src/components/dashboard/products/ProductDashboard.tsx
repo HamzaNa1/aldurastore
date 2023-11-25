@@ -9,45 +9,6 @@ interface ProductDashboardProps {
 }
 
 export default function ProductDashboard({ products }: ProductDashboardProps) {
-	// const searchParams = useSearchParams();
-
-	// const edit = searchParams.get("edit");
-
-	// let product: Product | undefined = undefined;
-	// if (edit) {
-	// 	product = products.find((x) => x.id == edit);
-
-	// 	if (product) {
-	// 	}
-	// }
-
-	// const [currentProduct, setProduct] = useState<Product | undefined>(product);
-
-	// useEffect(() => {
-	// 	setProduct(product);
-	// }, []);
-
-	// const ProductSetter = (product: Product | undefined) => {
-	// 	scrollTo(0, 0);
-
-	// 	if (!product) {
-	// 		window.history.pushState({}, "", window.location.pathname);
-	// 		setProduct(product);
-	// 		return;
-	// 	}
-
-	// 	const params = new URLSearchParams(searchParams);
-	// 	params.set("edit", product.id);
-
-	// 	window.history.pushState(
-	// 		{},
-	// 		"",
-	// 		window.location.pathname + "?" + params.toString()
-	// 	);
-
-	// 	setProduct(product);
-	// };
-
 	return (
 		<>
 			<form>

@@ -1,24 +1,22 @@
 "use client";
 
 import { DashboardUpdateProduct } from "@/actions/DashboardActions";
-import { Product, ProductImage, ProductSettings } from "@/lib/schema";
+import { Product } from "@/lib/schema";
 import Link from "next/link";
 import { useState } from "react";
 import ProductImagesForm from "./ProductImagesForm";
 import ProductSettingsForm from "./ProductSettingsForm";
 import { useRouter } from "next/navigation";
 import { useFormStatus } from "react-dom";
+import ProductPricesForm from "./ProductPricesForm";
+import { FullProduct } from "@/app/dashboard/products/edit/[id]/page";
 
 interface ProductEditDashboardProps {
-	product: Product;
-	productImages: ProductImage[];
-	productSettings: ProductSettings[];
+	product: FullProduct;
 }
 
 export default function ProductEditDashboard({
 	product,
-	productImages,
-	productSettings,
 }: ProductEditDashboardProps) {
 	const router = useRouter();
 	const [imageURL, setImageURL] = useState(product.imageURL);
@@ -45,16 +43,6 @@ export default function ProductEditDashboard({
 						className="w-96 h-32 px-1"
 						name="description"
 						defaultValue={product.description}
-						required
-					/>
-				</div>
-				<div className="flex flex-col gap-2 text-zinc-800">
-					<label>Cost</label>
-					<input
-						className="w-96 h-30 px-1"
-						name="cost"
-						type="number"
-						defaultValue={product.cost}
 						required
 					/>
 				</div>
@@ -119,11 +107,17 @@ export default function ProductEditDashboard({
 				</div>
 			</form>
 
-			<ProductImagesForm productId={product.id} productImages={productImages} />
-			<ProductSettingsForm
+			<ProductImagesForm
 				productId={product.id}
-				productSettings={productSettings}
+				productImages={product.productImages}
 			/>
+			<div className="flex flex-col gap-20">
+				<ProductSettingsForm
+					productId={product.id}
+					productSettings={product.productSettings}
+				/>
+				<ProductPricesForm productPrices={product.productPrices} />
+			</div>
 		</div>
 	);
 }
@@ -140,7 +134,6 @@ function UpdateButton({ productId }: { productId: string }) {
 					name: formData.get("name") as string,
 					description: formData.get("description") as string,
 					type: formData.get("type") as "women" | "men",
-					cost: Number(formData.get("cost")),
 					activated: Boolean(formData.get("active")),
 					showOnMain: Boolean(formData.get("showOnMain")),
 					imageURL: formData.get("image") as string,
