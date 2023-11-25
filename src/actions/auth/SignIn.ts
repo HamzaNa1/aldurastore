@@ -3,7 +3,7 @@
 import db from "@/lib/db";
 import hash from "@/lib/salt";
 import UserToken from "@/lib/types/UserToken";
-import { sendEmailConfirmationAsync } from "@/lib/userUtils";
+import { getServerSession, sendEmailConfirmationAsync } from "@/lib/userUtils";
 import { SignToken, isEmailValid } from "@/lib/utils";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";

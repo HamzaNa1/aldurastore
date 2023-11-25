@@ -28,7 +28,7 @@ export function getServerSession() {
 	const name = payload?.name as string | undefined;
 	const admin = payload?.admin as boolean | undefined;
 
-	if (!id || !email || !name || !admin) {
+	if (!id || !email || !name || admin == undefined) {
 		return null;
 	}
 

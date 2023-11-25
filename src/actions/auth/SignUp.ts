@@ -3,6 +3,7 @@
 import db from "@/lib/db";
 import hash from "@/lib/salt";
 import { NewUser, users } from "@/lib/schema";
+import { sendEmailConfirmationAsync } from "@/lib/userUtils";
 import { SignToken, isEmailValid } from "@/lib/utils";
 import { randomUUID } from "crypto";
 import { cookies } from "next/headers";
@@ -54,6 +55,7 @@ export default async function SignUp({
 		throw new Error("JWT_KEY is not defined");
 	}
 
+	await sendEmailConfirmationAsync(newUser);
 	redirect("/confirm?id=" + newUser.id);
 	// const token = SignToken({ id: newUser.id, email, name });
 
