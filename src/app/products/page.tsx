@@ -5,7 +5,7 @@ import { Suspense } from "react";
 export default async function Products() {
 	return (
 		<div className="w-full flex justify-center items-center">
-			<div className="productsContainer h-fit bg-secondary flex flex-row flex-wrap justify-start gap-10 px-2 py-10">
+			<div className="productsContainer h-fit bg-secondary flex flex-row flex-wrap justify-center gap-10 px-2 py-10">
 				<Suspense fallback={<ProductSkeleton />}>
 					<ProductSection />
 				</Suspense>
@@ -22,7 +22,9 @@ async function ProductSection() {
 	return (
 		<>
 			{products.map((product, i) => (
-				<ProductView key={i} product={product}></ProductView>
+				<div key={i} className="w-[60%] sm:w-[50%] md:w-[40%] lg:w-[30%]">
+					<ProductView product={product}></ProductView>
+				</div>
 			))}
 		</>
 	);
