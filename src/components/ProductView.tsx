@@ -13,10 +13,9 @@ export default function ProductView({ product }: ProductViewProp) {
 			className="w-full lg aspect-[1/1.75] hover:shadow-inside hover:shadow-[#39777A]/60 bg-white flex flex-col transition duration-300"
 		>
 			<div className="relative w-full aspect-square">
-				<Image
+				<img
 					src={product.imageURL}
 					alt=""
-					fill
 					className="h-full object-center object-contain"
 				/>
 			</div>
