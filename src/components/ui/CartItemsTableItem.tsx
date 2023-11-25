@@ -1,13 +1,14 @@
 "use client";
 
-import { CartItem, Product, ProductSettings } from "@/lib/schema";
+import { CartItem, Product, ProductPrice, ProductSettings } from "@/lib/schema";
 import { SubmitButton } from "./SubmitButton";
 import { FaSquareXmark } from "react-icons/fa6";
 import { DeleteCartItem } from "@/actions/GeneralActions";
 import { useState } from "react";
+import { localizePrice } from "@/lib/locationUtils";
 
 type CartItemWithProduct = CartItem & {
-	product: Product;
+	product: Product & { productPrices: ProductPrice[] };
 	productSettings: ProductSettings;
 };
 
@@ -59,7 +60,7 @@ export default function CartItemsTableItem({
 				</div>
 			</td>
 			<td className="pr-1 font-semibold">
-				${cartItemWithProduct.product.cost}
+				{localizePrice(cartItemWithProduct.product.productPrices[0])}
 			</td>
 			<td className="pr-1 py-2">
 				{`${cartItemWithProduct.productSettings.size} ${cartItemWithProduct.product.name}`}

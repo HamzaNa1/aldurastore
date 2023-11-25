@@ -1,11 +1,11 @@
 "use client";
 
-import { CartItem, Product, ProductSettings } from "@/lib/schema";
+import { CartItem, Product, ProductPrice, ProductSettings } from "@/lib/schema";
 import { useEffect, useState } from "react";
 import CartItemsTableItem from "./CartItemsTableItem";
 
 type CartItemWithProduct = CartItem & {
-	product: Product;
+	product: Product & { productPrices: ProductPrice[] };
 	productSettings: ProductSettings;
 };
 

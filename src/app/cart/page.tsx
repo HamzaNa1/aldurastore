@@ -2,6 +2,8 @@ import BackButton from "@/components/ui/BackButton";
 import CartItemsTable from "@/components/ui/CartItemsTable";
 import getCountry from "@/lib/country";
 import db from "@/lib/db";
+import { localizePrices } from "@/lib/locationUtils";
+import { cartItems } from "@/lib/schema";
 import { getServerSession } from "@/lib/userUtils";
 import Link from "next/link";
 import { BsCartX } from "react-icons/bs";
@@ -59,7 +61,7 @@ export default async function Cart() {
 						<tbody>
 							<tr className="text-black text-sm text-right outline outline-zinc-300 bg-white rounded-sm">
 								<td className="pr-1">
-									${cart.reduce((acc, x) => acc + x.product.cost, 0).toFixed(2)}
+									{localizePrices(cart.map((x) => x.product.productPrices[0]))}
 								</td>
 							</tr>
 						</tbody>
