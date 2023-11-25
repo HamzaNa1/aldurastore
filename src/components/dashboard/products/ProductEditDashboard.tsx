@@ -128,8 +128,6 @@ function UpdateButton({ productId }: { productId: string }) {
 		<button
 			type="submit"
 			formAction={async (formData: FormData) => {
-				console.log(Boolean(formData.get("active")).valueOf());
-
 				let newProduct: Product = {
 					id: productId,
 					name: formData.get("name") as string,

@@ -1,6 +1,5 @@
 import SignIn from "@/actions/auth/SignIn";
 import LoginForm from "@/components/ui/LoginForm";
-import { SubmitButton } from "@/components/ui/SubmitButton";
 import { getServerSession } from "@/lib/userUtils";
 import Link from "next/link";
 import { redirect } from "next/navigation";

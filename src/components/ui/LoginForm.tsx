@@ -3,7 +3,7 @@
 import SignIn from "@/actions/auth/SignIn";
 import { SubmitButton } from "./SubmitButton";
 import { toast } from "sonner";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 export default function LoginForm() {
 	const [showError, setShowError] = useState(false);
