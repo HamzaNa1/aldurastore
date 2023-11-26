@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useFormStatus } from "react-dom";
 import ProductPricesForm from "./ProductPricesForm";
 import { FullProduct } from "@/app/dashboard/products/edit/[id]/page";
+import { sortClothingSizes } from "@/lib/utils";
 
 interface ProductEditDashboardProps {
 	product: FullProduct;
@@ -114,7 +115,9 @@ export default function ProductEditDashboard({
 			<div className="flex flex-col gap-20">
 				<ProductSettingsForm
 					productId={product.id}
-					productSettings={product.productSettings}
+					productSettings={product.productSettings.sort((a, b) =>
+						sortClothingSizes(a.size, b.size)
+					)}
 				/>
 				<ProductPricesForm productPrices={product.productPrices} />
 			</div>

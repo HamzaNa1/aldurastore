@@ -23,3 +23,25 @@ export function isEmailValid(email: string) {
 
 	return true;
 }
+
+export function sortClothingSizes(sizeA: string, sizeB: string) {
+	const order = [
+		"3XS",
+		"2XS",
+		"XS",
+		"S",
+		"M",
+		"L",
+		"XL",
+		"2XL",
+		"3XL",
+		"4XL",
+		"5XL",
+		"6XL",
+		"7XL",
+		"8XL",
+		"9XL",
+	];
+
+	return order.indexOf(sizeA) - order.indexOf(sizeB);
+}

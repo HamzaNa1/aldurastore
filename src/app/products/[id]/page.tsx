@@ -3,6 +3,7 @@ import db from "@/lib/db";
 import AddToCartForm from "@/components/ui/AddToCartForm";
 import { localizePrice } from "@/lib/locationUtils";
 import getCountry from "@/lib/country";
+import { sortClothingSizes } from "@/lib/utils";
 
 interface ProductPageProps {
 	params: {
@@ -58,7 +59,11 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 						</div>
 					</div>
 
-					<AddToCartForm settings={product.productSettings} />
+					<AddToCartForm
+						settings={product.productSettings.sort((a, b) =>
+							sortClothingSizes(a.size, b.size)
+						)}
+					/>
 				</div>
 			</div>
 		</div>
