@@ -38,9 +38,9 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 	];
 
 	return (
-		<>
-			<div className="relative bg-secondary container h-fit flex flex-row justify-center p-[60px]">
-				<div className="absolute left-0">
+		<div className="w-full flex justify-center items-center">
+			<div className="bg-secondary container h-fit flex flex-row justify-center px-2 py-10 gap-5 flex-wrap lg:flex-nowrap">
+				<div className=" left-0">
 					<BackButton>
 						<div className="w-8 h-8 border-2 border-zinc-800 rounded-full hover:border-primary transition duration-300">
 							<BiArrowBack className="w-full h-full fill-zinc-800 hover:fill-primary transition duration-300" />
@@ -56,7 +56,10 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 						<div className="h-[2px] w-full bg-zinc-800 mx-2" />
 						<div className="w-full h-fit text-right text-xl">
 							<span className="text-zinc-800">
-								{localizePrice(product.productPrices[0])}
+								{localizePrice(
+									product.productPrices[0].cost,
+									product.productPrices[0].country
+								)}
 							</span>
 						</div>
 						<div className="w-full h-fit text-right text-l">
@@ -67,6 +70,6 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 					<AddToCartForm settings={product.productSettings} />
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }

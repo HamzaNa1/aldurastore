@@ -14,9 +14,10 @@ export default function ProductImageSlider({
 	const [loaded, setLoaded] = useState(false);
 	const [currentImage, setCurrentImage] = useState(0);
 
-	const [sliderRef, instanceRef] = useKeenSlider(
+	const windowSize = useWindowSize();
+	const [sliderRef] = useKeenSlider(
 		{
-			vertical: true,
+			vertical: windowSize.width > 1280,
 			mode: "free",
 			slides: { perView: "auto", spacing: 5 },
 		},
@@ -28,24 +29,25 @@ export default function ProductImageSlider({
 	}, []);
 
 	return (
-		<div className="relative w-full h-fit flex p-10 gap-3">
-			<div className="relative w-[13%] overflow-hidden">
+		<div className="relative w-full flex flex-col-reverse xl:flex-row py-4 gap-3">
+			<div className="relative h-[13%] xl:h-auto xl:w-[13%] overflow-hidden shrink-0">
 				{loaded ? (
 					<div className="absolute w-full h-full">
-						<div ref={sliderRef} className="relative w-full h-full">
+						<div ref={sliderRef} className="w-full h-full">
 							{imageUrls.map((url, i) => (
 								<button
 									key={i}
-									className="keen-slider__slide"
+									className="keen-slider__slide relative h-full xl:w-full xl:h-auto aspect-square"
 									onClick={() => {
 										setCurrentImage(i);
 									}}
 								>
-									<div className="w-full aspect-square bg-white">
+									<div className="w-full h-full bg-white">
 										<img
-											className="h-full object-center object-contain mx-auto"
 											src={url}
-										></img>
+											alt=""
+											className="w-full h-full object-center object-contain"
+										/>
 									</div>
 								</button>
 							))}
@@ -61,12 +63,33 @@ export default function ProductImageSlider({
 					</div>
 				)}
 			</div>
-			<div className="w-full aspect-square bg-white">
+			<div className="relative w-full aspect-square bg-white">
 				<img
-					className="h-full object-center object-contain mx-auto"
 					src={imageUrls[currentImage]}
-				></img>
+					alt=""
+					className="absolute w-full h-full object-center object-contain"
+				/>
 			</div>
 		</div>
 	);
+}
+
+function useWindowSize() {
+	const [windowSize, setWindowSize] = useState({
+		width: 0,
+		height: 0,
+	});
+
+	useEffect(() => {
+		function handleResize() {
+			setWindowSize({
+				width: window.innerWidth,
+				height: window.innerHeight,
+			});
+		}
+		window.addEventListener("resize", handleResize);
+		handleResize();
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
+	return windowSize;
 }

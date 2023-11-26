@@ -22,7 +22,7 @@ async function ProductSection() {
 	return (
 		<>
 			{products.map((product, i) => (
-				<div key={i} className="w-[60%] sm:w-[50%] md:w-[40%] lg:w-[30%]">
+				<div key={i} className="w-[72%] sm:w-[50%] md:w-[40%] lg:w-[30%]">
 					<ProductView product={product}></ProductView>
 				</div>
 			))}
@@ -33,13 +33,13 @@ async function ProductSection() {
 async function ProductSkeleton() {
 	return (
 		<>
-			<div className="w-[60%] sm:w-[50%] md:w-[40%] lg:w-[30%]">
+			<div className="w-[72%] sm:w-[50%] md:w-[40%] lg:w-[30%]">
 				<ProductViewSkeleton />
 			</div>
-			<div className="w-[60%] sm:w-[50%] md:w-[40%] lg:w-[30%]">
+			<div className="w-[72%] sm:w-[50%] md:w-[40%] lg:w-[30%]">
 				<ProductViewSkeleton />
 			</div>
-			<div className="w-[60%] sm:w-[50%] md:w-[40%] lg:w-[30%]">
+			<div className="w-[72%] sm:w-[50%] md:w-[40%] lg:w-[30%]">
 				<ProductViewSkeleton />
 			</div>
 		</>

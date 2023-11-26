@@ -53,7 +53,7 @@ async function ProductSection() {
 	return (
 		<>
 			{products.map((product, i) => (
-				<div key={i} className="w-[60%] sm:w-[50%] md:w-[38%] lg:w-[25%]">
+				<div key={i} className="w-[72%] sm:w-[50%] md:w-[38%] lg:w-[25%]">
 					<ProductView product={product}></ProductView>
 				</div>
 			))}
