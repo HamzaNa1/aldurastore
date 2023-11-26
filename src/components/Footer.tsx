@@ -10,8 +10,8 @@ export default function Footer() {
 				<div className="flex flex-row py-40 px-5 gap-40 flex-wrap justify-center">
 					<div className="text-black flex flex-col gap-4 text-right">
 						<span className="font-bold">تواصل</span>
-						<span>info@aldurastore.com </span>
-						<span>+96877468122 </span>
+						<span>info@aldurastore.com</span>
+						<span>+968 77468122 </span>
 					</div>
 
 					<div className="text-black flex flex-col gap-4 text-right">
