@@ -4,9 +4,10 @@ import db from "@/lib/db";
 import hash from "@/lib/salt";
 import UserToken from "@/lib/types/UserToken";
 import { sendEmailConfirmationAsync } from "@/lib/userUtils";
-import { SignToken, isEmailValid } from "@/lib/utils";
+import { SignToken } from "@/lib/authUtils";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { isEmailValid } from "@/lib/utils";
 
 interface SignInProps {
 	email: string;

@@ -1,7 +1,7 @@
 import "server-only";
 
 import { cookies } from "next/headers";
-import { ValidateToken } from "./utils";
+import { ValidateToken } from "./authUtils";
 import db from "./db";
 import { User, emailConfirmations } from "./schema";
 import { eq } from "drizzle-orm";

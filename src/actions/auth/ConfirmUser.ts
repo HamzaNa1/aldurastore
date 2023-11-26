@@ -2,7 +2,7 @@
 
 import db from "@/lib/db";
 import { emailConfirmations, users } from "@/lib/schema";
-import { SignToken } from "@/lib/utils";
+import { SignToken } from "@/lib/authUtils";
 import { eq } from "drizzle-orm";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";

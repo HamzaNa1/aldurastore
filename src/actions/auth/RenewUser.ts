@@ -2,7 +2,7 @@
 
 import UserToken from "@/lib/types/UserToken";
 import { getServerSession } from "@/lib/userUtils";
-import { SignToken, ValidateToken } from "@/lib/utils";
+import { SignToken, ValidateToken } from "@/lib/authUtils";
 
 interface RenewUserProps {}
 
