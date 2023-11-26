@@ -64,13 +64,13 @@ async function ProductSection() {
 async function ProductSkeleton() {
 	return (
 		<>
-			<div className="w-[60%] sm:w-[50%] md:w-[38%] lg:w-[25%]">
+			<div className="w-[72%] sm:w-[50%] md:w-[38%] lg:w-[25%]">
 				<ProductViewSkeleton />
 			</div>
-			<div className="w-[60%] sm:w-[50%] md:w-[38%] lg:w-[25%]">
+			<div className="w-[72%] sm:w-[50%] md:w-[38%] lg:w-[25%]">
 				<ProductViewSkeleton />
 			</div>
-			<div className="w-[60%] sm:w-[50%] md:w-[38%] lg:w-[25%]">
+			<div className="w-[72%] sm:w-[50%] md:w-[38%] lg:w-[25%]">
 				<ProductViewSkeleton />
 			</div>
 		</>

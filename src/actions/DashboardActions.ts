@@ -15,7 +15,6 @@ import {
 import { getServerSession } from "@/lib/userUtils";
 import { randomUUID } from "crypto";
 import { eq } from "drizzle-orm";
-import { uuid } from "drizzle-orm/pg-core";
 import { revalidatePath } from "next/cache";
 
 export async function DashboardDeleteProduct(productId: string) {

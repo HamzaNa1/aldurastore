@@ -4,8 +4,6 @@ import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
 import Footer from "@/components/Footer";
 import { Toaster } from "sonner";
-import { RiWhatsappFill } from "react-icons/ri";
-import Link from "next/link";
 
 const inter = Cairo({ subsets: ["arabic", "latin"] });
 

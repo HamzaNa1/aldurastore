@@ -4,9 +4,8 @@ import db from "@/lib/db";
 import hash from "@/lib/salt";
 import { NewUser, users } from "@/lib/schema";
 import { sendEmailConfirmationAsync } from "@/lib/userUtils";
-import { SignToken, isEmailValid } from "@/lib/utils";
+import { isEmailValid } from "@/lib/utils";
 import { randomUUID } from "crypto";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 interface SignUpProps {
