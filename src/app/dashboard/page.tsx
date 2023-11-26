@@ -1,4 +1,4 @@
-import { getServerSession } from "@/lib/userUtils";
+import { getServerSession } from "@/lib/Utils/userUtils";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 

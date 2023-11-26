@@ -1,9 +1,9 @@
 import ProductImageSlider from "@/components/ProductImageSlider";
 import db from "@/lib/db";
 import AddToCartForm from "@/components/ui/AddToCartForm";
-import { localizePrice } from "@/lib/locationUtils";
+import { localizePrice } from "@/lib/Utils/locationUtils";
 import getCountry from "@/lib/country";
-import { sortClothingSizes } from "@/lib/utils";
+import { sortClothingSizes } from "@/lib/Utils/utils";
 
 interface ProductPageProps {
 	params: {

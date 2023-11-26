@@ -1,5 +1,5 @@
 import { SubmitButton } from "@/components/ui/SubmitButton";
-import { getServerSession } from "@/lib/userUtils";
+import { getServerSession } from "@/lib/Utils/userUtils";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 

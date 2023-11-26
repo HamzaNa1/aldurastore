@@ -6,7 +6,7 @@ import {
 	ProductPrice,
 	ProductSettings,
 } from "@/lib/schema";
-import { getServerSession } from "@/lib/userUtils";
+import { getServerSession } from "@/lib/Utils/userUtils";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 

@@ -3,8 +3,8 @@
 import db from "@/lib/db";
 import hash from "@/lib/salt";
 import { NewUser, users } from "@/lib/schema";
-import { sendEmailConfirmationAsync } from "@/lib/userUtils";
-import { isEmailValid } from "@/lib/utils";
+import { sendEmailConfirmationAsync } from "@/lib/Utils/userUtils";
+import { isEmailValid } from "@/lib/Utils/utils";
 import { randomUUID } from "crypto";
 import { redirect } from "next/navigation";
 

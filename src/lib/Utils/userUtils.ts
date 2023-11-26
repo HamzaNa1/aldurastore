@@ -2,10 +2,11 @@ import "server-only";
 
 import { cookies } from "next/headers";
 import { ValidateToken } from "./authUtils";
-import db from "./db";
-import { User, emailConfirmations } from "./schema";
+import db from "../db";
+import { emailConfirmations } from "../schema";
 import { eq } from "drizzle-orm";
-import sendVerificationEmail from "./emailUtils";
+import sendEmail from "./emailUtils";
+import ConfirmationEmail from "../emails";
 
 export function getServerSession() {
 	const cookiesStore = cookies();
@@ -37,7 +38,7 @@ export function getServerSession() {
 
 export async function sendEmailConfirmationAsync(
 	userId: string,
-	email: string
+	emailAddress: string
 ) {
 	const confirmation = await db.query.emailConfirmations.findFirst({
 		where: (confirmation, { eq }) => eq(confirmation.id, userId),
@@ -57,7 +58,9 @@ export async function sendEmailConfirmationAsync(
 		const key = generateKey();
 		await tx.insert(emailConfirmations).values({ id: userId, key: key });
 
-		await sendVerificationEmail(email, key);
+		const email = ConfirmationEmail({ code: key });
+
+		await sendEmail(emailAddress, "تأكيد البريد الألكتروني", email);
 	});
 }
 

@@ -1,6 +1,6 @@
 import { GetOrders } from "@/actions/DashboardActions";
 import OrderDashboard from "@/components/dashboard/orders/OrderDashboard";
-import { getServerSession } from "@/lib/userUtils";
+import { getServerSession } from "@/lib/Utils/userUtils";
 import { notFound } from "next/navigation";
 
 export default async function ManageProducts() {

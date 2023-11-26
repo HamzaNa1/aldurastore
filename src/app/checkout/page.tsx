@@ -1,9 +1,9 @@
 import CheckoutForm from "@/components/ui/CheckoutForm";
 import getCountry from "@/lib/country";
 import db from "@/lib/db";
-import { localizePrice } from "@/lib/locationUtils";
+import { localizePrice } from "@/lib/Utils/locationUtils";
 import { cartItems, productPrices, products } from "@/lib/schema";
-import { getServerSession } from "@/lib/userUtils";
+import { getServerSession } from "@/lib/Utils/userUtils";
 import { and, eq, sql } from "drizzle-orm";
 import { redirect } from "next/navigation";
 

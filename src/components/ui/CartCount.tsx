@@ -1,6 +1,6 @@
 import db from "@/lib/db";
 import { cartItems } from "@/lib/schema";
-import { getServerSession } from "@/lib/userUtils";
+import { getServerSession } from "@/lib/Utils/userUtils";
 import { eq, sql } from "drizzle-orm";
 
 interface CartCountProps {}

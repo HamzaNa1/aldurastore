@@ -1,5 +1,5 @@
 import LoginForm from "@/components/ui/LoginForm";
-import { getServerSession } from "@/lib/userUtils";
+import { getServerSession } from "@/lib/Utils/userUtils";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 

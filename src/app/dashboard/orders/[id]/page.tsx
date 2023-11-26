@@ -5,9 +5,9 @@ import {
 import BackButton from "@/components/ui/BackButton";
 import { SubmitButton } from "@/components/ui/SubmitButton";
 import db from "@/lib/db";
-import { localizePrices } from "@/lib/locationUtils";
+import { localizePrices } from "@/lib/Utils/locationUtils";
 import { OrdersToProducts, Product, orderRelations } from "@/lib/schema";
-import { getServerSession } from "@/lib/userUtils";
+import { getServerSession } from "@/lib/Utils/userUtils";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";

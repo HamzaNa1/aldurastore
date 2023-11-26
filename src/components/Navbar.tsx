@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { VscAccount } from "react-icons/vsc";
-import { getServerSession } from "@/lib/userUtils";
+import { getServerSession } from "@/lib/Utils/userUtils";
 import CartCount from "./ui/CartCount";
 import { Suspense } from "react";
 import CountrySelector from "./ui/CountrySelector";

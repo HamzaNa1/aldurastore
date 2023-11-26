@@ -3,11 +3,11 @@
 import db from "@/lib/db";
 import hash from "@/lib/salt";
 import UserToken from "@/lib/types/UserToken";
-import { sendEmailConfirmationAsync } from "@/lib/userUtils";
-import { SignToken } from "@/lib/authUtils";
+import { sendEmailConfirmationAsync } from "@/lib/Utils/userUtils";
+import { SignToken } from "@/lib/Utils/authUtils";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { isEmailValid } from "@/lib/utils";
+import { isEmailValid } from "@/lib/Utils/utils";
 
 interface SignInProps {
 	email: string;

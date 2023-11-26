@@ -1,7 +1,7 @@
 import { DashboardDeleteProduct } from "@/actions/DashboardActions";
 import { SubmitButton } from "@/components/ui/SubmitButton";
 import db from "@/lib/db";
-import { getServerSession } from "@/lib/userUtils";
+import { getServerSession } from "@/lib/Utils/userUtils";
 import { notFound, redirect } from "next/navigation";
 
 interface DeleteProductPageProps {

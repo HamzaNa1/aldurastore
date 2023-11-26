@@ -1,6 +1,6 @@
 import ProductDashboard from "@/components/dashboard/products/ProductDashboard";
 import db from "@/lib/db";
-import { getServerSession } from "@/lib/userUtils";
+import { getServerSession } from "@/lib/Utils/userUtils";
 import { notFound } from "next/navigation";
 
 export default async function ManageProducts() {

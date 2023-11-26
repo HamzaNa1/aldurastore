@@ -1,7 +1,7 @@
 "use server";
 
 import db from "@/lib/db";
-import { countries } from "@/lib/locationUtils";
+import { countries } from "@/lib/Utils/locationUtils";
 import {
 	Product,
 	ProductImage,
@@ -12,7 +12,7 @@ import {
 	productSettings,
 	products,
 } from "@/lib/schema";
-import { getServerSession } from "@/lib/userUtils";
+import { getServerSession } from "@/lib/Utils/userUtils";
 import { randomUUID } from "crypto";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";

@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { useFormStatus } from "react-dom";
 import ProductPricesForm from "./ProductPricesForm";
 import { FullProduct } from "@/app/dashboard/products/edit/[id]/page";
-import { sortClothingSizes } from "@/lib/utils";
+import { sortClothingSizes } from "@/lib/Utils/utils";
 
 interface ProductEditDashboardProps {
 	product: FullProduct;

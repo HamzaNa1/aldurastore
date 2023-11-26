@@ -1,4 +1,4 @@
-import { currencies } from "@/lib/locationUtils";
+import { currencies } from "@/lib/Utils/locationUtils";
 import { ProductPrice } from "@/lib/schema";
 import ProductPriceEditor from "./ProductPriceEditor";
 

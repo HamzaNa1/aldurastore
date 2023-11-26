@@ -1,6 +1,6 @@
 "use client";
 import { SelectLocation } from "@/actions/GeneralActions";
-import { countries, currencies } from "@/lib/locationUtils";
+import { countries, currencies } from "@/lib/Utils/locationUtils";
 import React, { useRef, useState } from "react";
 import { IoIosGlobe } from "react-icons/io";
 

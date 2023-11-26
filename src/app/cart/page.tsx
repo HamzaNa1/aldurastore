@@ -2,8 +2,8 @@ import BackButton from "@/components/ui/BackButton";
 import CartItemsTable from "@/components/ui/CartItemsTable";
 import getCountry from "@/lib/country";
 import db from "@/lib/db";
-import { localizePrices } from "@/lib/locationUtils";
-import { getServerSession } from "@/lib/userUtils";
+import { localizePrices } from "@/lib/Utils/locationUtils";
+import { getServerSession } from "@/lib/Utils/userUtils";
 import Link from "next/link";
 import { BsCartX } from "react-icons/bs";
 

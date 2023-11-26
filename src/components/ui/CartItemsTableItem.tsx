@@ -5,7 +5,7 @@ import { SubmitButton } from "./SubmitButton";
 import { FaSquareXmark } from "react-icons/fa6";
 import { DeleteCartItem } from "@/actions/GeneralActions";
 import { useState } from "react";
-import { localizePrice } from "@/lib/locationUtils";
+import { localizePrice } from "@/lib/Utils/locationUtils";
 
 type CartItemWithProduct = CartItem & {
 	product: Product & { productPrices: ProductPrice[] };
