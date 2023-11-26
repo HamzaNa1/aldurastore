@@ -2,7 +2,7 @@ import CheckoutForm from "@/components/ui/CheckoutForm";
 import getCountry from "@/lib/country";
 import db from "@/lib/db";
 import { localizePrice } from "@/lib/Utils/locationUtils";
-import { cartItems, productPrices, products } from "@/lib/schema";
+import { cartItems, productPrices } from "@/lib/schema";
 import { getServerSession } from "@/lib/Utils/userUtils";
 import { and, eq, sql } from "drizzle-orm";
 import { redirect } from "next/navigation";
@@ -33,7 +33,7 @@ export default async function Checkout() {
 
 	return (
 		<>
-			<div className="flex flex-row container h-full bg-secondary justify-center gap-16 py-20 px-2 flex-wrap">
+			<div className="max-w-[1000px] w-full h-full flex flex-row bg-secondary justify-center gap-16 py-20 px-2 flex-wrap">
 				<div className="flex flex-col flex-[1_1_200px] h-full gap-3">
 					<span className="text-primarytext text-3xl font-bold text-right w-full h-10">
 						تفاصيل الفاتورة

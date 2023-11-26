@@ -8,8 +8,9 @@ export const currencies: { [id: string]: string } = {
 	sa: "SR",
 };
 
-export const locations: { [id: string]: { regions: string[] } } = {
-	ae: {
+export const locations = [
+	{
+		name: "الإمارات",
 		regions: [
 			"أبو ظبي",
 			"عجمان",
@@ -20,8 +21,12 @@ export const locations: { [id: string]: { regions: string[] } } = {
 			"أم القيوين",
 		],
 	},
-	bh: { regions: ["العاصمة", "الشمالية", "الجنوبية", "المحرق"] },
-	kw: {
+	{
+		name: "البحرين",
+		regions: ["العاصمة", "الشمالية", "الجنوبية", "المحرق"],
+	},
+	{
+		name: "الكويت",
 		regions: [
 			"الأحمدي",
 			"العاصمة",
@@ -31,7 +36,9 @@ export const locations: { [id: string]: { regions: string[] } } = {
 			"مبارك الكبير",
 		],
 	},
-	om: {
+	{
+		name: "عمان",
+
 		regions: [
 			"الداخلية",
 			"الظاهرة",
@@ -46,7 +53,8 @@ export const locations: { [id: string]: { regions: string[] } } = {
 			"مسندم",
 		],
 	},
-	qa: {
+	{
+		name: "قطر",
 		regions: [
 			"الدوحة",
 			"الريان",
@@ -58,7 +66,8 @@ export const locations: { [id: string]: { regions: string[] } } = {
 			"الشحانية",
 		],
 	},
-	sa: {
+	{
+		name: "السعودية",
 		regions: [
 			"الرياض",
 			"مكة",
@@ -75,7 +84,7 @@ export const locations: { [id: string]: { regions: string[] } } = {
 			"نجران",
 		],
 	},
-};
+];
 
 export function localizePrice(price: number, country: string) {
 	return `${currencies[country] ?? ""} ${price.toFixed(2)}`;
