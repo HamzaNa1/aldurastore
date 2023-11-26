@@ -64,9 +64,15 @@ async function ProductSection() {
 async function ProductSkeleton() {
 	return (
 		<>
-			<ProductViewSkeleton />
-			<ProductViewSkeleton />
-			<ProductViewSkeleton />
+			<div className="w-[60%] sm:w-[50%] md:w-[38%] lg:w-[25%]">
+				<ProductViewSkeleton />
+			</div>
+			<div className="w-[60%] sm:w-[50%] md:w-[38%] lg:w-[25%]">
+				<ProductViewSkeleton />
+			</div>
+			<div className="w-[60%] sm:w-[50%] md:w-[38%] lg:w-[25%]">
+				<ProductViewSkeleton />
+			</div>
 		</>
 	);
 }

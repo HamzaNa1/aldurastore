@@ -12,7 +12,7 @@ interface HeroComponentProps {
 
 export default function Hero({ images }: HeroComponentProps) {
 	const [currIndex, setCurrIndex] = useState(0);
-	const [loaded, setLoaded] = useState(true);
+	const [loaded, setLoaded] = useState(false);
 
 	const prevSlide = () => {
 		instanceRef.current?.prev();

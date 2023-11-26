@@ -1,5 +1,4 @@
 import { Product } from "@/lib/schema";
-import Image from "next/image";
 import Link from "next/link";
 
 interface ProductViewProp {
@@ -41,19 +40,19 @@ export default function ProductView({ product }: ProductViewProp) {
 
 export function ProductViewSkeleton() {
 	return (
-		<div className="w-[400px] h-[700px] bg-white flex flex-col">
-			<div className="relative w-full aspect-square bg-secondary">
-				<div className="w-full h-full bg-white animate-pulse"></div>
+		<div className="w-full flex flex-col aspect-[1/1.175] bg-white">
+			<div className="relative w-full aspect-square">
+				<div className="absolute w-full h-full bg-zinc-100 animate-pulse"></div>
 			</div>
 
-			<div className="w-full h-auto p-4 flex flex-col gap-10 items-end">
+			<div className="w-full h-full p-4 flex flex-col gap-10 items-end">
 				<div className="h-8 w-[60%] rounded-full bg-secondary animate-pulse"></div>
 
 				<div className="w-full flex flex-col gap-4 items-end">
-					<div className="h-6 w-[80%] rounded-full bg-secondary animate-pulse"></div>
-					<div className="h-6 w-[80%] rounded-full bg-secondary animate-pulse"></div>
-					<div className="h-6 w-[80%] rounded-full bg-secondary animate-pulse"></div>
-					<div className="h-6 w-[80%] rounded-full bg-secondary animate-pulse"></div>
+					<div className="h-6 w-[100%] rounded-full bg-secondary animate-pulse"></div>
+					<div className="h-6 w-[100%] rounded-full bg-secondary animate-pulse"></div>
+					<div className="h-6 w-[100%] rounded-full bg-secondary animate-pulse"></div>
+					<div className="h-6 w-[100%] rounded-full bg-secondary animate-pulse"></div>
 				</div>
 			</div>
 		</div>
