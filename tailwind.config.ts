@@ -13,6 +13,9 @@ const config: Config = {
 				"gradient-conic":
 					"conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
 			},
+			backgroundClip: {
+				text: "text",
+			},
 			colors: {
 				primary: "#336A6D",
 				secondary: "#ECECEC",
@@ -22,6 +25,12 @@ const config: Config = {
 			boxShadow: {
 				inside: "inset 0px 0px 10px rgb(0 0 0 / 0.05)",
 			},
+		},
+	},
+	variants: {
+		extend: {
+			backgroundImage: ["hover", "focus"],
+			backgroundClip: ["hover", "focus"],
 		},
 	},
 	plugins: [],

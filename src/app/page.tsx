@@ -46,14 +46,14 @@ async function HeroSkeleton() {
 
 async function ProductSection() {
 	const products = await db.query.products.findMany({
-		where: (product, { eq }) =>
-			eq(product.showOnMain, true) && eq(product.activated, true),
+		where: (product, { and, eq }) =>
+			and(eq(product.showOnMain, true), eq(product.activated, true)),
 	});
 
 	return (
 		<>
 			{products.map((product, i) => (
-				<div key={i} className="w-[70%]  sm:w-[47%] md:w-[35%] lg:w-[30%]">
+				<div key={i} className="w-[60%] sm:w-[50%] md:w-[38%] lg:w-[25%]">
 					<ProductView product={product}></ProductView>
 				</div>
 			))}
