@@ -73,8 +73,8 @@ export default function CartItemsTable({ items }: CartItemsTableProps) {
 		<>
 			{isLoaded && (
 				<tbody>
-					{items.map((x, i) => (
-						<CartItemsTableItem cartItemWithProduct={x} />
+					{items.map((x) => (
+						<CartItemsTableItem key={x.id} cartItemWithProduct={x} />
 					))}
 				</tbody>
 			)}

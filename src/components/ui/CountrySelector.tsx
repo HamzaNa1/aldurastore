@@ -1,7 +1,7 @@
 "use client";
 import { SelectLocation } from "@/actions/GeneralActions";
 import { countries, currencies } from "@/lib/locationUtils";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { IoIosGlobe } from "react-icons/io";
 
 interface CountrySelectorProps {
@@ -10,7 +10,6 @@ interface CountrySelectorProps {
 
 export default function CountrySelector({ country }: CountrySelectorProps) {
 	const [hover, setHover] = useState(false);
-	const [focus, setFocus] = useState(false);
 
 	const ref = useRef<HTMLDivElement>(null);
 
@@ -19,18 +18,16 @@ export default function CountrySelector({ country }: CountrySelectorProps) {
 			ref={ref}
 			onMouseEnter={() => setHover(true)}
 			onMouseLeave={() => setHover(false)}
-			onFocus={() => setFocus(true)}
-			onBlur={() => setFocus(false)}
 			tabIndex={0}
 			className="group mx-5 relative h-full flex flex-row gap-2 justify-center items-center p-2 z-10"
 		>
 			<button className="group w-full h-full">
 				<IoIosGlobe className="group w-full h-full fill-zinc-800 group-hover:fill-primary group-focus:fill-primary transition duration-300" />
 			</button>
-			{(hover || focus) && (
+			{hover && (
 				<div className="absolute flex flex-col gap-2 top-full bg-secondary drop-shadow-md border border-zinc-400/10 p-2 text-right">
 					<span className="w-full text-zinc-800">العملات</span>
-					<DropdownMenu myRef={ref} country={country} />
+					<DropdownMenu setHover={setHover} country={country} />
 				</div>
 			)}
 		</div>
@@ -38,10 +35,10 @@ export default function CountrySelector({ country }: CountrySelectorProps) {
 }
 
 function DropdownMenu({
-	myRef,
+	setHover,
 	country,
 }: {
-	myRef: React.RefObject<HTMLDivElement>;
+	setHover: React.Dispatch<React.SetStateAction<boolean>>;
 	country: string;
 }) {
 	const [select, setSelect] = useState(
@@ -68,7 +65,7 @@ function DropdownMenu({
 										await SelectLocation(x);
 										setShow(false);
 										setSelect(i);
-										myRef.current?.focus();
+										setHover(false);
 									}}
 									className={
 										"w-full h-10 bg-zinc-100 text-zinc-800 border-t first:border-t-0 border-zinc-400 " +

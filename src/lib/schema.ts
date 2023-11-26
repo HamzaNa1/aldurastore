@@ -112,6 +112,7 @@ export const orders = mysqlTable("orders", {
 	isProcessed: boolean("isProcessed").default(false).notNull(),
 	boughtDate: date("boughtDate").default(new Date()).notNull(),
 	fulfilledDate: date("fulfilledDate"),
+	country: varchar("country", { length: 255 }).notNull(),
 });
 
 export const ordersToProducts = mysqlTable(

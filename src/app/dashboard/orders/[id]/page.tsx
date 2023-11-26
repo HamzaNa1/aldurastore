@@ -5,6 +5,7 @@ import {
 import BackButton from "@/components/ui/BackButton";
 import { SubmitButton } from "@/components/ui/SubmitButton";
 import db from "@/lib/db";
+import { localizePrices } from "@/lib/locationUtils";
 import { OrdersToProducts, Product, orderRelations } from "@/lib/schema";
 import { getServerSession } from "@/lib/userUtils";
 import Link from "next/link";
@@ -100,9 +101,10 @@ async function OrderView({ orderId }: { orderId: string }) {
 				<div className="flex flex-col flex-1 gap-2 flex-shrink-0">
 					<span>
 						Total Cost:{" "}
-						{order.ordersToProducts
-							.reduce((acc, x) => acc + x.cost, 0)
-							.toFixed(2)}
+						{localizePrices(
+							order.ordersToProducts.map((x) => x.cost),
+							order.country
+						)}
 					</span>
 					<table className="table-fixed w-full">
 						<thead className="sticky text-zinc-50 text-sm text-left outline outline-[0.5px] rounded-tr-sm rounded-tl-sm bg-primary outline-primary h-fit">

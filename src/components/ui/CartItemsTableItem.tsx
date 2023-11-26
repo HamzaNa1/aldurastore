@@ -60,7 +60,10 @@ export default function CartItemsTableItem({
 				</div>
 			</td>
 			<td className="pr-1 font-semibold">
-				{localizePrice(cartItemWithProduct.product.productPrices[0])}
+				{localizePrice(
+					cartItemWithProduct.product.productPrices[0].cost,
+					cartItemWithProduct.product.productPrices[0].country
+				)}
 			</td>
 			<td className="pr-1 py-2">
 				{`${cartItemWithProduct.productSettings.size} ${cartItemWithProduct.product.name}`}

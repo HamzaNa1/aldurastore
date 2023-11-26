@@ -28,16 +28,16 @@ export const locations: { [id: string]: { regions: string[] } } = {
 	},
 };
 
-export function localizePrice(price: ProductPrice) {
-	return `${currencies[price.country]} ${price.cost.toFixed(2)}`;
+// export function localizePrice(price: ProductPrice) {
+// 	return `${currencies[price.country]} ${price.cost.toFixed(2)}`;
+// }
+
+export function localizePrice(price: number, country: string) {
+	return `${currencies[country] ?? ""} ${price.toFixed(2)}`;
 }
 
-export function localizePrices(prices: ProductPrice[]) {
-	if (prices.length == 0) {
-		return "0.00";
-	}
-
-	return `${currencies[prices[0].country]} ${prices
-		.reduce((acc, x) => acc + x.cost, 0)
+export function localizePrices(prices: number[], country: string) {
+	return `${currencies[country] ?? ""} ${prices
+		.reduce((acc, x) => acc + x, 0)
 		.toFixed(2)}`;
 }

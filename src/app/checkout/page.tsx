@@ -1,8 +1,10 @@
 import CheckoutForm from "@/components/ui/CheckoutForm";
+import getCountry from "@/lib/country";
 import db from "@/lib/db";
-import { cartItems, products } from "@/lib/schema";
+import { localizePrice } from "@/lib/locationUtils";
+import { cartItems, productPrices, products } from "@/lib/schema";
 import { getServerSession } from "@/lib/userUtils";
-import { eq, sql } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
 import { redirect } from "next/navigation";
 
 export default async function Checkout() {
@@ -12,11 +14,20 @@ export default async function Checkout() {
 		redirect("/login");
 	}
 
+	const country = getCountry();
+
 	const total = (
 		await db
-			.select({ total: sql<number>`sum(${products.cost})` })
+			.select({ total: sql<number>`sum(${productPrices.cost})` })
 			.from(cartItems)
-			.innerJoin(products, eq(cartItems.productId, products.id))
+			// .innerJoin(products, eq(cartItems.productId, products.id))
+			.innerJoin(
+				productPrices,
+				and(
+					eq(cartItems.productId, productPrices.productId),
+					eq(productPrices.country, country)
+				)
+			)
 			.where(eq(cartItems.userId, user.id))
 	)[0].total;
 
@@ -35,7 +46,7 @@ export default async function Checkout() {
 						</thead>
 						<tbody>
 							<tr className="text-black text-sm text-right outline outline-zinc-300 bg-white rounded-sm">
-								<td className="pr-1">${total.toFixed(2)}</td>
+								<td className="pr-1">{localizePrice(total, country)}</td>
 							</tr>
 						</tbody>
 					</table>
