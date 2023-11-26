@@ -6,6 +6,7 @@ import {
 	Img,
 	Preview,
 	Text,
+	render,
 } from "@react-email/components";
 
 import * as React from "react";
@@ -14,7 +15,7 @@ interface ConfirmationEmailProps {
 	code: string;
 }
 
-export default function ConfirmationEmail({ code }: ConfirmationEmailProps) {
+function ConfirmationEmailBuilder({ code }: ConfirmationEmailProps) {
 	return (
 		<Html style={{ direction: "rtl" }}>
 			<Head />
@@ -51,6 +52,11 @@ export default function ConfirmationEmail({ code }: ConfirmationEmailProps) {
 		</Html>
 	);
 }
+
+const ConfirmationEmail = ({ code }: { code: string }) =>
+	render(<ConfirmationEmailBuilder code={code} />);
+
+export default ConfirmationEmail;
 
 const main = {
 	backgroundColor: "#ffffff",
