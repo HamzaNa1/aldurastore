@@ -1,7 +1,5 @@
 import ProductImageSlider from "@/components/ProductImageSlider";
-import BackButton from "@/components/ui/BackButton";
 import db from "@/lib/db";
-import { BiArrowBack } from "react-icons/bi";
 import AddToCartForm from "@/components/ui/AddToCartForm";
 import { localizePrice } from "@/lib/locationUtils";
 import getCountry from "@/lib/country";
@@ -40,13 +38,6 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 	return (
 		<div className="w-full flex justify-center items-center">
 			<div className="bg-secondary container h-fit flex flex-row justify-center px-2 py-10 gap-5 flex-wrap lg:flex-nowrap">
-				<div className=" left-0">
-					<BackButton>
-						<div className="w-8 h-8 border-2 border-zinc-800 rounded-full hover:border-primary transition duration-300">
-							<BiArrowBack className="w-full h-full fill-zinc-800 hover:fill-primary transition duration-300" />
-						</div>
-					</BackButton>
-				</div>
 				<ProductImageSlider imageUrls={images}></ProductImageSlider>
 				<div className="w-full flex flex-col gap-20 items-end">
 					<div className="w-full flex flex-col gap-2">

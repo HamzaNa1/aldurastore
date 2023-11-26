@@ -1,5 +1,3 @@
-import { ProductPrice } from "./schema";
-
 export const countries = ["ae", "bh", "kw", "om", "qa", "sa"];
 export const currencies: { [id: string]: string } = {
 	ae: "AED",
@@ -27,10 +25,6 @@ export const locations: { [id: string]: { regions: string[] } } = {
 		],
 	},
 };
-
-// export function localizePrice(price: ProductPrice) {
-// 	return `${currencies[price.country]} ${price.cost.toFixed(2)}`;
-// }
 
 export function localizePrice(price: number, country: string) {
 	return `${currencies[country] ?? ""} ${price.toFixed(2)}`;
