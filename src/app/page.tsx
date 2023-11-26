@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import ProductView, { ProductViewSkeleton } from "@/components/ProductView";
+import getCountry from "@/lib/country";
 import db from "@/lib/db";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -45,15 +46,22 @@ async function HeroSkeleton() {
 }
 
 async function ProductSection() {
+	const country = getCountry();
+
 	const products = await db.query.products.findMany({
 		where: (product, { and, eq }) =>
 			and(eq(product.showOnMain, true), eq(product.activated, true)),
+		with: {
+			productPrices: {
+				where: (productPrice, { eq }) => eq(productPrice.country, country),
+			},
+		},
 	});
 
 	return (
 		<>
 			{products.map((product, i) => (
-				<div key={i} className="w-[72%] sm:w-[50%] md:w-[38%] lg:w-[25%]">
+				<div key={i} className="w-[47%] max-w-[375px]">
 					<ProductView product={product}></ProductView>
 				</div>
 			))}
@@ -64,13 +72,13 @@ async function ProductSection() {
 async function ProductSkeleton() {
 	return (
 		<>
-			<div className="w-[72%] sm:w-[50%] md:w-[38%] lg:w-[25%]">
+			<div className="w-[47%] max-w-[375px]">
 				<ProductViewSkeleton />
 			</div>
-			<div className="w-[72%] sm:w-[50%] md:w-[38%] lg:w-[25%]">
+			<div className="w-[47%] max-w-[375px]">
 				<ProductViewSkeleton />
 			</div>
-			<div className="w-[72%] sm:w-[50%] md:w-[38%] lg:w-[25%]">
+			<div className="w-[47%] max-w-[375px]">
 				<ProductViewSkeleton />
 			</div>
 		</>

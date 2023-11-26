@@ -68,9 +68,13 @@ export default async function Cart() {
 							</tr>
 						</tbody>
 					</table>
-					<button className="bg-primary hover:brightness-95 h-7 w-full rounded-md">
+					<Link
+						className="bg-primary hover:brightness-95 h-7 w-full rounded-md text-center"
+						href="/checkout"
+						prefetch
+					>
 						متابعة الشراء
-					</button>
+					</Link>
 					<BackButton>
 						<div className=" text-black bg-white hover:brightness-[.98] h-7 w-full rounded-md">
 							العودة للتسوق
