@@ -12,6 +12,21 @@ export default function CheckoutForm() {
 			<span className="text-primarytext text-3xl font-bold text-right w-full h-10">
 				تفاصيل العنوان
 			</span>
+			<div className="w-full flex flex-row-reverse gap-1">
+				<AutoComplete
+					label="الاسم"
+					className="w-full h-10 rounded-sm placeholder:text-right text-black text-right bg-white shadow"
+				></AutoComplete>
+				<AutoComplete
+					label="اسم الأسرة"
+					className="w-full h-10 rounded-sm placeholder:text-right text-black text-right bg-white shadow"
+				></AutoComplete>
+			</div>
+			<AutoComplete
+				label=" رقم الهاتف (WhatsApp)"
+				className="w-full h-10 rounded-sm placeholder:text-right text-black text-right bg-white shadow"
+				placeholder=""
+			></AutoComplete>
 			<AutoComplete
 				label="الموقع"
 				className="w-full h-10 rounded-sm placeholder:text-right text-black text-right bg-white shadow"

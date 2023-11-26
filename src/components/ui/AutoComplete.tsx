@@ -54,7 +54,7 @@ export default function AutoComplete({
 					</span>
 				)}
 				<input
-					className="appearance-none focus:outline-none w-full h-full px-1"
+					className="appearance-none focus:outline-none w-full h-full p-1"
 					placeholder={placeholder}
 					value={input}
 					ref={inputRef}
