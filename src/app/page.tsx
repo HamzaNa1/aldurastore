@@ -18,7 +18,7 @@ export default async function Home() {
 			<div className="w-full h-fit bg-primary py-10 flex justify-center">
 				<div className="container flex flex-col items-center gap-6 p-2">
 					<span className="text-7xl">منتجاتنا</span>
-					<div className="w-full flex flex-row justify-center gap-10 flex-wrap">
+					<div className="productsContainer h-fit flex flex-row flex-wrap justify-center gap-1 md:gap-5 px-1 py-10">
 						<Suspense fallback={<ProductSkeleton />}>
 							<ProductSection />
 						</Suspense>
@@ -42,7 +42,11 @@ async function HeroSection() {
 }
 
 async function HeroSkeleton() {
-	return <div className="w-full h-full bg-[#B9B9B9] animate-pulse"></div>;
+	return (
+		<div className="aspect-video w-full">
+			<div className="relative w-full h-full bg-[#B9B9B9] overflow-hidden drop-shadow-lg rounded-lg"></div>
+		</div>
+	);
 }
 
 async function ProductSection() {
