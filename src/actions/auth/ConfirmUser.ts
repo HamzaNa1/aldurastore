@@ -14,7 +14,7 @@ export default async function ConfirmUser(userId: string, key: string) {
 		where: (confirmation, { eq }) => eq(confirmation.id, userId),
 	});
 
-	if (!confirmation || new Date(confirmation.expiresBy) > new Date()) {
+	if (!confirmation || new Date(confirmation.expiresBy) < new Date()) {
 		redirect("/login");
 	}
 

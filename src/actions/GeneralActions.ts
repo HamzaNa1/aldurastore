@@ -87,6 +87,7 @@ export async function CreateOrder(orderDetails: OrderDetails) {
 		id: randomUUID(),
 		userId: user.id,
 		country: country,
+		boughtDate: new Date(),
 		firstname: orderDetails.firstName,
 		lastname: orderDetails.lastName,
 		phonenumber: orderDetails.phoneNumber,
@@ -118,6 +119,7 @@ export async function CreateOrder(orderDetails: OrderDetails) {
 
 		for (let i = 0; i < items.length; i++) {
 			await tx.insert(ordersToProducts).values({
+				id: randomUUID(),
 				orderId: order.id,
 				productId: items[i].productId,
 				productSettingsId: items[i].productSettingsId,

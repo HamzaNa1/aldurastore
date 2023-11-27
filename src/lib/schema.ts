@@ -6,12 +6,10 @@ import {
 	int,
 	bigint,
 	index,
-	date,
-	primaryKey,
 	double,
-	datetime,
 	mysqlEnum,
 	text,
+	timestamp,
 } from "drizzle-orm/mysql-core";
 
 export const heroImages = mysqlTable("heroImages", {
@@ -26,7 +24,7 @@ export const users = mysqlTable(
 		name: varchar("name", { length: 255 }).notNull(),
 		email: varchar("email", { length: 255 }).unique().notNull(),
 		password: varchar("password", { length: 255 }).notNull(),
-		createDate: datetime("createDate").default(new Date()).notNull(),
+		createDate: timestamp("createDate").defaultNow().notNull(),
 		admin: boolean("admin").default(false).notNull(),
 		emailConfirmed: boolean("emailConfirmed").default(false).notNull(),
 	},
@@ -40,7 +38,7 @@ export const emailConfirmations = mysqlTable("emailConfirmations", {
 	key: varchar("key", { length: 6 }),
 	expiresBy: bigint("expiresBy", { mode: "number" })
 		.notNull()
-		.default(new Date().getTime() + 1_000 * 60 * 15),
+		.$defaultFn(() => new Date().getTime() + 1_000 * 60 * 15),
 });
 
 export const products = mysqlTable("products", {
@@ -117,20 +115,21 @@ export const orders = mysqlTable("orders", {
 	region: varchar("region", { length: 255 }).notNull(),
 	address: varchar("address", { length: 255 }).notNull(),
 	isProcessed: boolean("isProcessed").default(false).notNull(),
-	boughtDate: date("boughtDate").default(new Date()).notNull(),
-	fulfilledDate: date("fulfilledDate"),
+	boughtDate: timestamp("boughtDate").defaultNow().notNull(),
+	fulfilledDate: timestamp("fulfilledDate"),
 });
 
 export const ordersToProducts = mysqlTable(
 	"ordersToProducts",
 	{
+		id: varchar("id", { length: 255 }).notNull().unique().primaryKey(),
 		orderId: varchar("orderId", { length: 255 }).notNull(),
 		productId: varchar("productId", { length: 255 }).notNull(),
 		productSettingsId: varchar("productSettingsId", { length: 255 }).notNull(),
 		cost: double("cost").notNull(),
 	},
 	(table) => ({
-		pk: primaryKey(table.orderId, table.productId),
+		pkIdx: index("pkIdx").on(table.orderId, table.productId),
 	})
 );
 
@@ -213,6 +212,10 @@ export const ordersToProductsRelations = relations(
 		product: one(products, {
 			fields: [ordersToProducts.productId],
 			references: [products.id],
+		}),
+		productSettings: one(productSettings, {
+			fields: [ordersToProducts.productId],
+			references: [productSettings.productId],
 		}),
 	})
 );
