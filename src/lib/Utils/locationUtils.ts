@@ -87,11 +87,11 @@ export const locations = [
 ];
 
 export function localizePrice(price: number, country: string) {
-	return `${currencies[country] ?? ""} ${price.toFixed(2)}`;
+	return `${currencies[country] ?? ""}${price.toFixed(2)}`;
 }
 
 export function localizePrices(prices: number[], country: string) {
-	return `${currencies[country] ?? ""} ${prices
+	return `${currencies[country] ?? ""}${prices
 		.reduce((acc, x) => acc + x, 0)
 		.toFixed(2)}`;
 }

@@ -8,7 +8,7 @@ export default function Footer() {
 		<>
 			<div className="w-full flex justify-center items-center bg-white">
 				<div className="flex flex-col productsContainer h-full bg-white items-center justify-center">
-					<div className="w-full flex flex-row py-16 lg:py-40 px-5 gap-y-16 flex-wrap justify-center">
+					<div className="w-full flex flex-row py-16 lg:py-40 px-5 gap-y-16 gap-x-8 flex-wrap justify-center">
 						<div className="flex justify-center flex-1">
 							<div className="text-black flex flex-col gap-4 text-right">
 								<span className="font-bold">تواصل</span>
@@ -18,7 +18,7 @@ export default function Footer() {
 						</div>
 
 						<div className="flex justify-center flex-1">
-							<div className="text-black flex flex-col gap-4 text-right">
+							<div className="text-black flex flex-col gap-4 text-right whitespace-nowrap">
 								<span className="font-bold">الصفحات</span>
 								<Link href="/" prefetch={true}>
 									الصفحة الرئيسية
