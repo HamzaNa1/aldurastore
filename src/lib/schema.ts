@@ -109,10 +109,16 @@ export const cartItems = mysqlTable(
 export const orders = mysqlTable("orders", {
 	id: varchar("id", { length: 255 }).notNull().unique().primaryKey(),
 	userId: varchar("userId", { length: 255 }).notNull(),
+	country: varchar("country", { length: 255 }).notNull(),
+	firstname: varchar("firstname", { length: 255 }).notNull(),
+	lastname: varchar("lastname", { length: 255 }).notNull(),
+	phonenumber: varchar("phonenumber", { length: 255 }).notNull(),
+	location: varchar("location", { length: 255 }).notNull(),
+	region: varchar("region", { length: 255 }).notNull(),
+	address: varchar("address", { length: 255 }).notNull(),
 	isProcessed: boolean("isProcessed").default(false).notNull(),
 	boughtDate: date("boughtDate").default(new Date()).notNull(),
 	fulfilledDate: date("fulfilledDate"),
-	country: varchar("country", { length: 255 }).notNull(),
 });
 
 export const ordersToProducts = mysqlTable(

@@ -7,9 +7,9 @@ export function SubmitButton({
 	fallback,
 	children,
 }: {
-	className: string;
-	fallback: React.ReactNode;
-	children: React.ReactNode;
+	className?: string;
+	fallback?: React.ReactNode;
+	children?: React.ReactNode;
 }) {
 	const { pending } = useFormStatus();
 
