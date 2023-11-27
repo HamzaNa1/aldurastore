@@ -5,8 +5,13 @@ import {
 import BackButton from "@/components/ui/BackButton";
 import { SubmitButton } from "@/components/ui/SubmitButton";
 import db from "@/lib/db";
-import { localizePrices } from "@/lib/Utils/locationUtils";
-import { OrdersToProducts, Product, orderRelations } from "@/lib/schema";
+import { localizePrice, localizePrices } from "@/lib/Utils/locationUtils";
+import {
+	OrdersToProducts,
+	Product,
+	ProductSettings,
+	orderRelations,
+} from "@/lib/schema";
 import { getServerSession } from "@/lib/Utils/userUtils";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -39,7 +44,7 @@ async function OrderView({ orderId }: { orderId: string }) {
 		where: (order, { eq }) => eq(order.id, orderId),
 		with: {
 			ordersToProducts: {
-				with: { product: true },
+				with: { product: true, productSettings: true },
 			},
 			user: true,
 		},
@@ -97,6 +102,12 @@ async function OrderView({ orderId }: { orderId: string }) {
 					<span>User Id: {order.userId}</span>
 					<span>Username: {order.user.name}</span>
 					<span>Email: {order.user.email}</span>
+					<span>First Name: {order.firstname}</span>
+					<span>Last Name: {order.lastname}</span>
+					<span>Phone Number: {order.phonenumber}</span>
+					<span>Country: {order.location}</span>
+					<span>Region: {order.region}</span>
+					<span>Address: {order.address}</span>
 				</div>
 				<div className="flex flex-col flex-1 gap-2 flex-shrink-0">
 					<span>
@@ -110,11 +121,15 @@ async function OrderView({ orderId }: { orderId: string }) {
 						<thead className="sticky text-zinc-50 text-sm text-left outline outline-[0.5px] rounded-tr-sm rounded-tl-sm bg-primary outline-primary h-fit">
 							<tr>
 								<th className="font-semibold">Product</th>
+								<th className="font-semibold">Size</th>
 								<th className="py-1 font-semibold">Cost</th>
 								<th className="w-[7%]"></th>
 							</tr>
 						</thead>
-						<CartItemsTable items={order.ordersToProducts}></CartItemsTable>
+						<CartItemsTable
+							items={order.ordersToProducts}
+							country={order.country}
+						/>
 					</table>
 				</div>
 			</div>
@@ -122,11 +137,18 @@ async function OrderView({ orderId }: { orderId: string }) {
 	);
 }
 
-type OrdersToProductsWithProducts = OrdersToProducts & {
+type OrderProduct = OrdersToProducts & {
 	product: Product;
+	productSettings: ProductSettings;
 };
 
-function CartItemsTable({ items }: { items: OrdersToProductsWithProducts[] }) {
+function CartItemsTable({
+	items,
+	country,
+}: {
+	items: OrderProduct[];
+	country: string;
+}) {
 	return (
 		<tbody>
 			{items.map((x, i) => (
@@ -142,7 +164,10 @@ function CartItemsTable({ items }: { items: OrdersToProductsWithProducts[] }) {
 							{x.product.name}
 						</Link>
 					</td>
-					<td className="pl-1 font-semibold">${x.cost}</td>
+					<td className="pl-1">{x.productSettings.size}</td>
+					<td className="pl-1 font-semibold">
+						{localizePrice(x.cost, country)}
+					</td>
 					<td className="relative flex items-center justify-center h-full aspect-square">
 						<div className="absolute w-full h-full p-1 flex justify-center items-center">
 							<img

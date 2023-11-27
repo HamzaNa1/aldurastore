@@ -1,9 +1,13 @@
+import { CreateOrder } from "@/actions/GeneralActions";
 import { SubmitButton } from "@/components/ui/SubmitButton";
+import { localizePrices } from "@/lib/Utils/locationUtils";
 import { getServerSession } from "@/lib/Utils/userUtils";
+import db from "@/lib/db";
 import { cookies } from "next/headers";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
-export default function Account() {
+export default async function Account() {
 	async function logout() {
 		"use server";
 
@@ -19,58 +23,74 @@ export default function Account() {
 		redirect("/login");
 	}
 
-	const testOrder = {
-		id: "AAAA-AAAA-AAAA-AAAA",
-		cost: 40,
-		isProcessed: true,
-		boughtDate: new Date(),
-		fulfilledDate: new Date(),
-	};
-
-	const orders = [
-		testOrder,
-		testOrder,
-		testOrder,
-		testOrder,
-		testOrder,
-		testOrder,
-		testOrder,
-		testOrder,
-		testOrder,
-		testOrder,
-	];
+	const orders = await db.query.orders.findMany({
+		where: (order, { eq }) => eq(order.userId, user.id),
+		with: {
+			ordersToProducts: true,
+		},
+	});
 
 	return (
-		<div className="container flex flex-row bg-secondary gap-20 p-10">
-			<div className="flex flex-col justify-center items-center w-full gap-2">
+		<div className="container flex flex-row bg-secondary gap-20 p-10 flex-wrap">
+			<div className="flex flex-col flex-1 items-center gap-2">
 				<span className="text-primarytext text-3xl">طلباتك</span>
-				<div className="w-full outline outline-black outline-1">
-					<table className="w-full table-auto text-zinc-800 border-separate border-spacing-4">
-						<thead>
-							<tr>
-								<th>Link</th>
-								<th>تاريخ التوصيل</th>
-								<th>تاريخ الشراء</th>
-								<th>السعر</th>
-								<th>رقم الطلب</th>
-							</tr>
-						</thead>
-						<tbody className="text-center">
-							{orders.map((order, i) => (
-								<tr key={i}>
-									<td>link</td>
-									<td>{order.fulfilledDate.toLocaleDateString()}</td>
-									<td>{order.boughtDate.toLocaleDateString()}</td>
-									<td>${order.cost}</td>
-									<td>{order.id}</td>
+				<div className="w-full">
+					{orders.length > 0 ? (
+						<table className="table-auto w-full text-right">
+							<thead className="sticky text-zinc-50 text-sm text-left outline outline-[0.5px] rounded-tr-sm rounded-tl-sm bg-primary outline-primary h-fit">
+								<tr className="text-right">
+									<th className="py-1 font-semibold">تاريخ المعالجة</th>
+									<th className="py-1 font-semibold">تاريخ الطلب</th>
+									<th className="py-1 font-semibold">القيمة الكلية</th>
+									<th className="font-semibold">رقم الطلب</th>
 								</tr>
-							))}
-						</tbody>
-					</table>
+							</thead>
+							<tbody className="text-zinc-800">
+								{orders.map((order) => (
+									<tr
+										key={order.id}
+										className="text-sm outline outline-[0.5px] last:rounded-b-sm bg-white outline-zinc-400 h-fit"
+									>
+										<td dir="rtl" className="pl-1 font-semibold">
+											{order.isProcessed
+												? order.boughtDate.toLocaleString()
+												: "جاري المعالجة..."}
+										</td>
+										<td className="pl-1 font-semibold">
+											{order.boughtDate.toLocaleString()}
+										</td>
+										<td className="pl-1 font-semibold">
+											{localizePrices(
+												order.ordersToProducts.map((x) => x.cost),
+												order.country
+											)}
+										</td>
+										<td className="pl-1 py-2">
+											<Link
+												className="text-primarytext underline hover:brightness-50"
+												href={"/products/" + order.id}
+											>
+												{order.id}
+											</Link>
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					) : (
+						<div className="flex mt-10 justify-center items-center">
+							<span
+								dir="rtl"
+								className="whitespace-nowrap text-zinc-800 text-xl"
+							>
+								ليس لديك طلبات!
+							</span>
+						</div>
+					)}
 				</div>
 			</div>
 
-			<div className="flex-grow flex flex-col h-full items-center gap-10">
+			<div className="flex flex-col flex-1 items-center gap-10">
 				<span className="text-primarytext text-3xl">الحساب</span>
 				<div className="flex flex-col overflow-hidden text-zinc-800 whitespace-nowrap text-right">
 					<span className="font-semibold">
