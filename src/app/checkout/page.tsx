@@ -34,19 +34,33 @@ export default async function Checkout() {
 	return (
 		<>
 			<div className="max-w-[1000px] w-full h-full flex flex-row bg-secondary justify-center gap-16 py-20 px-2 flex-wrap">
-				<div className="flex flex-col flex-[1_1_200px] h-full gap-3">
+				<div className="flex flex-col flex-[1_1_200px] h-full gap-6">
 					<span className="text-primarytext text-3xl font-bold text-right w-full h-10">
 						تفاصيل الفاتورة
 					</span>
-					<table className="table-fixed border-separate border-spacing-y-6">
-						<thead className="text-black text-sm text-right outline outline-zinc-300 bg-zinc-300 rounded-sm">
-							<tr>
-								<th>القيمة الكلية</th>
+					<table dir="rtl" className="table-fixed">
+						<tbody className="border border-zinc-300 bg-white rounded-lg">
+							<tr className="text-zinc-800 text-sm text-right">
+								<td className="pr-1 p-1">القيمة:</td>
+								<td className="pr-1 font-semibold">
+									{localizePrice(total, country)}
+								</td>
 							</tr>
-						</thead>
-						<tbody>
-							<tr className="text-black text-sm text-right outline outline-zinc-300 bg-white rounded-sm">
-								<td className="pr-1">{localizePrice(total, country)}</td>
+							<tr className="text-zinc-800 text-sm text-right">
+								<td className="pr-1 p-1">رسوم الشحن:</td>
+								<td className="pr-1 font-semibold">
+									{localizePrice(0, country)}
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<table dir="rtl" className="table-fixed">
+						<tbody className="border border-zinc-300 bg-white rounded-lg">
+							<tr className="text-zinc-800 text-sm text-right">
+								<td className="pr-1 p-1">القيمة الكلية:</td>
+								<td className="pr-1 font-semibold">
+									{localizePrice(total, country)}
+								</td>
 							</tr>
 						</tbody>
 					</table>

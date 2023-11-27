@@ -94,6 +94,7 @@ export default function AutoComplete({
 					value={input}
 					ref={inputRef}
 					autoComplete="off"
+					required
 					onChange={(e) => {
 						if (
 							valid(e.currentTarget.value) &&

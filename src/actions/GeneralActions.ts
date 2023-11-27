@@ -71,6 +71,7 @@ interface OrderDetails {
 	phoneNumber: string;
 	location: string;
 	region: string;
+	area: string;
 	address: string;
 }
 
@@ -93,6 +94,7 @@ export async function CreateOrder(orderDetails: OrderDetails) {
 		phonenumber: orderDetails.phoneNumber,
 		location: orderDetails.location,
 		region: orderDetails.region,
+		area: orderDetails.area,
 		address: orderDetails.address,
 	};
 

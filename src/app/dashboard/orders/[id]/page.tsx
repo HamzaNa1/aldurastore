@@ -107,6 +107,7 @@ async function OrderView({ orderId }: { orderId: string }) {
 					<span>Phone Number: {order.phonenumber}</span>
 					<span>Country: {order.location}</span>
 					<span>Region: {order.region}</span>
+					<span>Area: {order.area}</span>
 					<span>Address: {order.address}</span>
 				</div>
 				<div className="flex flex-col flex-1 gap-2 flex-shrink-0">

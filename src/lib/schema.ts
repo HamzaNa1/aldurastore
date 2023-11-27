@@ -113,6 +113,7 @@ export const orders = mysqlTable("orders", {
 	phonenumber: varchar("phonenumber", { length: 255 }).notNull(),
 	location: varchar("location", { length: 255 }).notNull(),
 	region: varchar("region", { length: 255 }).notNull(),
+	area: varchar("area", { length: 255 }).notNull(),
 	address: varchar("address", { length: 255 }).notNull(),
 	isProcessed: boolean("isProcessed").default(false).notNull(),
 	boughtDate: timestamp("boughtDate").defaultNow().notNull(),

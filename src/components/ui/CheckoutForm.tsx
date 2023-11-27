@@ -17,6 +17,7 @@ export default function CheckoutForm() {
 				const phonenumber = formData.get("phonenumber") as string;
 				const location = formData.get("location") as string;
 				const region = formData.get("region") as string;
+				const area = formData.get("area") as string;
 				const address = formData.get("address") as string;
 
 				await CreateOrder({
@@ -25,6 +26,7 @@ export default function CheckoutForm() {
 					phoneNumber: phonenumber,
 					location: location,
 					region: region,
+					area: area,
 					address: address,
 				});
 			}}
@@ -80,16 +82,25 @@ export default function CheckoutForm() {
 					inputDir="rtl"
 					options={cityOptions}
 				/>
-				<AutoComplete
-					id="address"
-					label="العنوان"
-					className="w-full h-10 rounded-sm placeholder:text-right text-black text-right bg-white shadow"
-					placeholder="المدينة, المنطقة, الشارع, رقم المبنى"
-					inputDir="rtl"
-				></AutoComplete>
+				<div className="w-full flex flex-row-reverse gap-1">
+					<AutoComplete
+						id="area"
+						label="المنطقة"
+						className="w-full h-10 rounded-sm placeholder:text-right text-black text-right bg-white shadow"
+						placeholder="المدينة, الحي"
+						inputDir="rtl"
+					></AutoComplete>
+					<AutoComplete
+						id="address"
+						label="العنوان"
+						className="w-full h-10 rounded-sm placeholder:text-right text-black text-right bg-white shadow"
+						placeholder="الشارع, رقم المبنىس"
+						inputDir="rtl"
+					></AutoComplete>
+				</div>
 			</div>
 			<div dir="rtl" className="flex flex-col gap-1 text-xs text-zinc-500">
-				<span>*سيتم التواصل معك عن طريق الـ WhatsApp للتأكد من العنوان</span>
+				<span>*سيتم التواصل معك عن طريق الـWhatsApp للتأكد من العنوان</span>
 				<span>*التوصيل مجاني لجميع دول الخليج</span>
 				<span>*يتم الدفع عند التوصيل</span>
 			</div>
