@@ -2,7 +2,7 @@
 
 import SignUp from "@/actions/auth/SignUp";
 import { useState } from "react";
-import { SubmitButton } from "./SubmitButton";
+import { SubmitButton } from "./ui/SubmitButton";
 
 export default function LoginForm() {
 	const [errors, setErrors] = useState<string[]>([]);

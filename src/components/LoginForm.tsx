@@ -1,7 +1,7 @@
 "use client";
 
 import SignIn from "@/actions/auth/SignIn";
-import { SubmitButton } from "./SubmitButton";
+import { SubmitButton } from "./ui/SubmitButton";
 import { toast } from "sonner";
 import { useState } from "react";
 

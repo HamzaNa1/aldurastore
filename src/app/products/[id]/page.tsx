@@ -1,6 +1,6 @@
 import ProductImageSlider from "@/components/ProductImageSlider";
 import db from "@/lib/db";
-import AddToCartForm from "@/components/ui/AddToCartForm";
+import AddToCartForm from "@/components/AddToCartForm";
 import { localizePrice } from "@/lib/Utils/locationUtils";
 import getCountry from "@/lib/country";
 import { sortClothingSizes } from "@/lib/Utils/utils";

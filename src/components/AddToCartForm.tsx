@@ -1,7 +1,7 @@
 "use client";
 
 import { ProductSettings } from "@/lib/schema";
-import { SubmitButton } from "./SubmitButton";
+import { SubmitButton } from "./ui/SubmitButton";
 import { AddCartItem } from "@/actions/GeneralActions";
 import { useState } from "react";
 

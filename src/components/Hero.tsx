@@ -78,7 +78,7 @@ export default function Hero({ images }: HeroComponentProps) {
 							size={30}
 						/>
 					</div>
-					<div className="absolute bottom-0 right-[50%] translate-x-[50%] flex flex-row justify-center items-end z-10 p-2">
+					<div className="hidden sm:flex absolute bottom-0 right-[50%] translate-x-[50%] flex-row justify-center items-end z-10 p-2">
 						{images.map((_, i) => (
 							<div
 								key={i}

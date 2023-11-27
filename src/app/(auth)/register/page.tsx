@@ -1,4 +1,4 @@
-import RegisterForm from "@/components/ui/RegisterForm";
+import RegisterForm from "@/components/RegisterForm";
 import { getServerSession } from "@/lib/Utils/userUtils";
 import Link from "next/link";
 import { redirect } from "next/navigation";

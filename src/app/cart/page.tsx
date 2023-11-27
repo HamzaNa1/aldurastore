@@ -1,5 +1,5 @@
 import BackButton from "@/components/ui/BackButton";
-import CartItemsTable from "@/components/ui/CartItemsTable";
+import CartItemsTable from "@/components/CartItemsTable";
 import getCountry from "@/lib/country";
 import db from "@/lib/db";
 import { localizePrices } from "@/lib/Utils/locationUtils";

@@ -1,4 +1,4 @@
-import CheckoutForm from "@/components/ui/CheckoutForm";
+import CheckoutForm from "@/components/CheckoutForm";
 import getCountry from "@/lib/country";
 import db from "@/lib/db";
 import { localizePrice } from "@/lib/Utils/locationUtils";

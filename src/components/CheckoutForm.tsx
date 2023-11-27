@@ -1,9 +1,9 @@
 "use client";
 
 import { locations } from "@/lib/Utils/locationUtils";
-import AutoComplete from "./AutoComplete";
+import AutoComplete from "./ui/AutoComplete";
 import { useState } from "react";
-import { SubmitButton } from "./SubmitButton";
+import { SubmitButton } from "./ui/SubmitButton";
 import { CreateOrder } from "@/actions/GeneralActions";
 
 export default function CheckoutForm() {

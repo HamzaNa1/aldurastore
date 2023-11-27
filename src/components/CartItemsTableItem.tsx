@@ -1,7 +1,7 @@
 "use client";
 
 import { CartItem, Product, ProductPrice, ProductSettings } from "@/lib/schema";
-import { SubmitButton } from "./SubmitButton";
+import { SubmitButton } from "./ui/SubmitButton";
 import { FaSquareXmark } from "react-icons/fa6";
 import { DeleteCartItem } from "@/actions/GeneralActions";
 import { useState } from "react";
