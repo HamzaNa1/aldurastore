@@ -8,8 +8,8 @@ import { Suspense } from "react";
 export default async function Home() {
 	return (
 		<main className="w-screen bg-secondary">
-			<div className="w-full h-fit flex flex-col items-center pb-10">
-				<div className="container max-h-screen aspect-video p-20">
+			<div className="flex items-center justify-center py-20">
+				<div className="w-full h-full max-w-5xl px-1">
 					<Suspense fallback={<HeroSkeleton />}>
 						<HeroSection />
 					</Suspense>
