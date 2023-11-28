@@ -28,7 +28,7 @@ export default function AddToCartForm({ settings }: AddToCartProps) {
     </div>
   </div> */}
 				<div className="flex flex-col gap-2">
-					<span className="font-bold text-xl">:المقاس</span>
+					<span className="font-bold text-lg sm:text-xl">:المقاس</span>
 					<div className="flex flex-row flex-wrap gap-2 justify-end">
 						{settings.map((size, i) => (
 							<button

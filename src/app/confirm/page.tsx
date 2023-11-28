@@ -13,13 +13,13 @@ export default function ConfirmPage() {
 	}
 
 	return (
-		<div className="flex min-h-[50vh] justify-center items-center">
+		<div className="flex min-h-[50vh] justify-center items-center px-1">
 			<div className="container flex flex-col text-right gap-10">
 				<div className="flex flex-col gap-5">
-					<span className="text-primarytext text-4xl">
+					<span className="text-primarytext text-2xl sm:text-3xl md:text-4xl">
 						تأكيد البريد الألكتروني
 					</span>
-					<span className="text-zinc-400">
+					<span className="text-zinc-400 text-xs sm:text-sm md:text-base">
 						تم أرسال رمز التأكيد إلى البريد الألكتروني الخاص بك
 					</span>
 				</div>
@@ -37,7 +37,9 @@ function ConfirmForm({ userId }: { userId: string }) {
 	return (
 		<>
 			<div className="flex flex-col gap-2">
-				<label className="text-zinc-800">رمز التأكيد</label>
+				<label className="text-zinc-800 text-sm md:text-base xl:text-lg">
+					رمز التأكيد
+				</label>
 				<input
 					id="key"
 					name="key"

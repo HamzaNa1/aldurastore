@@ -32,7 +32,7 @@ export default function ProductImageSlider({
 		<div className="relative w-full flex flex-col-reverse xl:flex-row py-4 gap-3">
 			<div className="relative h-[13%] xl:h-auto xl:w-[13%] overflow-hidden shrink-0">
 				{loaded ? (
-					<div className="absolute w-full h-full">
+					<div className="absolute w-full h-full rounded-b-md xl:rounded-none xl:rounded-l-md overflow-hidden">
 						<div ref={sliderRef} className="w-full h-full">
 							{imageUrls.map((url, i) => (
 								<button
@@ -63,7 +63,7 @@ export default function ProductImageSlider({
 					</div>
 				)}
 			</div>
-			<div className="relative w-full aspect-square bg-white">
+			<div className="relative w-full aspect-square bg-white rounded-t-md xl:rounded-none xl:rounded-r-md">
 				<img
 					src={imageUrls[currentImage]}
 					alt=""

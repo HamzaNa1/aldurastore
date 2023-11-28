@@ -52,8 +52,8 @@ export default async function Cart() {
 						تفاصيل الفاتورة
 					</span>
 					<table className="table-fixed border-separate border-spacing-y-6">
-						<thead className="text-black text-sm text-right outline outline-zinc-300 bg-zinc-300 rounded-sm">
-							<tr>
+						<thead>
+							<tr className="text-black text-sm text-right bg-zinc-300 rounded-sm outline outline-zinc-300">
 								<th>القيمة الكلية</th>
 							</tr>
 						</thead>
@@ -89,7 +89,7 @@ export default async function Cart() {
 						<thead className="sticky text-zinc-50 text-sm text-right outline outline-[0.5px] rounded-tr-sm rounded-tl-sm bg-primary outline-primary h-fit">
 							<tr>
 								<th className="w-[7%]"></th>
-								<th className="w-[7%]"></th>
+								<th className="w-[12.5%]"></th>
 								<th className="py-1 font-semibold">السعر</th>
 								<th className="font-semibold">المنتج</th>
 							</tr>
