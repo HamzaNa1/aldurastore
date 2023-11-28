@@ -14,7 +14,7 @@ export default async function Navbar() {
 	const country = getCountry();
 
 	return (
-		<div className="w-full h-16 flex flex-row justify-start relative p-1 bg-secondary md:px-2 lg:px-8">
+		<div className="w-full h-16 flex flex-row relative p-1 bg-secondary md:px-2 lg:px-8">
 			<Link
 				href="/"
 				className="absolute md:relative max-md:left-1/2 max-md:top-1/2 max-md:transform max-md:-translate-x-1/2 max-md:-translate-y-1/2 min-w-fit aspect-square h-full"
@@ -26,8 +26,8 @@ export default async function Navbar() {
 					className="absolute w-full h-full object-center object-contain p-1 md:p-0"
 				/>
 			</Link>
-			<div className="flex justify-center items-center p-2 md:p-0 gap-1">
-				<div className="w-full h-full md:hidden">
+			<div className="flex justify-center items-center p-2 md:p-0 gap-1 self-start h-full">
+				<div className="aspect-square h-full md:hidden">
 					<Menu />
 				</div>
 				<CountrySelector country={country} />
@@ -55,7 +55,7 @@ export default async function Navbar() {
 
 				<Link
 					href="/cart"
-					className="flex flex-row items-center group space-x-[-6px]"
+					className="flex flex-row items-center group space-x-[-6px] h-full"
 				>
 					<Suspense fallback={<></>}>
 						<CartCount></CartCount>
