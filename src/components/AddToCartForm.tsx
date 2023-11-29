@@ -13,7 +13,7 @@ export default function AddToCartForm({ settings }: AddToCartProps) {
 	const [settingsIdx, setSettingsIdx] = useState<number>(-1);
 
 	return (
-		<>
+		<div className="flex flex-col gap-20 items-end">
 			<div className="flex flex-col gap-5 text-zinc-800 text-right">
 				{/* <div className="flex flex-col gap-2">
     <span className="font-bold text-xl">:اللون</span>
@@ -68,6 +68,6 @@ export default function AddToCartForm({ settings }: AddToCartProps) {
 					</SubmitButton>
 				</form>
 			</div>
-		</>
+		</div>
 	);
 }

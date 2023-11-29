@@ -5,7 +5,6 @@ import { locations } from "@/lib/Utils/locationUtils";
 import {
 	CartItem,
 	NewOrder,
-	Order,
 	cartItems,
 	orders,
 	ordersToProducts,
@@ -17,6 +16,8 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import getCountry from "@/lib/country";
+import { CheckoutEmail } from "@/lib/emails";
+import sendEmail from "@/lib/Utils/emailUtils";
 
 export async function AddCartItem(
 	productId: string,
@@ -129,6 +130,9 @@ export async function CreateOrder(orderDetails: OrderDetails) {
 			});
 		}
 	});
+
+	const email = CheckoutEmail({ orderId: order.id });
+	await sendEmail("info@aldurastore.com", "طلب جديد", email);
 
 	redirect("/thank-you");
 }

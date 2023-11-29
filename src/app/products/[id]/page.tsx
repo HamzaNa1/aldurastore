@@ -5,6 +5,7 @@ import { localizePrice } from "@/lib/Utils/locationUtils";
 import getCountry from "@/lib/country";
 import { sortClothingSizes } from "@/lib/Utils/utils";
 import { notFound } from "next/navigation";
+import { LiaShippingFastSolid } from "react-icons/lia";
 
 interface ProductPageProps {
 	params: {
@@ -53,16 +54,27 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 								)}
 							</span>
 						</div>
-						<div className="w-full h-fit text-right text-sm sm:text-base md:text-l">
+						<div
+							dir="rtl"
+							className="w-full h-fit text-right text-sm sm:text-base md:text-l"
+						>
 							<span className="text-zinc-800">{product.description}</span>
 						</div>
 					</div>
 
-					<AddToCartForm
-						settings={product.productSettings.sort((a, b) =>
-							sortClothingSizes(a.size, b.size)
-						)}
-					/>
+					<div className="w-full flex flex-col gap-5 items-end">
+						<AddToCartForm
+							settings={product.productSettings.sort((a, b) =>
+								sortClothingSizes(a.size, b.size)
+							)}
+						/>
+						<div className="flex flex-row items-center justify-center gap-1 p-1">
+							<span dir="rtl" className="text-zinc-400 text-xs">
+								الشحن والتوصيل مجاني الى كافة دول مجلس التعاون خلال 7 ايام
+							</span>
+							<LiaShippingFastSolid className="fill-zinc-400 w-4 h-4" />
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

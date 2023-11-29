@@ -107,7 +107,7 @@ export default function CheckoutForm() {
 			</div>
 			<div dir="rtl" className="flex flex-col gap-1 text-xs text-zinc-500">
 				<span>*سيتم التواصل معك عن طريق الـWhatsApp للتأكد من العنوان</span>
-				<span>*التوصيل مجاني لجميع دول الخليج</span>
+				<span>*الشحن والتوصيل مجاني خلال 7 ايام</span>
 				<span>*يتم الدفع عند التوصيل</span>
 			</div>
 			<SubmitButton className="w-full bg-primary p-1 rounded-md drop-shadow-lg hover:brightness-90 disabled:brightness-90">

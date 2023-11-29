@@ -41,6 +41,7 @@ export default function ProductEditDashboard({
 				<div className="flex flex-col gap-2 text-zinc-800">
 					<label>Description</label>
 					<textarea
+						dir="rtl"
 						className="w-96 h-32 px-1"
 						name="description"
 						defaultValue={product.description}

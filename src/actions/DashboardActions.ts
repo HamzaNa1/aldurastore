@@ -1,7 +1,6 @@
 "use server";
 
 import db from "@/lib/db";
-import { countries } from "@/lib/Utils/locationUtils";
 import {
 	Product,
 	ProductImage,
@@ -12,6 +11,7 @@ import {
 	productSettings,
 	products,
 } from "@/lib/schema";
+import { locations } from "@/lib/Utils/locationUtils";
 import { getServerSession } from "@/lib/Utils/userUtils";
 import { randomUUID } from "crypto";
 import { eq } from "drizzle-orm";
@@ -72,11 +72,11 @@ export async function DashboardCreateProduct(): Promise<Product | undefined> {
 	await db.transaction(async (tx) => {
 		await tx.insert(products).values(product);
 
-		for (let i = 0; i < countries.length; i++) {
+		for (let i = 0; i < locations.length; i++) {
 			await tx.insert(productPrices).values({
 				id: randomUUID(),
 				productId: product.id,
-				country: countries[i],
+				country: locations[i].code,
 				cost: 9999,
 			});
 		}

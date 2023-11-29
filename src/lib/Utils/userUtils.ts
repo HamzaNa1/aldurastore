@@ -6,7 +6,7 @@ import db from "../db";
 import { emailConfirmations } from "../schema";
 import { eq } from "drizzle-orm";
 import sendEmail from "./emailUtils";
-import ConfirmationEmail from "../emails";
+import { ConfirmationEmail } from "../emails";
 
 export function getServerSession() {
 	const cookiesStore = cookies();
@@ -65,7 +65,7 @@ export async function sendEmailConfirmationAsync(
 }
 
 function generateKey() {
-	const characters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+	const characters = "0123456789";
 
 	let key = "";
 	for (let i = 0; i < 6; i++) {

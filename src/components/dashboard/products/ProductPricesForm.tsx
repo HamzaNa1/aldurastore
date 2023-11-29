@@ -1,6 +1,6 @@
-import { currencies } from "@/lib/Utils/locationUtils";
 import { ProductPrice } from "@/lib/schema";
 import ProductPriceEditor from "./ProductPriceEditor";
+import { countryToLocation } from "@/lib/Utils/locationUtils";
 
 interface ProductPricesFormProps {
 	productPrices: ProductPrice[];
@@ -16,7 +16,7 @@ export default function ProductPricesForm({
 					<div key={price.id}>
 						<div className="w-full h-12 bg-zinc-300 flex flex-row items-center px-4 gap-8 ">
 							<div className="w-4 shrink-0">
-								<span>{currencies[price.country]}</span>
+								<span>{countryToLocation[price.country]?.loc.currency}</span>
 							</div>
 							<div className="w-4 shrink-0">
 								<span>{price.cost}</span>

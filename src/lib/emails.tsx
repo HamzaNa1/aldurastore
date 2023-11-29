@@ -15,6 +15,10 @@ interface ConfirmationEmailProps {
 	code: string;
 }
 
+interface CheckoutEmailProps {
+	orderId: string;
+}
+
 function ConfirmationEmailBuilder({ code }: ConfirmationEmailProps) {
 	return (
 		<Html style={{ direction: "rtl" }}>
@@ -53,10 +57,43 @@ function ConfirmationEmailBuilder({ code }: ConfirmationEmailProps) {
 	);
 }
 
-const ConfirmationEmail = ({ code }: { code: string }) =>
-	render(<ConfirmationEmailBuilder code={code} />);
+function CheckoutEmailBuilder({ orderId }: CheckoutEmailProps) {
+	return (
+		<Html style={{ direction: "rtl" }}>
+			<Head />
+			<Preview>متجر الدرة</Preview>
+			<Body style={main}>
+				<Container style={container}>
+					<Img
+						src={`${process.env.NEXT_PUBLIC_SERVER_URL}/logo.png`}
+						width="150"
+						height="150"
+						alt="Aldurastore"
+						style={logo}
+					/>
+					<Text style={{ textAlign: "right", direction: "rtl" }}>
+						تم تسجيل طلب جديد
+					</Text>
 
-export default ConfirmationEmail;
+					<Text style={{ textAlign: "right", direction: "rtl" }}>
+						<a href={"https://aldurastore.com/dashboard/orders/" + orderId}>
+							Order Info
+						</a>
+					</Text>
+					<Text style={{ textAlign: "right", direction: "rtl" }}>
+						فريق متجر الدرة
+					</Text>
+				</Container>
+			</Body>
+		</Html>
+	);
+}
+
+export const ConfirmationEmail = (props: ConfirmationEmailProps) =>
+	render(<ConfirmationEmailBuilder {...props} />);
+
+export const CheckoutEmail = (props: CheckoutEmailProps) =>
+	render(<CheckoutEmailBuilder {...props} />);
 
 const main = {
 	backgroundColor: "#ffffff",
