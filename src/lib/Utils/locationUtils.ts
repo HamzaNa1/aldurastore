@@ -106,10 +106,10 @@ export const countryToLocation: {
 } = {
 	ae: { loc: locations[0] },
 	bh: { loc: locations[1] },
-	kw: { loc: locations[2] },
+	sa: { loc: locations[2] },
 	om: { loc: locations[3] },
 	qa: { loc: locations[4] },
-	sa: { loc: locations[5] },
+	kw: { loc: locations[5] },
 };
 
 export function localizePrice(price: number, country: string) {
