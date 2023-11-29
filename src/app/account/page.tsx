@@ -28,16 +28,18 @@ export default async function Account() {
 		with: {
 			ordersToProducts: true,
 		},
+		orderBy: (order, { desc }) => desc(order.boughtDate),
+		limit: 7,
 	});
 
 	return (
-		<div className="container flex flex-row bg-secondary gap-20 p-10 flex-wrap">
-			<div className="flex flex-col flex-1 items-center gap-2">
+		<div className="container flex flex-row bg-secondary gap-6 px-1 py-10 flex-wrap-reverse">
+			<div className="flex flex-col flex-[2_2_0] items-center gap-2">
 				<span className="text-primarytext text-3xl">طلباتك</span>
 				<div className="w-full">
 					{orders.length > 0 ? (
-						<table className="table-auto w-full text-right">
-							<thead className="sticky text-zinc-50 text-sm text-left outline outline-[0.5px] rounded-tr-sm rounded-tl-sm bg-primary outline-primary h-fit">
+						<table className="table-auto w-full text-right min-[550px]:min-w-[520px]">
+							<thead className="sticky text-zinc-50 text-xs md:text-sm text-left outline outline-[0.5px] rounded-tr-sm rounded-tl-sm bg-primary outline-primary h-fit">
 								<tr className="text-right">
 									<th className="py-1 font-semibold">تاريخ المعالجة</th>
 									<th className="py-1 font-semibold">تاريخ الطلب</th>
@@ -49,7 +51,7 @@ export default async function Account() {
 								{orders.map((order) => (
 									<tr
 										key={order.id}
-										className="text-sm outline outline-[0.5px] last:rounded-b-sm bg-white outline-zinc-400 h-fit"
+										className="text-xs md:text-sm outline outline-[0.5px] last:rounded-b-sm bg-white outline-zinc-400 h-fit"
 									>
 										<td dir="rtl" className="pl-1 font-semibold">
 											{order.isProcessed
@@ -68,7 +70,7 @@ export default async function Account() {
 										<td className="pl-1 py-2">
 											<Link
 												className="text-primarytext underline hover:brightness-50"
-												href={"/products/" + order.id}
+												href={"/orders/" + order.id}
 											>
 												{order.id}
 											</Link>
