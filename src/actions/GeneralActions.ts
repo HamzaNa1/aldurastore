@@ -1,7 +1,7 @@
 "use server";
 
 import db from "@/lib/db";
-import { countries } from "@/lib/Utils/locationUtils";
+import { locations } from "@/lib/Utils/locationUtils";
 import {
 	CartItem,
 	NewOrder,
@@ -55,7 +55,7 @@ export async function DeleteCartItem(cartItemId: string) {
 }
 
 export async function SelectLocation(country: string) {
-	if (countries.findIndex((x) => x == country) == -1) {
+	if (locations.findIndex((x) => x.code == country) == -1) {
 		return;
 	}
 

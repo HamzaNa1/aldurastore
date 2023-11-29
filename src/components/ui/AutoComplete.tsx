@@ -39,12 +39,15 @@ export default function AutoComplete({
 
 	const valid = (value: string) => {
 		if (type == "phonenumber") {
-			const phoneNumberRegex =
-				/^\+\d{1,3}[-. ]?\d{1,4}[-. ]?\d{1,4}[-. ]?\d{1,9}$/;
+			const phoneNumberRegex = /[^\d]*\d[^\d]*(\d[^\d]*){5,9}/;
 
 			if (!phoneNumberRegex.test(value)) {
 				return false;
 			}
+		}
+
+		if (options && options.findIndex((x) => x == value) == -1) {
+			return false;
 		}
 
 		return true;
@@ -96,26 +99,25 @@ export default function AutoComplete({
 					autoComplete="off"
 					required
 					onChange={(e) => {
-						if (
-							valid(e.currentTarget.value) &&
-							(!options ||
-								options.findIndex((x) => x == e.currentTarget.value) != -1)
-						) {
-							InputSetter(e.currentTarget.value);
+						const value = e.currentTarget.value;
+
+						if (valid(value)) {
+							InputSetter(value);
 							return;
 						}
 
-						setInput(e.currentTarget.value);
+						setInput(value);
 					}}
 				/>
 			</div>
 			{focus && options && (
 				<div className="absolute w-full h-fit z-50 drop-shadow-lg">
-					<div className="relative max-h-[150px] overflow-auto bg-white">
+					<div className="relative w-full max-h-[150px] overflow-auto bg-white">
 						{options
 							.filter((x) => x.startsWith(input))
 							.map((x) => (
 								<button
+									key={x}
 									className={optionClassName}
 									onMouseDown={() => {
 										InputSetter(x);

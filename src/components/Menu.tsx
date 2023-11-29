@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { IoReturnDownBack } from "react-icons/io5";
 
 export default function Menu() {
 	const [show, setShow] = useState(false);
@@ -38,6 +39,14 @@ function DropdownMenu({ handleClick }: { handleClick: () => void }) {
 						<span className="w-full text-lg text-primary whitespace-nowrap">
 							متجر الدرة
 						</span>
+					</div>
+					<button className="w-full h-10 p-2" onClick={() => handleClick()}>
+						<div className="mx-auto h-full aspect-square">
+							<IoReturnDownBack className="h-full w-full" />
+						</div>
+					</button>
+					<div className="px-2">
+						<div className="border-b border-b-zinc-400"></div>
 					</div>
 					<div className="w-full p-2">
 						<Link

@@ -1,13 +1,13 @@
 "use client";
 
-import { locations } from "@/lib/Utils/locationUtils";
+import { countryToLocation, locations } from "@/lib/Utils/locationUtils";
 import AutoComplete from "./ui/AutoComplete";
 import { useState } from "react";
 import { SubmitButton } from "./ui/SubmitButton";
 import { CreateOrder } from "@/actions/GeneralActions";
 
 export default function CheckoutForm() {
-	const [cityOptions, setCityOptions] = useState<string[]>([]);
+	const [country, setCountry] = useState<string>("");
 
 	return (
 		<form
@@ -36,29 +36,6 @@ export default function CheckoutForm() {
 				تفاصيل العنوان
 			</span>
 			<div className="flex flex-col gap-3 w-full">
-				<div className="w-full flex flex-row-reverse gap-1">
-					<AutoComplete
-						id="firstname"
-						label="الاسم"
-						className="w-full h-10 rounded-sm placeholder:text-right text-black text-right bg-white shadow"
-						inputDir="rtl"
-					></AutoComplete>
-					<AutoComplete
-						id="lastname"
-						label="اسم الأسرة"
-						className="w-full h-10 rounded-sm placeholder:text-right text-black text-right bg-white shadow"
-						inputDir="rtl"
-					></AutoComplete>
-				</div>
-				<AutoComplete
-					id="phonenumber"
-					label=" رقم الهاتف (WhatsApp)"
-					className="w-full h-10 rounded-sm placeholder:text-right text-black text-right bg-white shadow"
-					type="phonenumber"
-					labelDir="rtl"
-					inputDir="ltr"
-					inputAlign="text-right"
-				></AutoComplete>
 				<AutoComplete
 					id="location"
 					label="الموقع"
@@ -68,11 +45,40 @@ export default function CheckoutForm() {
 					inputDir="rtl"
 					options={locations.map((x) => x.name)}
 					onInput={(value) => {
-						setCityOptions(
-							locations.find((x) => x.name == value)?.regions ?? []
-						);
+						setCountry(locations.find((x) => x.name == value)?.code ?? "");
 					}}
 				/>
+				<div className="w-full flex flex-row-reverse gap-1">
+					<AutoComplete
+						id="firstname"
+						label="الاسم"
+						className="w-full h-10 rounded-sm placeholder:text-right text-black text-right bg-white shadow"
+						inputDir="rtl"
+					/>
+					<AutoComplete
+						id="lastname"
+						label="اسم الأسرة"
+						className="w-full h-10 rounded-sm placeholder:text-right text-black text-right bg-white shadow"
+						inputDir="rtl"
+					/>
+				</div>
+				<div className="flex flex-row">
+					<AutoComplete
+						id="phonenumber"
+						label=" رقم الهاتف (WhatsApp)"
+						className="w-full h-10 rounded-sm placeholder:text-right text-black text-right bg-white shadow"
+						type="phonenumber"
+						labelDir="rtl"
+						inputDir="ltr"
+						inputAlign="text-right"
+						options={country == "" ? [] : undefined}
+					/>
+					{country != "" && (
+						<div className="whitespace-nowrap select-none flex justify-center items-center px-2 bg-white text-zinc-800 border border-zinc-300 shadow">
+							<span>{`${countryToLocation[country]?.loc.countryCode} ${countryToLocation[country]?.loc.currency}`}</span>
+						</div>
+					)}
+				</div>
 				<AutoComplete
 					id="region"
 					label="المقاطعة"
@@ -80,7 +86,7 @@ export default function CheckoutForm() {
 					optionClassName="w-full h-full bg-white p-1 hover:brightness-90"
 					placeholder="يرجى أختيار المقاطعة/المدينة"
 					inputDir="rtl"
-					options={cityOptions}
+					options={countryToLocation[country]?.loc.regions ?? []}
 				/>
 				<div className="w-full flex flex-row-reverse gap-1">
 					<AutoComplete
@@ -89,14 +95,14 @@ export default function CheckoutForm() {
 						className="w-full h-10 rounded-sm placeholder:text-right text-black text-right bg-white shadow"
 						placeholder="المدينة, الحي"
 						inputDir="rtl"
-					></AutoComplete>
+					/>
 					<AutoComplete
 						id="address"
 						label="العنوان"
 						className="w-full h-10 rounded-sm placeholder:text-right text-black text-right bg-white shadow"
 						placeholder="الشارع, رقم المبنىس"
 						inputDir="rtl"
-					></AutoComplete>
+					/>
 				</div>
 			</div>
 			<div dir="rtl" className="flex flex-col gap-1 text-xs text-zinc-500">
