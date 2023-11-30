@@ -19,20 +19,8 @@ export default function Menu() {
 }
 
 function DropdownMenu({ handleClick }: { handleClick: () => void }) {
-	const handleScroll = () => {
-		window.scrollTo(0, 0);
-	};
-
-	useEffect(() => {
-		window.addEventListener("scroll", handleScroll);
-
-		return () => {
-			window.removeEventListener("scroll", handleScroll);
-		};
-	});
-
 	return (
-		<div className="absolute flex h-screen w-screen left-0 top-0 bg-black/30 z-[99]">
+		<div className="fixed flex h-screen w-screen left-0 top-0 bg-black/30 z-[99]">
 			<div className="shrink-0 min-w-fit w-[70%] bg-secondary">
 				<div className="flex-col w-full h-full items-center justify-center text-zinc-800 text-right">
 					<div className="text-center shadow">
