@@ -108,7 +108,6 @@ function DropdownMenu({
 											"w-full h-10 bg-zinc-100 text-zinc-800 border-t first:border-t-0 border-zinc-400 flex justify-center "
 										}
 									>
-										{/* {x.currency} */}
 										<div className="h-full aspect-square flex">
 											{countryToFlag(x.code, { className: "drop-shadow-lg" })}
 										</div>

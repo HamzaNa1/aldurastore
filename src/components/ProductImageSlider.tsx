@@ -1,7 +1,7 @@
 "use client";
 
 import useEmblaCarousel from "embla-carousel-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface ProductImageSliderProps {
 	imageUrls: string[];
@@ -10,7 +10,6 @@ interface ProductImageSliderProps {
 export default function ProductImageSlider({
 	imageUrls,
 }: ProductImageSliderProps) {
-	const [loaded, setLoaded] = useState(false);
 	const [currentImage, setCurrentImage] = useState(-1);
 
 	const [sliderRef] = useEmblaCarousel({
@@ -22,10 +21,6 @@ export default function ProductImageSlider({
 		dragFree: false,
 		loop: true,
 	});
-
-	useEffect(() => {
-		setLoaded(true);
-	}, []);
 
 	return (
 		<>
@@ -91,24 +86,4 @@ export default function ProductImageSlider({
 			)}
 		</>
 	);
-}
-
-function useWindowSize() {
-	const [windowSize, setWindowSize] = useState({
-		width: 0,
-		height: 0,
-	});
-
-	useEffect(() => {
-		function handleResize() {
-			setWindowSize({
-				width: window.innerWidth,
-				height: window.innerHeight,
-			});
-		}
-		window.addEventListener("resize", handleResize);
-		handleResize();
-		return () => window.removeEventListener("resize", handleResize);
-	}, []);
-	return windowSize;
 }

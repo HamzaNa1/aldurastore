@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
 import Footer from "@/components/Footer";
 import { Toaster } from "sonner";
+import Renewer from "@/components/Renewer";
 
 const inter = Cairo({ subsets: ["arabic", "latin"] });
 
@@ -32,6 +33,7 @@ export default function RootLayout({
 						<Footer />
 					</div>
 				</div>
+				<Renewer />
 			</body>
 		</html>
 	);

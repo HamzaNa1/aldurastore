@@ -24,10 +24,10 @@ export function getServerSession() {
 		return null;
 	}
 
-	const id = payload?.id as string | undefined;
-	const email = payload?.email as string | undefined;
-	const name = payload?.name as string | undefined;
-	const admin = payload?.admin as boolean | undefined;
+	const id = payload.id as string | undefined;
+	const email = payload.email as string | undefined;
+	const name = payload.name as string | undefined;
+	const admin = payload.admin as boolean | undefined;
 
 	if (!id || !email || !name || admin == undefined) {
 		return null;

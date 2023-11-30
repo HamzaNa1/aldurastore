@@ -57,7 +57,7 @@ export default async function Navbar() {
 					className="flex flex-row items-center group space-x-[-6px] h-full"
 				>
 					<Suspense fallback={<></>}>
-						<CartCount></CartCount>
+						<CartCount />
 					</Suspense>
 					<div className="w-full h-full aspect-square">
 						<AiOutlineShoppingCart className="fill-zinc-800 w-full h-full group-hover:fill-primary transition" />
