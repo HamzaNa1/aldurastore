@@ -54,7 +54,7 @@ export default function CartItemsTableItem({
 				<div className="absolute w-full h-full p-1 flex justify-center items-center">
 					<img
 						src={cartItemWithProduct.product.imageURL}
-						alt=""
+						alt={cartItemWithProduct.product.name}
 						className="h-full object-center object-contain"
 					/>
 				</div>

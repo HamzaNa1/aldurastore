@@ -23,6 +23,7 @@ export default function ProductBanner({ product }: ProductBannerProps) {
 				<img
 					className="w-full h-full object-center object-contain mx-auto"
 					src={product.imageURL}
+					alt={product.name}
 				></img>
 			</div>
 			<div className="flex flex-col p-2 w-full justify-start items-end text-zinc-700">

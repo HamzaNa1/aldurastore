@@ -173,7 +173,7 @@ function CartItemsTable({
 						<div className="absolute w-full h-full p-1 flex justify-center items-center">
 							<img
 								src={x.product.imageURL}
-								alt=""
+								alt={x.product.name}
 								className="h-full object-center object-contain"
 							/>
 						</div>

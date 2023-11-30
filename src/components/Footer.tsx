@@ -38,7 +38,11 @@ export default function Footer() {
 
 						<div className="flex justify-center flex-1">
 							<div className="flex flex-col w-48 shrink ">
-								<img className="w-full aspect-square" src="/logo.png" alt="" />
+								<img
+									className="w-full aspect-square"
+									src="/logo.png"
+									alt="aldurastore"
+								/>
 								<div className="flex flex-row gap-5 p-3 items-center justify-center">
 									<Link
 										href="https://www.facebook.com/aldurrastore?mibextid=LQQJ4d"

@@ -17,12 +17,11 @@ export default async function Navbar() {
 		<div className="w-full h-16 flex flex-row relative p-1 bg-secondary md:px-2 lg:px-8">
 			<Link
 				href="/"
-				className="absolute md:relative max-md:left-1/2 max-md:top-1/2 max-md:transform max-md:-translate-x-1/2 max-md:-translate-y-1/2 min-w-fit aspect-square h-full"
+				className="absolute md:relative max-md:left-1/2 max-md:top-1/2 max-md:transform max-md:-translate-x-1/2 max-md:-translate-y-1/2 min-w-fit aspect-square h-full z-50"
 			>
-				<Image
+				<img
 					src="/logo.png"
 					alt=""
-					fill
 					className="absolute w-full h-full object-center object-contain p-1 md:p-0"
 				/>
 			</Link>

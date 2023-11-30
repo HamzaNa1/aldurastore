@@ -17,7 +17,7 @@ export default function ProductView({ product }: ProductViewProp) {
 			<div className="relative w-full aspect-square">
 				<img
 					src={product.imageURL}
-					alt=""
+					alt={product.name}
 					className="absolute w-full h-full object-center object-contain"
 				/>
 			</div>
