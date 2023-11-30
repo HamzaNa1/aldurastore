@@ -15,6 +15,7 @@ import {
 export const heroImages = mysqlTable("heroImages", {
 	id: varchar("id", { length: 255 }).notNull().unique().primaryKey(),
 	imageURL: varchar("imageURL", { length: 255 }).notNull(),
+	order: int("order").default(0).notNull(),
 });
 
 export const users = mysqlTable(

@@ -38,7 +38,11 @@ export default async function Home() {
 async function HeroSection() {
 	const images = await db.query.heroImages.findMany({});
 
-	return <Hero images={images.map((x) => x.imageURL)} />;
+	return (
+		<Hero
+			images={images.sort((a, b) => a.order - b.order).map((x) => x.imageURL)}
+		/>
+	);
 }
 
 async function HeroSkeleton() {
