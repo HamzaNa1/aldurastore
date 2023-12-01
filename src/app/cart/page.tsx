@@ -91,6 +91,7 @@ export default async function Cart() {
 								<th className="w-[7%]"></th>
 								<th className="w-[12.5%]"></th>
 								<th className="py-1 font-semibold">السعر</th>
+								<th className="font-semibold">القياس</th>
 								<th className="font-semibold">المنتج</th>
 							</tr>
 						</thead>
