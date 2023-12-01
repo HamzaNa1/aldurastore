@@ -65,9 +65,8 @@ export default function CartItemsTableItem({
 					cartItemWithProduct.product.productPrices[0].country
 				)}
 			</td>
-			<td className="pr-1 py-2">
-				{`${cartItemWithProduct.productSettings.size} ${cartItemWithProduct.product.name}`}
-			</td>
+			<td className="pr-1 py-2">{cartItemWithProduct.productSettings.size}</td>
+			<td className="pr-1 py-2">{cartItemWithProduct.product.name}</td>
 		</tr>
 	);
 }
