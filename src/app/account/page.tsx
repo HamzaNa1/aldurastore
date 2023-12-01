@@ -84,7 +84,7 @@ export default async function Account() {
 										key={order.id}
 										className="text-xs md:text-sm outline outline-[0.5px] last:rounded-b-sm bg-white outline-zinc-400 h-fit"
 									>
-										<td dir="rtl" className="pl-1 font-semibold">
+										<td className="pl-1 font-semibold">
 											{order.isProcessed
 												? order.boughtDate.toLocaleString()
 												: accountDict.ordersTable.processing}
@@ -112,10 +112,7 @@ export default async function Account() {
 						</table>
 					) : (
 						<div className="flex mt-10 justify-center items-center">
-							<span
-								dir="rtl"
-								className="whitespace-nowrap text-zinc-800 text-xl"
-							>
+							<span className="whitespace-nowrap text-zinc-800 text-xl">
 								{accountDict.noOrders}
 							</span>
 						</div>
