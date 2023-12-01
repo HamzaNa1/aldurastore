@@ -1,23 +1,25 @@
+import { getDictionary } from "@/lib/languages/dictionaries";
+import getLanguage from "@/lib/languages/language";
 import Link from "next/link";
 
-export default function ThankYouPage() {
+export default async function ThankYouPage() {
+	const language = getLanguage();
+	const thankyouDict = (await getDictionary(language)).thankyou;
+
 	return (
-		<div
-			dir="rtl"
-			className="flex flex-col container justify-center items-center px-1 gap-7"
-		>
+		<div className="flex flex-col container justify-center items-center px-1 gap-7">
 			<div className="flex flex-col gap-3 items-center">
 				<IconCheckCircle className="text-green-500 w-16 h-16 drop-shadow-lg"></IconCheckCircle>
-				<h1 className="text-zinc-800 text-5xl font-bold">شكراً</h1>
-				<span className="text-zinc-500 text-lg">
-					شكراً على طلبكم. سيتم التواصل معكم لأتمام الطلب.
-				</span>
+				<h1 className="text-zinc-800 text-5xl font-bold">
+					{thankyouDict.thankyou}
+				</h1>
+				<span className="text-zinc-500 text-lg">{thankyouDict.message}</span>
 			</div>
 			<Link
 				className="text-center bg-primary w-full max-w-sm rounded-md p-1 hover:brightness-90 drop-shadow-lg"
 				href="/"
 			>
-				الصفحة الرئيسية
+				{thankyouDict.homepage}
 			</Link>
 		</div>
 	);

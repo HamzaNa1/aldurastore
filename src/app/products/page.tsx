@@ -1,6 +1,8 @@
 import ProductView, { ProductViewSkeleton } from "@/components/ProductView";
 import getCountry from "@/lib/country";
 import db from "@/lib/db";
+import { getDictionary } from "@/lib/languages/dictionaries";
+import getLanguage from "@/lib/languages/language";
 import { Suspense } from "react";
 
 export default async function Products() {
@@ -15,6 +17,8 @@ export default async function Products() {
 
 async function ProductSection() {
 	const country = getCountry();
+	const language = getLanguage();
+	const dict = (await getDictionary(language)).productView;
 
 	const products = await db.query.products.findMany({
 		where: (product, { and, eq }) => and(eq(product.activated, true)),
@@ -29,7 +33,7 @@ async function ProductSection() {
 		<>
 			{products.map((product, i) => (
 				<div key={i} className="w-[47%] max-w-[375px]">
-					<ProductView product={product}></ProductView>
+					<ProductView product={product} dict={dict}></ProductView>
 				</div>
 			))}
 		</>

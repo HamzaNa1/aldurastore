@@ -7,6 +7,7 @@ import { emailConfirmations } from "../schema";
 import { eq } from "drizzle-orm";
 import sendEmail from "./emailUtils";
 import { ConfirmationEmail } from "../emails";
+import { Language } from "../languages/dictionaries";
 
 export function getServerSession() {
 	const cookiesStore = cookies();
@@ -48,6 +49,14 @@ export async function sendEmailConfirmationAsync(
 		return;
 	}
 
+	const cookiesStore = cookies();
+	let language: Language;
+	try {
+		language = (cookiesStore.get("location")?.value ?? "ar") as Language;
+	} catch {
+		language = "ar";
+	}
+
 	await db.transaction(async (tx) => {
 		if (confirmation) {
 			await tx
@@ -58,7 +67,7 @@ export async function sendEmailConfirmationAsync(
 		const key = generateKey();
 		await tx.insert(emailConfirmations).values({ id: userId, key: key });
 
-		const email = ConfirmationEmail({ code: key });
+		const email = ConfirmationEmail(language, { code: key });
 
 		await sendEmail(emailAddress, "تأكيد البريد الألكتروني", email);
 	});

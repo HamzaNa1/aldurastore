@@ -2,10 +2,17 @@ import Hero from "@/components/Hero";
 import ProductView, { ProductViewSkeleton } from "@/components/ProductView";
 import getCountry from "@/lib/country";
 import db from "@/lib/db";
+import { getDictionary } from "@/lib/languages/dictionaries";
+import getLanguage from "@/lib/languages/language";
+import { ProductViewDict } from "@/lib/languages/types";
 import Link from "next/link";
 import { Suspense } from "react";
 
 export default async function Home() {
+	const language = getLanguage();
+	const dict = await getDictionary(language);
+	const mainDict = dict.main;
+
 	return (
 		<main className="w-screen bg-secondary">
 			<div className="flex items-center justify-center py-20">
@@ -17,17 +24,17 @@ export default async function Home() {
 			</div>
 			<div className="w-full h-fit bg-primary py-10 flex justify-center">
 				<div className="container flex flex-col items-center gap-6 p-2">
-					<span className="text-7xl">منتجاتنا</span>
+					<span className="text-7xl">{mainDict.products}</span>
 					<div className="productsContainer h-fit flex flex-row flex-wrap justify-center gap-1 md:gap-5 px-1 py-10">
 						<Suspense fallback={<ProductSkeleton />}>
-							<ProductSection />
+							<ProductSection dict={dict.productView} />
 						</Suspense>
 					</div>
 					<Link
 						href="/products"
 						className="w-64 h-16 bg-white text-[#646464] rounded-3xl flex items-center justify-center drop-shadow-lg brightness-100 hover:brightness-90 transition duration-300"
 					>
-						<span className="text-2xl">عرض الجميع</span>
+						<span className="text-2xl">{mainDict.showAll}</span>
 					</Link>
 				</div>
 			</div>
@@ -53,7 +60,7 @@ async function HeroSkeleton() {
 	);
 }
 
-async function ProductSection() {
+async function ProductSection({ dict }: { dict: ProductViewDict }) {
 	const country = getCountry();
 
 	const products = await db.query.products.findMany({
@@ -70,7 +77,7 @@ async function ProductSection() {
 		<>
 			{products.map((product, i) => (
 				<div key={i} className="w-[47%] max-w-[375px]">
-					<ProductView product={product}></ProductView>
+					<ProductView product={product} dict={dict}></ProductView>
 				</div>
 			))}
 		</>

@@ -4,6 +4,8 @@ import { OrdersToProducts, Product, ProductSettings } from "@/lib/schema";
 import { getServerSession } from "@/lib/Utils/userUtils";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import getLanguage from "@/lib/languages/language";
+import { getDictionary } from "@/lib/languages/dictionaries";
 
 interface ViewOrderPageProps {
 	params: {
@@ -32,6 +34,9 @@ export default async function ViewOwnOrderPage({ params }: ViewOrderPageProps) {
 		notFound();
 	}
 
+	const language = getLanguage();
+	const orderDict = (await getDictionary(language)).order;
+
 	return (
 		<div className="container flex py-10 text-zinc-800">
 			<div className="box-content flex flex-col gap-6">
@@ -42,19 +47,23 @@ export default async function ViewOwnOrderPage({ params }: ViewOrderPageProps) {
 							className="flex flex-col w-full h-fit bg-zinc-300 p-2 rounded-md drop-shadow-md"
 						>
 							<span className="text-base sm:text-lg text-primarytext">
-								تفاصيل الطلب
+								{orderDict.order.orderDetails}
 							</span>
-							<span>رمز الطلب: {order.id}</span>
-							<span>تاريخ الشراء: {order.boughtDate.toLocaleString()}</span>
+							<span>
+								{orderDict.order.orderId}: {order.id}
+							</span>
+							<span>
+								{orderDict.order.orderDate}: {order.boughtDate.toLocaleString()}
+							</span>
 
 							<span>
-								تاريخ المعالجة:{" "}
+								{orderDict.order.processDate}:{" "}
 								{order.isProcessed
 									? order.boughtDate.toLocaleString()
-									: "جاري المعالجة..."}
+									: orderDict.order.processing}
 							</span>
 							<span>
-								السعر الكلي:{" "}
+								{orderDict.order.totalCost}:{" "}
 								{localizePrices(
 									order.ordersToProducts.map((x) => x.cost),
 									order.country
@@ -69,24 +78,44 @@ export default async function ViewOwnOrderPage({ params }: ViewOrderPageProps) {
 							className="flex flex-col w-full h-fit bg-zinc-300 p-2 rounded-md drop-shadow-md"
 						>
 							<span className="text-base sm:text-lg text-primarytext">
-								تفاصيل العنوان
+								{orderDict.address.addressDetails}
 							</span>
-							<span>الأسم: {order.firstname}</span>
-							<span>أسم العائلة: {order.lastname}</span>
-							<span>رقم الهاتف: {order.phonenumber}</span>
-							<span>البلد: {order.location}</span>
-							<span>المقاطعة: {order.region}</span>
-							<span>المنطقة: {order.area}</span>
-							<span>العنوان: {order.address}</span>
+							<span>
+								{orderDict.address.name}: {order.firstname}
+							</span>
+							<span>
+								{orderDict.address.lastName}: {order.lastname}
+							</span>
+							<span>
+								{orderDict.address.phoneNumber}: {order.phonenumber}
+							</span>
+							<span>
+								{orderDict.address.location}: {order.location}
+							</span>
+							<span>
+								{orderDict.address.region}: {order.region}
+							</span>
+							<span>
+								{orderDict.address.area}: {order.area}
+							</span>
+							<span>
+								{orderDict.address.address}: {order.address}
+							</span>
 						</div>
 					</div>
 					<div className="flex flex-col flex-[2_2_0%] gap-2 min-w-full md:min-w-0">
 						<table dir="rtl" className="table-fixed w-full">
 							<thead className="sticky text-zinc-50 text-xs md:text-sm text-right outline outline-[0.5px] rounded-tr-sm rounded-tl-sm bg-primary outline-primary h-fit">
 								<tr>
-									<th className="font-semibold">المنتج</th>
-									<th className="font-semibold">القياس</th>
-									<th className="py-1 font-semibold">السعر</th>
+									<th className="font-semibold">
+										{orderDict.ordersTable.product}
+									</th>
+									<th className="font-semibold">
+										{orderDict.ordersTable.size}
+									</th>
+									<th className="py-1 font-semibold">
+										{orderDict.ordersTable.price}
+									</th>
 									<th className="w-[12.5%]"></th>
 								</tr>
 							</thead>

@@ -1,4 +1,5 @@
 import { localizePrice } from "@/lib/Utils/locationUtils";
+import { ProductViewDict } from "@/lib/languages/types";
 import { Product, ProductPrice } from "@/lib/schema";
 import Link from "next/link";
 
@@ -6,9 +7,10 @@ interface ProductViewProp {
 	product: Product & {
 		productPrices: ProductPrice[];
 	};
+	dict: ProductViewDict;
 }
 
-export default function ProductView({ product }: ProductViewProp) {
+export default function ProductView({ product, dict }: ProductViewProp) {
 	return (
 		<Link
 			href={`/products/${product.id}`}
@@ -22,18 +24,18 @@ export default function ProductView({ product }: ProductViewProp) {
 				/>
 			</div>
 
-			<div className="w-full h-full p-3 flex flex-col items-end gap-4">
-				<div className="text-[#145654] right-0 text-right sm:text-lg md:text-xl lg:text-3xl">
+			<div className="w-full h-full p-3 flex flex-col gap-4">
+				<div className="text-[#145654] right-0 sm:text-lg md:text-xl lg:text-3xl">
 					{product.name}
 				</div>
-				<div className="text-zinc-800 right-0 text-right text-sm sm:text-base md:text-lg lg:text-xl">
+				<div className="text-zinc-800 right-0 text-sm sm:text-base md:text-lg lg:text-xl">
 					{localizePrice(
 						product.productPrices[0].cost,
 						product.productPrices[0].country
 					)}
 				</div>
 				<div className="w-36 max-w-[50%] text-xs sm:text-sm md:text-base bg-zinc-300 text-center text-zinc-800 p-2 rounded-full drop-shadow-md brightness-100 hover:brightness-90 transition duration-300">
-					<span>عرض المنتج</span>
+					<span>{dict.showProduct}</span>
 				</div>
 			</div>
 		</Link>
@@ -47,7 +49,7 @@ export function ProductViewSkeleton() {
 				<div className="absolute w-full h-full bg-zinc-100 animate-pulse"></div>
 			</div>
 
-			<div className="w-full h-full p-3 flex flex-col items-end gap-4">
+			<div className="w-full h-full p-3 flex flex-col gap-4">
 				<div className="h-[24px] sm:h-[28px] lg:h-[36px] w-[60%] rounded-full bg-secondary animate-pulse"></div>
 
 				<div className="h-[20px] sm:h-[24px] md:h-[28px] w-[30%] rounded-full bg-secondary animate-pulse"></div>

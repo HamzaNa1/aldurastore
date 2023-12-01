@@ -4,17 +4,19 @@ import { ProductSettings } from "@/lib/schema";
 import { SubmitButton } from "./ui/SubmitButton";
 import { AddCartItem } from "@/actions/GeneralActions";
 import { useState } from "react";
+import { AddToCartFormDict } from "@/lib/languages/types";
 
 interface AddToCartProps {
 	settings: ProductSettings[];
+	dict: AddToCartFormDict;
 }
 
-export default function AddToCartForm({ settings }: AddToCartProps) {
+export default function AddToCartForm({ settings, dict }: AddToCartProps) {
 	const [settingsIdx, setSettingsIdx] = useState<number>(-1);
 
 	return (
-		<div className="flex flex-col gap-20 items-end">
-			<div className="flex flex-col gap-5 text-zinc-800 text-right">
+		<div className="flex flex-col gap-20">
+			<div className="flex flex-col gap-5 text-zinc-800">
 				{/* <div className="flex flex-col gap-2">
     <span className="font-bold text-xl">:اللون</span>
     <div className="flex flex-row gap-2 justify-end">
@@ -28,8 +30,8 @@ export default function AddToCartForm({ settings }: AddToCartProps) {
     </div>
   </div> */}
 				<div className="flex flex-col gap-2">
-					<span className="font-bold text-lg sm:text-xl">:المقاس</span>
-					<div className="flex flex-row flex-wrap gap-2 justify-end">
+					<span className="font-bold text-lg sm:text-xl">{dict.size}:</span>
+					<div className="flex flex-row flex-wrap gap-2">
 						{settings.map((size, i) => (
 							<button
 								key={size.id}
@@ -64,7 +66,7 @@ export default function AddToCartForm({ settings }: AddToCartProps) {
 						className="py-2 px-12 bg-primary rounded-md drop-shadow-lg brightness-100 hover:brightness-90 transition duration-300 disabled:brightness-90"
 						fallback={null}
 					>
-						<span>أضف إلى السلة</span>
+						<span>{dict.cart}</span>
 					</SubmitButton>
 				</form>
 			</div>

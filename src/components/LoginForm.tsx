@@ -4,8 +4,13 @@ import SignIn from "@/actions/auth/SignIn";
 import { SubmitButton } from "./ui/SubmitButton";
 import { toast } from "sonner";
 import { useState } from "react";
+import { LoginFormDict } from "@/lib/languages/types";
 
-export default function LoginForm() {
+interface LoginFormProps {
+	dict: LoginFormDict;
+}
+
+export default function LoginForm({ dict }: LoginFormProps) {
 	const [showError, setShowError] = useState(false);
 	const [password, setPassword] = useState("");
 
@@ -19,9 +24,7 @@ export default function LoginForm() {
 				const user = await SignIn({ email, password });
 
 				if (user) {
-					toast.success(
-						<span className="w-full text-right">تم تسجيل الدخول</span>
-					);
+					toast.success(<span className="w-full">{dict.toast}</span>);
 				} else {
 					setPassword("");
 					setShowError(true);
@@ -29,8 +32,8 @@ export default function LoginForm() {
 			}}
 		>
 			<input
-				className="w-full h-10 p-1 rounded-sm placeholder:text-right text-black"
-				placeholder="البريد الألكتروني"
+				className="w-full h-10 p-1 rounded-sm text-black"
+				placeholder={dict.email}
 				type="email"
 				name="email"
 				onReset={(e) => {
@@ -39,8 +42,8 @@ export default function LoginForm() {
 				required
 			/>
 			<input
-				className="w-full h-10 p-1 rounded-sm placeholder:text-right text-black"
-				placeholder="كلمة السر"
+				className="w-full h-10 p-1 rounded-sm text-black"
+				placeholder={dict.password}
 				type="password"
 				name="password"
 				value={password}
@@ -51,13 +54,10 @@ export default function LoginForm() {
 				className="w-full h-10 p-1 rounded-sm drop-shadow-md bg-primary text-white disabled:bg-primarytext transition duration-500"
 				fallback={null}
 			>
-				تسجيل الدخول
+				{dict.login}
 			</SubmitButton>
-			<label
-				className="text-sm text-red-500 w-full text-right mb-4"
-				hidden={!showError}
-			>
-				البريد الألكتروني او كلمة السر خاطئة
+			<label className="text-sm text-red-500 w-full mb-4" hidden={!showError}>
+				{dict.error}
 			</label>
 		</form>
 	);

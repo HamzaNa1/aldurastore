@@ -18,6 +18,7 @@ import { redirect } from "next/navigation";
 import getCountry from "@/lib/country";
 import { CheckoutEmail } from "@/lib/emails";
 import sendEmail from "@/lib/Utils/emailUtils";
+import { Language } from "@/lib/languages/dictionaries";
 
 export async function AddCartItem(
 	productId: string,
@@ -62,6 +63,13 @@ export async function SelectLocation(country: string) {
 
 	const cookiesStore = cookies();
 	cookiesStore.set("country", country);
+
+	revalidatePath("/");
+}
+
+export async function SelectLanguage(language: Language) {
+	const cookiesStore = cookies();
+	cookiesStore.set("language", language);
 
 	revalidatePath("/");
 }
