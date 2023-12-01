@@ -61,7 +61,9 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 						dir="rtl"
 						className="w-full h-fit text-right text-sm sm:text-base md:text-l"
 					>
-						<span className="text-zinc-800">{product.description}</span>
+						<div className="text-zinc-800 whitespace-pre-wrap">
+							{product.description}
+						</div>
 					</div>
 					<div className="w-full flex flex-col gap-5 items-end">
 						<AddToCartForm
