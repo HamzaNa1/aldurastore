@@ -39,7 +39,7 @@ export default async function ViewOwnOrderPage({ params }: ViewOrderPageProps) {
 					<div className="flex justify-center sm:justify-normal flex-1 min-w-fit sm:min-w-0">
 						<div
 							dir="rtl"
-							className="flex flex-col w-fit h-fit bg-zinc-300 p-2 rounded-md drop-shadow-md"
+							className="flex flex-col w-full h-fit bg-zinc-300 p-2 rounded-md drop-shadow-md"
 						>
 							<span className="text-base sm:text-lg text-primarytext">
 								تفاصيل الطلب
@@ -66,7 +66,7 @@ export default async function ViewOwnOrderPage({ params }: ViewOrderPageProps) {
 					<div className="flex justify-center sm:justify-normal flex-1 min-w-fit sm:min-w-0">
 						<div
 							dir="rtl"
-							className="flex flex-col w-fit h-fit bg-zinc-300 p-2 rounded-md drop-shadow-md"
+							className="flex flex-col w-full h-fit bg-zinc-300 p-2 rounded-md drop-shadow-md"
 						>
 							<span className="text-base sm:text-lg text-primarytext">
 								تفاصيل العنوان
