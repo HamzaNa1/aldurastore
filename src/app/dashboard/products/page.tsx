@@ -13,7 +13,7 @@ export default async function ManageProducts() {
 	const products = await db.query.products.findMany();
 
 	return (
-		<div className="container flex flex-col m-10 gap-1 text-zinc-800">
+		<div dir="ltr" className="container flex flex-col m-10 gap-1 text-zinc-800">
 			<ProductDashboard products={products}></ProductDashboard>
 		</div>
 	);
