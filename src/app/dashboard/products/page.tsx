@@ -1,7 +1,10 @@
-import ProductDashboard from "@/components/dashboard/products/ProductDashboard";
+import { DashboardCreateProduct } from "@/actions/DashboardActions";
+import Slider from "@/components/dashboard/Slider";
 import db from "@/lib/db";
+import { Product } from "@/lib/schema";
 import { getServerSession } from "@/lib/Utils/userUtils";
-import { notFound } from "next/navigation";
+import Link from "next/link";
+import { notFound, redirect } from "next/navigation";
 
 export default async function ManageProducts() {
 	const user = getServerSession();
@@ -13,8 +16,70 @@ export default async function ManageProducts() {
 	const products = await db.query.products.findMany();
 
 	return (
-		<div className="container flex flex-col m-10 gap-1 text-zinc-800">
-			<ProductDashboard products={products}></ProductDashboard>
+		<div className="container max-h-screen flex flex-col m-10 gap-1 text-zinc-800">
+			<form className="w-full">
+				<button
+					formAction={async () => {
+						"use server";
+
+						const newProduct = await DashboardCreateProduct();
+						redirect("/dashboard/products/edit/" + newProduct?.id);
+					}}
+					type="submit"
+					className="w-full h-full bg-zinc-300 hover:brightness-90 "
+				>
+					Add Product
+				</button>
+			</form>
+			<div className="w-full h-full">
+				<Slider perView={5}>
+					{products.map((product, i) => (
+						<div key={i} className="keen-slider__slide w-full h-full ">
+							<ProductBanner product={product}></ProductBanner>
+						</div>
+					))}
+				</Slider>
+			</div>
+		</div>
+	);
+}
+
+interface ProductBannerProps {
+	product: Product;
+}
+
+function ProductBanner({ product }: ProductBannerProps) {
+	return (
+		<div className={"flex w-full h-full bg-zinc-300"}>
+			<div className="h-full aspect-square bg-white select-none">
+				<img
+					className="w-full h-full object-center object-contain mx-auto"
+					src={product.imageURL}
+					alt={product.name}
+				></img>
+			</div>
+			<div className="flex flex-col p-2 w-full justify-start items-end text-zinc-700">
+				<span className="text-primarytext text-xl font-bold">
+					{product.name}
+				</span>
+				<span className="text-md font-bold overflow-hidden">
+					{product.description}
+				</span>
+				<span className="text-md font-bold self-start">
+					Is Active: {`${product.activated}`}
+				</span>
+				<span className="text-md font-bold self-start">
+					Show On Main: {`${product.showOnMain}`}
+				</span>
+				<div className="self-start mt-auto flex gap-2">
+					<Link
+						className="text-primarytext underline disabled:cursor-pointer"
+						href={"/dashboard/products/edit/" + product.id}
+					>
+						Edit
+					</Link>
+				</div>
+			</div>
 		</div>
 	);
 }
