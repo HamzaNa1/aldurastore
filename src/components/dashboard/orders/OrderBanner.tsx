@@ -1,6 +1,7 @@
 "use client";
 
 import { Order } from "@/lib/schema";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 interface OrderBannerProps {
@@ -8,19 +9,15 @@ interface OrderBannerProps {
 }
 
 export default function OrderBanner({ order }: OrderBannerProps) {
-	const router = useRouter();
-
 	return (
 		<div className={"flex w-full h-full bg-zinc-300"}>
 			<div className="flex flex-col p-2 w-full justify-start text-zinc-700">
-				<button
-					className="text-primarytext underline hover:brightness-50"
-					onClick={() => {
-						router.push("/dashboard/orders/" + order.id);
-					}}
+				<Link
+					className="text-primarytext underline hover:brightness-50 flex text-center"
+					href={"/dashboard/orders/" + order.id}
 				>
 					{order.id}
-				</button>
+				</Link>
 			</div>
 			<div className="flex flex-col p-2 w-full justify-start text-zinc-700">
 				<span className="text-zinc-800" suppressHydrationWarning>

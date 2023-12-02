@@ -21,12 +21,17 @@ export default function OrderDashboard({ action }: OrderDashboardProps) {
 	useEffect(() => {
 		setOrders([]);
 
-		const refreshOrders = async () => {
+		const refreshOrders = async (signal: AbortSignal) => {
 			const newOrders = await action(date?.getTime() ?? null, processed);
+			signal.throwIfAborted();
+
 			setOrders(newOrders ?? []);
 		};
 
-		refreshOrders();
+		const controller = new AbortController();
+		refreshOrders(controller.signal);
+
+		return () => controller.abort("cancel");
 	}, [date, processed]);
 
 	return (
