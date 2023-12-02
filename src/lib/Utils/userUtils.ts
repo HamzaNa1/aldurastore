@@ -40,6 +40,10 @@ export async function sendEmailConfirmationAsync(
 	userId: string,
 	emailAddress: string
 ) {
+	if (process.env.NODE_ENV != "production") {
+		return;
+	}
+
 	const confirmation = await db.query.emailConfirmations.findFirst({
 		where: (confirmation, { eq }) => eq(confirmation.id, userId),
 	});

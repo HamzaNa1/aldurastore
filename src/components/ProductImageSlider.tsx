@@ -27,7 +27,7 @@ export default function ProductImageSlider({
 			<div className="flex flex-col w-full h-full gap-3 py-4 items-start justify-start">
 				<div className="relative w-full aspect-square bg-white">
 					<div ref={mainSliderRef} className="w-full h-full overflow-hidden">
-						<div className="flex flex-row w-full h-full ">
+						<div className="flex flex-row w-full h-full">
 							{imageUrls.map((url, i) => (
 								<button
 									key={i}

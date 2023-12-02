@@ -8,10 +8,11 @@ import {
 	cartItems,
 	orders,
 	ordersToProducts,
+	productSettings,
 } from "@/lib/schema";
 import { getServerSession } from "@/lib/Utils/userUtils";
 import { randomUUID } from "crypto";
-import { and, eq } from "drizzle-orm";
+import { and, eq, gt, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -30,10 +31,25 @@ export async function AddCartItem(
 		redirect("/login");
 	}
 
+	const product = await db.query.products.findFirst({
+		where: (product, { and, eq }) =>
+			and(eq(product.id, productId), eq(product.activated, true)),
+		with: {
+			productSettings: {
+				where: (settings, { and, eq, gt }) =>
+					and(eq(settings.id, settingId), gt(settings.quantity, 0)),
+			},
+		},
+	});
+
+	if (!product || product.productSettings.length != 1) {
+		return;
+	}
+
 	const item: CartItem = {
 		id: randomUUID(),
 		userId: user.id,
-		productId: productId,
+		productId: product.id,
 		productSettingsId: settingId,
 		quantity: quantity,
 	};
@@ -99,40 +115,68 @@ export async function CreateOrder(orderDetails: OrderDetails) {
 		address: orderDetails.address,
 	};
 
-	await db.transaction(async (tx) => {
-		const items = await tx.query.cartItems.findMany({
-			where: (item, { eq }) => eq(item.userId, user.id),
-			with: {
-				product: {
-					with: {
-						productPrices: {
-							where: (price, { eq }) => eq(price.country, country),
+	const successful = await db.transaction(async (tx) => {
+		try {
+			const items = await tx.query.cartItems.findMany({
+				where: (item, { eq }) => eq(item.userId, user.id),
+				with: {
+					product: {
+						with: {
+							productPrices: {
+								where: (price, { eq }) => eq(price.country, country),
+							},
 						},
 					},
 				},
-			},
-		});
-
-		if (items.length == 0) {
-			return;
-		}
-
-		await tx.insert(orders).values(order);
-		await tx.delete(cartItems).where(eq(cartItems.userId, user.id));
-
-		for (let i = 0; i < items.length; i++) {
-			await tx.insert(ordersToProducts).values({
-				id: randomUUID(),
-				orderId: order.id,
-				productId: items[i].productId,
-				productSettingsId: items[i].productSettingsId,
-				cost: items[i].product.productPrices[0].cost,
 			});
+
+			if (items.length == 0) {
+				await tx.rollback();
+				return false;
+			}
+
+			await tx.insert(orders).values(order);
+			await tx.delete(cartItems).where(eq(cartItems.userId, user.id));
+
+			for (let i = 0; i < items.length; i++) {
+				await tx.insert(ordersToProducts).values({
+					id: randomUUID(),
+					orderId: order.id,
+					productId: items[i].productId,
+					productSettingsId: items[i].productSettingsId,
+					cost: items[i].product.productPrices[0].cost,
+				});
+
+				const query = await tx
+					.update(productSettings)
+					.set({ quantity: sql`${productSettings.quantity} - 1` })
+					.where(
+						and(
+							eq(productSettings.productId, items[i].productId),
+							gt(productSettings.quantity, 0)
+						)
+					);
+
+				if (query.rowsAffected == 0) {
+					await tx.rollback();
+					return false;
+				}
+			}
+
+			return true;
+		} catch (ex) {
+			return false;
 		}
 	});
 
-	const email = CheckoutEmail({ orderId: order.id });
-	await sendEmail("info@aldurastore.com", "طلب جديد", email);
+	if (!successful) {
+		return false;
+	}
+
+	if (process.env.NODE_ENV == "production") {
+		const email = CheckoutEmail({ orderId: order.id });
+		await sendEmail("info@aldurastore.com", "طلب جديد", email);
+	}
 
 	redirect("/thank-you");
 }

@@ -243,7 +243,10 @@ export async function MarkOrderAsUnprocessed(orderId: string) {
 		return undefined;
 	}
 
-	await db.update(orders).set({ isProcessed: false, fulfilledDate: null });
+	await db
+		.update(orders)
+		.set({ isProcessed: false, fulfilledDate: null })
+		.where(eq(orders.id, orderId));
 	revalidatePath("/dashboard/orders");
 }
 
@@ -263,7 +266,7 @@ export async function GetOrders(
 		return await db.query.orders.findMany({
 			where: (order, { and, eq, between }) =>
 				and(
-					!onlyNotProcessed ? eq(order.isProcessed, false) : undefined,
+					onlyNotProcessed ? eq(order.isProcessed, false) : undefined,
 
 					between(orders.boughtDate, boughtDate, nextDay)
 				),
@@ -272,7 +275,7 @@ export async function GetOrders(
 	} else {
 		return await db.query.orders.findMany({
 			where: (order, { eq }) =>
-				!onlyNotProcessed ? eq(order.isProcessed, false) : undefined,
+				onlyNotProcessed ? eq(order.isProcessed, false) : undefined,
 			limit: 10,
 		});
 	}
