@@ -5,6 +5,8 @@ import db from "@/lib/db";
 import { getDictionary } from "@/lib/languages/dictionaries";
 import getLanguage from "@/lib/languages/language";
 import { ProductViewDict } from "@/lib/languages/types";
+import { products } from "@/lib/schema";
+import { sql } from "drizzle-orm";
 import Link from "next/link";
 import { Suspense } from "react";
 
@@ -63,7 +65,15 @@ async function HeroSkeleton() {
 async function ProductSection({ dict }: { dict: ProductViewDict }) {
 	const country = getCountry();
 
-	const products = await db.query.products.findMany({
+	const language = getLanguage();
+
+	const mainProducts = await db.query.products.findMany({
+		extras:
+			language == "en"
+				? {
+						name: sql<string>`${products.nameEN}`.as("name"),
+				  }
+				: undefined,
 		where: (product, { and, eq }) =>
 			and(eq(product.showOnMain, true), eq(product.activated, true)),
 		with: {
@@ -75,7 +85,7 @@ async function ProductSection({ dict }: { dict: ProductViewDict }) {
 
 	return (
 		<>
-			{products.map((product, i) => (
+			{mainProducts.map((product, i) => (
 				<div key={i} className="w-[47%] max-w-[375px]">
 					<ProductView product={product} dict={dict}></ProductView>
 				</div>

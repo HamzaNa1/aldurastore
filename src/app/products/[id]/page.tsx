@@ -8,6 +8,8 @@ import { notFound } from "next/navigation";
 import { LiaShippingFastSolid } from "react-icons/lia";
 import getLanguage, { getDirection } from "@/lib/languages/language";
 import { getDictionary } from "@/lib/languages/dictionaries";
+import { sql } from "drizzle-orm";
+import { products } from "@/lib/schema";
 
 interface ProductPageProps {
 	params: {
@@ -18,7 +20,15 @@ interface ProductPageProps {
 export default async function Product({ params: { id } }: ProductPageProps) {
 	const country = getCountry();
 
+	const language = getLanguage();
+
 	const product = await db.query.products.findFirst({
+		extras:
+			language == "en"
+				? {
+						name: sql<string>`${products.nameEN}`.as("name"),
+				  }
+				: undefined,
 		where: (product, { eq }) => eq(product.id, id),
 		with: {
 			productImages: true,
@@ -31,7 +41,6 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 		notFound();
 	}
 
-	const language = getLanguage();
 	const productDict = (await getDictionary(language)).product;
 	const dir = getDirection();
 
