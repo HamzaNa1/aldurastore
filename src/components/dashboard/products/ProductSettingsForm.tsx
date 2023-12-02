@@ -54,7 +54,7 @@ export default function ProductSettingsForm({
 						/>
 						<input
 							className="w-full"
-							defaultValue={-1}
+							defaultValue={9999}
 							placeholder="quantity"
 							name="quantity"
 							id="quantity"
