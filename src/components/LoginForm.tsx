@@ -4,6 +4,7 @@ import SignIn from "@/actions/auth/SignIn";
 import { SubmitButton } from "./ui/SubmitButton";
 import { toast } from "sonner";
 import { useState } from "react";
+import { redirect } from "next/navigation";
 
 export default function LoginForm() {
 	const [showError, setShowError] = useState(false);
@@ -18,14 +19,16 @@ export default function LoginForm() {
 
 				const user = await SignIn({ email, password });
 
-				if (user) {
-					toast.success(
-						<span className="w-full text-right">تم تسجيل الدخول</span>
-					);
-				} else {
+				if (!user) {
 					setPassword("");
 					setShowError(true);
+					return;
 				}
+
+				toast.success(
+					<span className="w-full text-right">تم تسجيل الدخول</span>
+				);
+				redirect("/");
 			}}
 		>
 			<input
