@@ -1,28 +1,20 @@
 "use client";
 
-import "keen-slider/keen-slider.min.css";
-import { useKeenSlider } from "keen-slider/react";
+import useEmblaCarousel from "embla-carousel-react";
 
 interface SliderProps {
-	perView: number;
 	children: React.ReactNode;
 }
 
-export default function Slider({ perView, children }: SliderProps) {
-	const [sliderRef, instanceRef] = useKeenSlider(
-		{
-			vertical: true,
-			mode: "free",
-			slides: { perView: perView, spacing: 10 },
-		},
-		[]
-	);
+export default function Slider({ children }: SliderProps) {
+	const [sliderRef, sliderInstance] = useEmblaCarousel({
+		dragFree: false,
+		axis: "y",
+	});
 
 	return (
-		<div className="w-full h-full overflow-hidden">
-			<div ref={sliderRef} className="relative w-full h-full">
-				{children}
-			</div>
+		<div ref={sliderRef} className="w-full h-full overflow-hidden">
+			<div className="flex flex-col w-full h-full">{children}</div>
 		</div>
 	);
 }

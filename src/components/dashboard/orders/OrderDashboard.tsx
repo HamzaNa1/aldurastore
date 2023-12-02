@@ -54,9 +54,9 @@ export default function OrderDashboard({ action }: OrderDashboardProps) {
 			</div>
 			<div className="h-screen">
 				{orders.length > 0 && (
-					<Slider perView={10}>
+					<Slider>
 						{orders.map((order, i) => (
-							<div key={i} className="keen-slider__slide w-full h-full ">
+							<div key={i} className="flex-[0_0_10%]">
 								<OrderBanner order={order}></OrderBanner>
 							</div>
 						))}

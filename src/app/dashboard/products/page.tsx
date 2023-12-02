@@ -32,9 +32,9 @@ export default async function ManageProducts() {
 				</button>
 			</form>
 			<div className="w-full h-full">
-				<Slider perView={5}>
+				<Slider>
 					{products.map((product, i) => (
-						<div key={i} className="keen-slider__slide w-full h-full ">
+						<div key={i} className="flex-[0_0_20%]">
 							<ProductBanner product={product}></ProductBanner>
 						</div>
 					))}
@@ -50,21 +50,20 @@ interface ProductBannerProps {
 
 function ProductBanner({ product }: ProductBannerProps) {
 	return (
-		<div className={"flex w-full h-full bg-zinc-300"}>
-			<div className="h-full aspect-square bg-white select-none">
+		<div className="flex w-full h-full bg-zinc-300">
+			<div className="relative h-full bg-white aspect-square select-none">
 				<img
-					className="w-full h-full object-center object-contain mx-auto"
 					src={product.imageURL}
 					alt={product.name}
-				></img>
+					className="absolute w-full h-full object-center object-contain"
+				/>
 			</div>
+
 			<div className="flex flex-col p-2 w-full justify-start items-end text-zinc-700">
 				<span className="text-primarytext text-xl font-bold">
 					{product.name}
 				</span>
-				<span className="text-md font-bold overflow-hidden">
-					{product.description}
-				</span>
+
 				<span className="text-md font-bold self-start">
 					Is Active: {`${product.activated}`}
 				</span>

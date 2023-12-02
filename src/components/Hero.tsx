@@ -1,8 +1,9 @@
 "use client";
 
-import "keen-slider/keen-slider.min.css";
-import { useKeenSlider } from "keen-slider/react";
-import { useEffect, useState } from "react";
+import Autoplay from "embla-carousel-autoplay";
+import useEmblaCarousel, { EmblaCarouselType } from "embla-carousel-react";
+
+import { useCallback, useEffect, useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { GoDot, GoDotFill } from "react-icons/go";
 
@@ -12,53 +13,40 @@ interface HeroComponentProps {
 
 export default function Hero({ images }: HeroComponentProps) {
 	const [currIndex, setCurrIndex] = useState(0);
-	const [loaded, setLoaded] = useState(false);
+
+	const options = {
+		delay: 4000,
+		stopOnMouseEnter: true,
+		stopOnInteraction: false,
+		rootNode: (emblaRoot: HTMLElement) => emblaRoot.parentElement,
+	};
+
+	const [sliderRef, sliderInstance] = useEmblaCarousel(
+		{
+			dragFree: false,
+			loop: true,
+		},
+		[Autoplay(options)]
+	);
+
+	const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
+		setCurrIndex(emblaApi.selectedScrollSnap());
+	}, []);
+
+	useEffect(() => {
+		if (!sliderInstance) return;
+
+		onSelect(sliderInstance);
+		sliderInstance.on("select", onSelect);
+	}, [sliderInstance, onSelect]);
 
 	const prevSlide = () => {
-		instanceRef.current?.prev();
+		sliderInstance?.scrollPrev();
 	};
 
 	const nextSlide = () => {
-		instanceRef.current?.next();
+		sliderInstance?.scrollNext();
 	};
-
-	const [sliderRef, instanceRef] = useKeenSlider(
-		{
-			loop: true,
-			slides: {
-				perView: 1,
-			},
-		},
-		[
-			(slider) => {
-				let timeout: NodeJS.Timeout;
-
-				function clearNextTimeout() {
-					clearTimeout(timeout);
-				}
-
-				function nextTimeout() {
-					clearTimeout(timeout);
-					timeout = setTimeout(() => {
-						slider.next();
-					}, 4000);
-				}
-
-				slider.on("dragStarted", clearNextTimeout);
-				slider.on("animationEnded", nextTimeout);
-				slider.on("updated", nextTimeout);
-				slider.on("slideChanged", (e) => {
-					setCurrIndex(e.track.details.rel);
-				});
-
-				nextTimeout();
-			},
-		]
-	);
-
-	useEffect(() => {
-		setLoaded(true);
-	}, []);
 
 	return (
 		<div className="aspect-video w-full">
@@ -83,7 +71,7 @@ export default function Hero({ images }: HeroComponentProps) {
 							<div
 								key={i}
 								className="w-5 h-5 cursor-pointer"
-								onClick={() => instanceRef.current?.moveToIdx(i)}
+								onClick={() => sliderInstance?.scrollTo(i)}
 							>
 								{i == currIndex ? (
 									<GoDotFill className="fill-primary w-full h-full"></GoDotFill>
@@ -95,10 +83,10 @@ export default function Hero({ images }: HeroComponentProps) {
 					</div>
 				</div>
 
-				{loaded && (
-					<div ref={sliderRef} className="keen-slider w-full h-full">
+				<div ref={sliderRef} className="w-full h-full overflow-hidden">
+					<div className="flex flex-row w-full h-full">
 						{images.map((src, i) => (
-							<div key={i} className="keen-slider__slide w-full h-full">
+							<div key={i} className="flex-[0_0_100%]">
 								<img
 									src={src}
 									className="w-full h-full object-center object-contain"
@@ -107,7 +95,7 @@ export default function Hero({ images }: HeroComponentProps) {
 							</div>
 						))}
 					</div>
-				)}
+				</div>
 			</div>
 		</div>
 	);
