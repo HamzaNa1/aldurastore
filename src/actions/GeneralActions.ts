@@ -131,8 +131,10 @@ export async function CreateOrder(orderDetails: OrderDetails) {
 		}
 	});
 
-	const email = CheckoutEmail({ orderId: order.id });
-	await sendEmail("info@aldurastore.com", "طلب جديد", email);
+	if (process.env.NODE_ENV == "production") {
+		const email = CheckoutEmail({ orderId: order.id });
+		await sendEmail("info@aldurastore.com", "طلب جديد", email);
+	}
 
 	redirect("/thank-you");
 }
