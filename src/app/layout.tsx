@@ -5,6 +5,7 @@ import { Cairo } from "next/font/google";
 import Footer from "@/components/Footer";
 import { Toaster } from "sonner";
 import Renewer from "@/components/Renewer";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Cairo({ subsets: ["arabic", "latin"] });
 
@@ -34,6 +35,7 @@ export default function RootLayout({
 					</div>
 				</div>
 				<Renewer />
+				<Analytics />
 			</body>
 		</html>
 	);
