@@ -176,7 +176,7 @@ export async function CreateOrder(orderDetails: OrderDetails) {
 	}
 
 	if (process.env.NODE_ENV == "production") {
-		const email = CheckoutEmail({ orderId: order.id });
+		const email = CheckoutEmail({ order: order });
 		await sendEmail("info@aldurastore.com", "طلب جديد", email);
 	}
 

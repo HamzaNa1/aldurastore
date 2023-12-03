@@ -8,16 +8,16 @@ import {
 	Text,
 	render,
 } from "@react-email/components";
-
 import * as React from "react";
 import { Language } from "./languages/dictionaries";
+import { NewOrder } from "./schema";
 
 interface ConfirmationEmailProps {
 	code: string;
 }
 
 interface CheckoutEmailProps {
-	orderId: string;
+	order: NewOrder;
 }
 
 function ConfirmationEmailARBuilder({ code }: ConfirmationEmailProps) {
@@ -98,7 +98,7 @@ function ConfirmationEmailENBuilder({ code }: ConfirmationEmailProps) {
 	);
 }
 
-function CheckoutEmailBuilder({ orderId }: CheckoutEmailProps) {
+function CheckoutEmailBuilder({ order }: CheckoutEmailProps) {
 	return (
 		<Html style={{ direction: "rtl" }}>
 			<Head />
@@ -117,9 +117,16 @@ function CheckoutEmailBuilder({ orderId }: CheckoutEmailProps) {
 					</Text>
 
 					<Text style={{ textAlign: "right", direction: "rtl" }}>
-						<a href={"https://aldurastore.com/dashboard/orders/" + orderId}>
+						<a href={"https://aldurastore.com/dashboard/orders/" + order.id}>
 							Order Info
 						</a>
+					</Text>
+					<Text style={{ textAlign: "right", direction: "rtl" }}>
+						الأسم: {order.firstname} {order.lastname}
+					</Text>
+					<Text style={{ textAlign: "right", direction: "rtl" }}>
+						الموقع: {order.location}, {order.region}, {order.area},{" "}
+						{order.address}
 					</Text>
 					<Text style={{ textAlign: "right", direction: "rtl" }}>
 						فريق متجر الدرة
