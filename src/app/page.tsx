@@ -17,7 +17,7 @@ export default async function Home() {
 
 	return (
 		<main className="w-screen bg-secondary">
-			<div className="flex items-center justify-center py-20">
+			<div dir="ltr" className="flex items-center justify-center py-20">
 				<div className="w-full h-full max-w-5xl px-1">
 					<Suspense fallback={<HeroSkeleton />}>
 						<HeroSection />
