@@ -25,7 +25,7 @@ export default function ProductView({ product, dict }: ProductViewProp) {
 			</div>
 
 			<div className="w-full h-full p-3 flex flex-col gap-4">
-				<div className="text-[#145654] right-0 sm:text-lg md:text-xl lg:text-3xl">
+				<div className="text-[#145654] right-0 sm:text-lg md:text-xl lg:text-2xl line-clamp-1">
 					{product.name}
 				</div>
 				<div className="text-zinc-800 right-0 text-sm sm:text-base md:text-lg lg:text-xl">
