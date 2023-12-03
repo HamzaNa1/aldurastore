@@ -1,0 +1,144 @@
+{
+	"navbar": {
+		"home": "Home",
+		"products": "All Products"
+	},
+	"footer": {
+		"pages": "Pages",
+		"home": "Home",
+		"products": "All Products",
+		"cart": "Cart",
+		"account": "Account",
+		"contact": "Contact"
+	},
+	"main": {
+		"products": "Our Products",
+		"showAll": "Show All"
+	},
+	"productView": {
+		"showProduct": "Show Product"
+	},
+	"product": {
+		"addToCartForm": {
+			"size": "Size",
+			"cart": "Add to Cart"
+		},
+		"label": "Shipping and delivery are free to all Gulf Cooperation Council countries within 7 days"
+	},
+	"login": {
+		"loginForm": {
+			"email": "Email",
+			"password": "Password",
+			"login": "Login",
+			"toast": "Logged in successfully",
+			"error": "Incorrect email or password"
+		},
+		"register": "Register New Account",
+		"forgetPassword": "Forgot Password?"
+	},
+	"register": {
+		"registerForm": {
+			"username": "Username",
+			"email": "Email",
+			"password": "Password",
+			"register": "Register",
+			"invalidEmail": "Invalid Email",
+			"invalidPassowrd": "The password must contain at least 8 characters",
+			"emailUsed": "This email has been used before"
+		},
+		"alreadyRegistered": "Already have an account?"
+	},
+	"confirm": {
+		"confirmEmail": "Confirm Email",
+		"codeSent": "Confirmation code has been sent to your email",
+		"confirmForm": { "code": "Confirmation Code", "confirm": "Confirm" }
+	},
+	"forgotPassword": {
+		"forgot": "Forgot Password?",
+		"label": "To retrieve your password, you can contact us at the following email: info@aldurastore.com"
+	},
+	"account": {
+		"account": "Account",
+		"username": "Username",
+		"email": "Email",
+		"logout": "Logout",
+		"orders": "Your Orders",
+		"noOrders": "You don't have any orders!",
+
+		"ordersTable": {
+			"orderId": "Order Number",
+			"totalCost": "Total Value",
+			"orderDate": "Order Date",
+			"processDate": "Processing Date",
+			"processing": "Processing..."
+		}
+	},
+	"cart": {
+		"empty": "Cart is empty!",
+		"shopping": "Start shopping",
+		"products": "Products",
+		"cartTable": {
+			"product": "Product",
+			"size": "Size",
+			"price": "Price"
+		},
+		"cartDetails": "Bill Details",
+		"totalCost": "Total Value",
+		"continue": "Continue Shopping",
+		"back": "Back to Shopping"
+	},
+	"checkout": {
+		"addressDetails": "Address Details",
+		"locationForm": {
+			"name": "Name",
+			"lastName": "Last Name",
+			"phoneNumber": "Phone Number",
+			"location": "Location",
+			"locationLabel": "Please choose the country",
+			"region": "Province",
+			"regionLabel": "Please choose the province/city",
+			"area": "Area",
+			"areaLabel": "City, Neighborhood",
+			"address": "Address",
+			"addressLabel": "Street, Building Number",
+			"lable1": "You will be contacted via WhatsApp to confirm the address",
+			"label2": "Shipping and delivery are free within 7 days",
+			"label3": "Payment is made upon delivery",
+			"buy": "Purchase"
+		},
+		"billDetails": "Bill Details",
+		"cost": "Value",
+		"shipping": "Shipping Fees",
+		"totalCost": "Total Value"
+	},
+	"thankyou": {
+		"thankyou": "Thank You",
+		"message": "Thank you for ordering. We will contact you soon to fulfill your order",
+		"homepage": "Home Page"
+	},
+	"order": {
+		"ordersTable": {
+			"product": "Product",
+			"size": "Size",
+			"price": "Price"
+		},
+		"address": {
+			"addressDetails": "Address Details",
+			"name": "Name",
+			"lastName": "Last Name",
+			"phoneNumber": "Phone Number",
+			"location": "Location",
+			"region": "Province",
+			"area": "Area",
+			"address": "Address"
+		},
+		"order": {
+			"orderDetails": "Order Details",
+			"orderId": "Order Id",
+			"totalCost": "Total Value",
+			"orderDate": "Order Date",
+			"processDate": "Processing Date",
+			"processing": "Processing..."
+		}
+	}
+}

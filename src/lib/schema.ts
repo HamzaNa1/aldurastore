@@ -45,7 +45,9 @@ export const emailConfirmations = mysqlTable("emailConfirmations", {
 export const products = mysqlTable("products", {
 	id: varchar("id", { length: 255 }).notNull().unique().primaryKey(),
 	name: varchar("name", { length: 255 }).notNull(),
+	nameEN: varchar("nameEN", { length: 255 }),
 	description: text("description").notNull(),
+	descriptionEN: text("descriptionEN"),
 	type: mysqlEnum("type", ["women", "men"]).notNull(),
 	imageURL: varchar("imageURL", { length: 255 }).notNull(),
 	showOnMain: boolean("showOnMain").default(false).notNull(),

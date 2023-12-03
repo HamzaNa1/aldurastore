@@ -1,0 +1,143 @@
+{
+	"navbar": {
+		"home": "الصفحة الرئيسية",
+		"products": "جميع المنتجات"
+	},
+	"footer": {
+		"pages": "الصفحات",
+		"home": "الصفحة الرئيسية",
+		"products": "جميع المنتجات",
+		"cart": "السلة",
+		"account": "الحساب",
+		"contact": "تواصل"
+	},
+	"main": {
+		"products": "منتجاتنا",
+		"showAll": "عرض الجميع"
+	},
+	"productView": {
+		"showProduct": "عرض المنتج"
+	},
+	"product": {
+		"addToCartForm": {
+			"size": "المقاس",
+			"cart": "أضف إلى السلة"
+		},
+		"label": "الشحن والتوصيل مجاني الى كافة دول مجلس التعاون خلال 7 ايام"
+	},
+	"login": {
+		"loginForm": {
+			"email": "البريد الألكتروني",
+			"password": "كلمة السر",
+			"login": "تسجيل الدخول",
+			"toast": "تم تسجيل الدخول",
+			"error": "البريد الألكتروني او كلمة السر خاطئة"
+		},
+		"register": "تسجيل حساب جديد",
+		"forgetPassword": "نسيت كلمة السر؟"
+	},
+	"register": {
+		"registerForm": {
+			"username": "أسم المستخدم",
+			"email": "البريد الألكتروني",
+			"password": "كلمة السر",
+			"register": "تسجيل",
+			"invalidEmail": "البريد الألكتروني غير صحيح",
+			"invalidPassowrd": "كلمة المرور يجب ان تكون مكونة من 8 رموز كحد أدنى",
+			"emailUsed": "البريد الألكتروني مستخدم من قبل"
+		},
+		"alreadyRegistered": "لديك حساب؟"
+	},
+	"confirm": {
+		"confirmEmail": "تأكيد البريد الألكتروني",
+		"codeSent": "تم أرسال رمز التأكيد إلى البريد الألكتروني الخاص بك",
+		"confirmForm": { "code": "رمز التأكيد", "confirm": "تأكيد" }
+	},
+	"forgotPassword": {
+		"forgot": "نسيت كلمة السر؟",
+		"label": "لإسترجاع كلمة السر, يمكنك التواصل معنا على البريد الألكتروني: info@aldurastore.com"
+	},
+	"account": {
+		"account": "الحساب",
+		"username": "أسم المستخدم",
+		"email": "البريد الألكتروني",
+		"logout": "تسجيل الخروج",
+		"orders": "طلباتك",
+		"noOrders": "ليس لديك طلبات!",
+		"ordersTable": {
+			"orderId": "رقم الطلب",
+			"totalCost": "القيمة الكلية",
+			"orderDate": "تاريخ الطلب",
+			"processDate": "تاريخ المعالجة",
+			"processing": "جاري المعالجة..."
+		}
+	},
+	"cart": {
+		"empty": "سلة التسوق فارغة",
+		"shopping": "أبدأ بالتسوق",
+		"products": "المنتجات",
+		"cartTable": {
+			"product": "المنتج",
+			"size": "المقاس",
+			"price": "السعر"
+		},
+		"cartDetails": "تفاصيل الفاتورة",
+		"totalCost": "القيمة الكلية",
+		"continue": "متابعة الشراء",
+		"back": "العودة للتسوق"
+	},
+	"checkout": {
+		"addressDetails": "تفاصيل العنوان",
+		"locationForm": {
+			"name": "الأسم",
+			"lastName": "أسم الأسرة",
+			"phoneNumber": "رقم الهاتف",
+			"location": "الموقع",
+			"locationLabel": "يرجى أختيار البلد",
+			"region": "المقاطعة",
+			"regionLabel": "يرجى أختيار المقاطعة/المدينة",
+			"area": "المنطقة",
+			"areaLabel": "المدينة, الحي",
+			"address": "العنوان",
+			"addressLabel": "الشارع, رقم المبنى",
+			"lable1": "سيتم التواصل معك عن طريق الـWhatsApp للتأكد من العنوان",
+			"label2": "الشحن والتوصيل مجاني خلال 7 ايام",
+			"label3": "يتم الدفع عند التوصيل",
+			"buy": "الشراء"
+		},
+		"billDetails": "تفاصيل الفاتورة",
+		"cost": "القيمة",
+		"shipping": "رسوم الشحن",
+		"totalCost": "القيمة الكلية"
+	},
+	"thankyou": {
+		"thankyou": "شكراً",
+		"message": "شكراً على طلبكم. سيتم التواصل معكم لأتمام الطلب",
+		"homepage": "الصفحة الرئيسية"
+	},
+	"order": {
+		"ordersTable": {
+			"product": "المنتج",
+			"size": "المقاس",
+			"price": "السعر"
+		},
+		"address": {
+			"addressDetails": "تفاصيل العنوان",
+			"name": "الأسم",
+			"lastName": "أسم الأسرة",
+			"phoneNumber": "رقم الهاتف",
+			"location": "الموقع",
+			"region": "المقاطعة",
+			"area": "المنطقة",
+			"address": "العنوان"
+		},
+		"order": {
+			"orderDetails": "تفاصيل الطلب",
+			"orderId": "رقم الطلب",
+			"totalCost": "القيمة الكلية",
+			"orderDate": "تاريخ الطلب",
+			"processDate": "تاريخ المعالجة",
+			"processing": "جاري المعالجة..."
+		}
+	}
+}

@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { Toaster } from "sonner";
 import Renewer from "@/components/Renewer";
 import { Analytics } from "@vercel/analytics/react";
+import getLanguage, { getDirection } from "@/lib/languages/language";
 
 const inter = Cairo({ subsets: ["arabic", "latin"] });
 
@@ -14,14 +15,20 @@ export const metadata: Metadata = {
 	description: "",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
+	const lang = getLanguage();
+	const dir = getDirection();
+
 	return (
-		<html lang="en">
-			<Toaster richColors position="bottom-right" />
+		<html dir={dir} lang={lang}>
+			<Toaster
+				richColors
+				position={dir == "rtl" ? "bottom-right" : "bottom-left"}
+			/>
 			<body className={inter.className + " no-scrollbar"}>
 				<div className="min-h-screen w-screen flex flex-col">
 					<div className="h-fit w-full justify-self-start flex-shrink-0">

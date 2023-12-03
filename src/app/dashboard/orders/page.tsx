@@ -11,7 +11,7 @@ export default async function ManageProducts() {
 	}
 
 	return (
-		<div className="container flex flex-col m-10 gap-1 text-zinc-800">
+		<div dir="ltr" className="container flex flex-col m-10 gap-1 text-zinc-800">
 			<OrderDashboard action={GetOrders} />
 		</div>
 	);

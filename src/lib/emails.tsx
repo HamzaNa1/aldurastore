@@ -10,6 +10,7 @@ import {
 } from "@react-email/components";
 
 import * as React from "react";
+import { Language } from "./languages/dictionaries";
 
 interface ConfirmationEmailProps {
 	code: string;
@@ -19,7 +20,7 @@ interface CheckoutEmailProps {
 	orderId: string;
 }
 
-function ConfirmationEmailBuilder({ code }: ConfirmationEmailProps) {
+function ConfirmationEmailARBuilder({ code }: ConfirmationEmailProps) {
 	return (
 		<Html style={{ direction: "rtl" }}>
 			<Head />
@@ -50,6 +51,46 @@ function ConfirmationEmailBuilder({ code }: ConfirmationEmailProps) {
 					<Text style={{ textAlign: "right", direction: "rtl" }}>شكرا لك,</Text>
 					<Text style={{ textAlign: "right", direction: "rtl" }}>
 						فريق متجر الدرة
+					</Text>
+				</Container>
+			</Body>
+		</Html>
+	);
+}
+
+function ConfirmationEmailENBuilder({ code }: ConfirmationEmailProps) {
+	return (
+		<Html style={{ direction: "ltr" }}>
+			<Head />
+			<Preview>Durra Store</Preview>
+			<Body style={main}>
+				<Container style={container}>
+					<Img
+						src={`${process.env.NEXT_PUBLIC_SERVER_URL}/logo.png`}
+						width="150"
+						height="150"
+						alt="Aldurastore"
+						style={logo}
+					/>
+					<Text style={{ textAlign: "left", direction: "ltr" }}>
+						Thank you for registering in our store. Please use the following
+						code to confirm your email address.
+					</Text>
+					<Text style={{ textAlign: "left", direction: "ltr" }}>
+						Confirmation code: {code}
+					</Text>
+					<Text style={{ textAlign: "left", direction: "ltr" }}>
+						Please note that this code will expire after 15 minutes.
+					</Text>
+					<Text style={{ textAlign: "left", direction: "ltr" }}>
+						If you have any questions, please contact us at:{" "}
+						<a href="mailto:info@aldurastore.com">info@aldurastore.com</a>
+					</Text>
+					<Text style={{ textAlign: "left", direction: "ltr" }}>
+						Thank you,
+					</Text>
+					<Text style={{ textAlign: "left", direction: "ltr" }}>
+						Aldurastore Team
 					</Text>
 				</Container>
 			</Body>
@@ -89,8 +130,17 @@ function CheckoutEmailBuilder({ orderId }: CheckoutEmailProps) {
 	);
 }
 
-export const ConfirmationEmail = (props: ConfirmationEmailProps) =>
-	render(<ConfirmationEmailBuilder {...props} />);
+export const ConfirmationEmail = (
+	language: Language,
+	props: ConfirmationEmailProps
+) =>
+	render(
+		language == "ar" ? (
+			<ConfirmationEmailARBuilder {...props} />
+		) : (
+			<ConfirmationEmailENBuilder {...props} />
+		)
+	);
 
 export const CheckoutEmail = (props: CheckoutEmailProps) =>
 	render(<CheckoutEmailBuilder {...props} />);

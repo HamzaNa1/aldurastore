@@ -6,6 +6,8 @@ import { cartItems, productPrices } from "@/lib/schema";
 import { getServerSession } from "@/lib/Utils/userUtils";
 import { and, eq, sql } from "drizzle-orm";
 import { redirect } from "next/navigation";
+import getLanguage, { getDirection } from "@/lib/languages/language";
+import { getDictionary } from "@/lib/languages/dictionaries";
 
 export default async function Checkout() {
 	const user = getServerSession();
@@ -15,6 +17,10 @@ export default async function Checkout() {
 	}
 
 	const country = getCountry();
+
+	const language = getLanguage();
+	const checkoutDict = (await getDictionary(language)).checkout;
+	const dir = getDirection();
 
 	const total = (
 		await db
@@ -33,39 +39,50 @@ export default async function Checkout() {
 
 	return (
 		<>
-			<div className="max-w-[1000px] w-full h-full flex flex-row bg-secondary justify-center gap-16 py-20 px-2 flex-wrap">
-				<div className="flex flex-col flex-[1_1_200px] h-full gap-6">
-					<span className="text-primarytext text-3xl font-bold text-right w-full h-10">
-						تفاصيل الفاتورة
+			<div
+				dir="ltr"
+				className="max-w-[1000px] w-full h-full flex flex-row bg-secondary justify-center gap-16 py-20 px-2 flex-wrap"
+			>
+				<div dir={dir} className="flex flex-col flex-[1_1_200px] h-full gap-6">
+					<span className="text-primarytext text-3xl font-bold w-full h-10">
+						{checkoutDict.billDetails}
 					</span>
-					<table dir="rtl" className="table-fixed">
+					<table className="table-fixed">
 						<tbody className="border border-zinc-300 bg-white rounded-lg">
-							<tr className="text-zinc-800 text-sm text-right">
-								<td className="pr-1 p-1">القيمة:</td>
-								<td className="pr-1 font-semibold">
+							<tr className="text-zinc-800 text-sm">
+								<td className="px-1 p-1">{checkoutDict.cost}:</td>
+								<td className="px-1 font-semibold">
 									{localizePrice(total, country)}
 								</td>
 							</tr>
-							<tr className="text-zinc-800 text-sm text-right">
-								<td className="pr-1 p-1">رسوم الشحن:</td>
-								<td className="pr-1 font-semibold">
+							<tr className="text-zinc-800 text-sm">
+								<td className="px-1 p-1">{checkoutDict.shipping}:</td>
+								<td className="px-1 font-semibold">
 									{localizePrice(0, country)}
 								</td>
 							</tr>
 						</tbody>
 					</table>
-					<table dir="rtl" className="table-fixed">
+					<table className="table-fixed">
 						<tbody className="border border-zinc-300 bg-white rounded-lg">
-							<tr className="text-zinc-800 text-sm text-right">
-								<td className="pr-1 p-1">القيمة الكلية:</td>
-								<td className="pr-1 font-semibold">
+							<tr className="text-zinc-800 text-sm">
+								<td className="px-1 p-1">{checkoutDict.totalCost}:</td>
+								<td className="px-1 font-semibold">
 									{localizePrice(total, country)}
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-				<CheckoutForm />
+				<div
+					dir={dir}
+					className="flex flex-col items-end gap-6 flex-[2_2_auto]"
+				>
+					<span className="text-primarytext text-3xl font-bold w-full h-10">
+						{checkoutDict.addressDetails}
+					</span>
+					<CheckoutForm dict={checkoutDict.locationForm} dir={dir} />
+				</div>
 			</div>
 		</>
 	);
