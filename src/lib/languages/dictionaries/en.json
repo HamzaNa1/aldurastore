@@ -109,7 +109,8 @@
 		"billDetails": "Bill Details",
 		"cost": "Value",
 		"shipping": "Shipping Fees",
-		"totalCost": "Total Value"
+		"totalCost": "Total Value",
+		"fail": "Failed to checkout. Please check your cart and try again later!"
 	},
 	"thankyou": {
 		"thankyou": "Thank You",

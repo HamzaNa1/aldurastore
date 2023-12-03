@@ -46,4 +46,5 @@ export interface CheckoutFormDict {
 	label2: string;
 	label3: string;
 	buy: string;
+	fail: string;
 }

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { SubmitButton } from "./ui/SubmitButton";
 import { CreateOrder } from "@/actions/GeneralActions";
 import { CheckoutFormDict } from "@/lib/languages/types";
+import { toast } from "sonner";
 
 interface CheckoutFormProps {
 	dict: CheckoutFormDict;
@@ -26,7 +27,7 @@ export default function CheckoutForm({ dict, dir }: CheckoutFormProps) {
 				const area = formData.get("area") as string;
 				const address = formData.get("address") as string;
 
-				await CreateOrder({
+				const successful = await CreateOrder({
 					firstName: firstName,
 					lastName: lastName,
 					phoneNumber: phonenumber,
@@ -35,6 +36,10 @@ export default function CheckoutForm({ dict, dir }: CheckoutFormProps) {
 					area: area,
 					address: address,
 				});
+
+				if (!successful) {
+					toast.error(dict.fail);
+				}
 			}}
 			className="flex flex-col gap-6 w-full"
 		>
