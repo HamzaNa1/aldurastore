@@ -14,7 +14,7 @@ import {
 import { locations } from "@/lib/Utils/locationUtils";
 import { getServerSession } from "@/lib/Utils/userUtils";
 import { randomUUID } from "crypto";
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 export async function DashboardDeleteProduct(productId: string) {
@@ -269,15 +269,15 @@ export async function GetOrders(
 			where: (order, { and, eq, between }) =>
 				and(
 					onlyNotProcessed ? eq(order.isProcessed, false) : undefined,
-
 					between(orders.boughtDate, boughtDate, nextDay)
 				),
-			limit: 10,
+			orderBy: (order, { desc }) => desc(order.boughtDate),
 		});
 	} else {
 		return await db.query.orders.findMany({
 			where: (order, { eq }) =>
 				onlyNotProcessed ? eq(order.isProcessed, false) : undefined,
+			orderBy: (order, { desc }) => desc(order.boughtDate),
 			limit: 10,
 		});
 	}

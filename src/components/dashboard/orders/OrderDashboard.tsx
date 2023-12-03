@@ -53,7 +53,7 @@ export default function OrderDashboard({ action }: OrderDashboardProps) {
 					type="date"
 				/>
 				<div onClick={() => setProcessed((prev) => !prev)}>
-					<input checked={processed} type="checkbox" />
+					<input onChange={() => {}} checked={processed} type="checkbox" />
 					<label> Show Unprocessed Only </label>
 				</div>
 			</div>
