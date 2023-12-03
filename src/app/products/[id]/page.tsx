@@ -27,6 +27,9 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 			language == "en"
 				? {
 						name: sql<string>`${products.nameEN}`.as("name"),
+						description: sql<string>`${products.descriptionEN}`.as(
+							"description"
+						),
 				  }
 				: undefined,
 		where: (product, { and, eq }) =>
