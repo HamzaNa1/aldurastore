@@ -37,6 +37,10 @@ export default async function Checkout() {
 			.where(eq(cartItems.userId, user.id))
 	)[0].total;
 
+	if (!total) {
+		redirect("/cart");
+	}
+
 	return (
 		<>
 			<div

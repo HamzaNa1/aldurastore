@@ -21,7 +21,8 @@
 	"product": {
 		"addToCartForm": {
 			"size": "Size",
-			"cart": "Add to Cart"
+			"cart": "Add to Cart",
+			"nostock": "This product is out of stock!"
 		},
 		"label": "Shipping and delivery are free to all Gulf Cooperation Council countries within 7 days"
 	},
@@ -85,7 +86,9 @@
 		"cartDetails": "Bill Details",
 		"totalCost": "Total Value",
 		"continue": "Continue Shopping",
-		"back": "Back to Shopping"
+		"back": "Back to Shopping",
+		"cantcontinue": "There are out of stock products in cart",
+		"nostock": "Out of Stock"
 	},
 	"checkout": {
 		"addressDetails": "Address Details",
@@ -104,13 +107,13 @@
 			"lable1": "You will be contacted via WhatsApp to confirm the address",
 			"label2": "Shipping and delivery are free within 7 days",
 			"label3": "Payment is made upon delivery",
-			"buy": "Purchase"
+			"buy": "Purchase",
+			"fail": "Failed to checkout. Please check your cart and try again later!"
 		},
 		"billDetails": "Bill Details",
 		"cost": "Value",
 		"shipping": "Shipping Fees",
-		"totalCost": "Total Value",
-		"fail": "Failed to checkout. Please check your cart and try again later!"
+		"totalCost": "Total Value"
 	},
 	"thankyou": {
 		"thankyou": "Thank You",

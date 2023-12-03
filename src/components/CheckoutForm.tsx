@@ -7,6 +7,7 @@ import { SubmitButton } from "./ui/SubmitButton";
 import { CreateOrder } from "@/actions/GeneralActions";
 import { CheckoutFormDict } from "@/lib/languages/types";
 import { toast } from "sonner";
+import { redirect } from "next/navigation";
 
 interface CheckoutFormProps {
 	dict: CheckoutFormDict;
@@ -37,9 +38,12 @@ export default function CheckoutForm({ dict, dir }: CheckoutFormProps) {
 					address: address,
 				});
 
-				if (!successful) {
-					toast.error(dict.fail);
+				if (successful) {
+					redirect("/thank-you");
 				}
+
+				toast.error(dict.fail);
+				redirect("/cart");
 			}}
 			className="flex flex-col gap-6 w-full"
 		>

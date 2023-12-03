@@ -80,13 +80,19 @@ export default async function Cart() {
 							</tr>
 						</tbody>
 					</table>
-					<Link
-						className="bg-primary hover:brightness-95 h-7 w-full rounded-md text-center"
-						href="/checkout"
-						prefetch
-					>
-						{cartDict.continue}
-					</Link>
+					{cartItems.find((x) => x.productSettings.quantity <= 0) ? (
+						<div className="bg-red-500 text-white h-7 w-full rounded-md text-center">
+							{cartDict.cantcontinue}
+						</div>
+					) : (
+						<Link
+							className="bg-primary hover:brightness-95 h-7 w-full rounded-md text-center"
+							href="/checkout"
+							prefetch
+						>
+							{cartDict.continue}
+						</Link>
+					)}
 					<BackButton>
 						<div className=" text-black bg-white hover:brightness-[.98] h-7 w-full rounded-md">
 							{cartDict.back}
@@ -97,7 +103,7 @@ export default async function Cart() {
 					<span className="text-primarytext text-3xl font-bold w-full h-10">
 						{cartDict.products}
 					</span>
-					<table className="table-fixed w-full">
+					<table className="sticky table-fixed w-full">
 						<thead className="sticky text-zinc-50 text-sm outline outline-[0.5px] rounded-tr-sm rounded-tl-sm bg-primary outline-primary h-fit">
 							<tr className={dir == "rtl" ? "text-right" : "text-left"}>
 								<th className="font-semibold">{cartDict.cartTable.product}</th>
@@ -117,7 +123,21 @@ export default async function Cart() {
 										"text-zinc-800 text-sm outline outline-[0.5px] last:rounded-b-sm bg-white outline-zinc-400 h-fit"
 									}
 								>
-									<td className="px-1 py-2">{item.product.name}</td>
+									<td className="relative px-1 py-2">
+										{item.productSettings.quantity <= 0 && (
+											<div
+												className={
+													"select-none absolute text-xs text-white pb-[2px] px-[2px] bg-red-500 top-[1px]" +
+													(dir == "rtl"
+														? " right-0 rounded-bl-md pl-1"
+														: " left-0 rounded-br-md pr-1")
+												}
+											>
+												{cartDict.nostock}
+											</div>
+										)}
+										{item.product.name}
+									</td>
 									<td className="px-1 py-2">{item.productSettings.size}</td>
 									<td className="px-1 font-semibold">
 										{localizePrice(

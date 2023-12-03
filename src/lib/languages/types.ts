@@ -5,6 +5,7 @@ export interface ProductViewDict {
 export interface AddToCartFormDict {
 	size: string;
 	cart: string;
+	nostock: string;
 }
 
 export interface LoginFormDict {
