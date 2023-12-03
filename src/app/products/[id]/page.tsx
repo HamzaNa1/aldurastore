@@ -29,7 +29,8 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 						name: sql<string>`${products.nameEN}`.as("name"),
 				  }
 				: undefined,
-		where: (product, { eq }) => eq(product.id, id),
+		where: (product, { and, eq }) =>
+			and(eq(product.activated, true), eq(product.id, id)),
 		with: {
 			productImages: true,
 			productSettings: true,
