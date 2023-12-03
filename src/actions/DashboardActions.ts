@@ -62,7 +62,9 @@ export async function DashboardCreateProduct(): Promise<Product | undefined> {
 	const product: Product = {
 		id: GenerateId(),
 		name: "New Product",
+		nameEN: null,
 		description: "Product Description",
+		descriptionEN: null,
 		imageURL: "/test.png",
 		type: "women",
 		showOnMain: false,

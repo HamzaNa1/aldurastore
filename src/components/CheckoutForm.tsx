@@ -55,7 +55,7 @@ export default function CheckoutForm({ dict, dir }: CheckoutFormProps) {
 						setCountry(locations.find((x) => x.name == value)?.code ?? "");
 					}}
 				/>
-				<div className="w-full flex flex-row-reverse gap-1">
+				<div className="w-full flex gap-1">
 					<AutoComplete
 						id="firstname"
 						label={dict.name}

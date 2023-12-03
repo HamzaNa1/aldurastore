@@ -3,7 +3,7 @@ import { localizePrices } from "@/lib/Utils/locationUtils";
 import { getServerSession } from "@/lib/Utils/userUtils";
 import db from "@/lib/db";
 import { getDictionary } from "@/lib/languages/dictionaries";
-import getLanguage from "@/lib/languages/language";
+import getLanguage, { getDirection } from "@/lib/languages/language";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -25,6 +25,7 @@ export default async function Account() {
 	}
 
 	const language = getLanguage();
+	const dir = getDirection();
 	const accountDict = (await getDictionary(language)).account;
 
 	const orders = await db.query.orders.findMany({
@@ -63,7 +64,7 @@ export default async function Account() {
 					{orders.length > 0 ? (
 						<table className="table-auto w-full min-[550px]:min-w-[520px]">
 							<thead className="sticky text-zinc-50 text-xs md:text-sm text-left outline outline-[0.5px] rounded-tr-sm rounded-tl-sm bg-primary outline-primary h-fit">
-								<tr>
+								<tr className={dir == "rtl" ? "text-right" : "text-left"}>
 									<th className="py-1 font-semibold">
 										{accountDict.ordersTable.processDate}
 									</th>
