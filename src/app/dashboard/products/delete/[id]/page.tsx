@@ -26,7 +26,10 @@ export default async function DeleteProductPage({
 	}
 
 	return (
-		<div className="container inset-0 flex justify-center items-center">
+		<div
+			dir="ltr"
+			className="container inset-0 flex justify-center items-center"
+		>
 			<form
 				action={async (formData: FormData) => {
 					"use server";

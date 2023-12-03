@@ -80,7 +80,7 @@ export default function AutoComplete({
 					<span
 						dir={labelDir}
 						className={
-							"text-xs text-zinc-500 pt-1 pr-1 select-none " + labelAlign
+							"text-xs text-zinc-500 pt-1 px-1 select-none " + labelAlign
 						}
 					>
 						{label}

@@ -3,8 +3,13 @@
 import SignUp from "@/actions/auth/SignUp";
 import { useState } from "react";
 import { SubmitButton } from "./ui/SubmitButton";
+import { RegisterFormDict } from "@/lib/languages/types";
 
-export default function LoginForm() {
+interface RegisterFormProps {
+	dict: RegisterFormDict;
+}
+
+export default function RegisterForm({ dict }: RegisterFormProps) {
 	const [errors, setErrors] = useState<string[]>([]);
 
 	return (
@@ -23,37 +28,34 @@ export default function LoginForm() {
 
 				let errors: string[] = [];
 				if (error.invalidEmail) {
-					errors = [...errors, "البريد الألكتروني غير صحيح"];
+					errors = [...errors, dict.invalidEmail];
 				}
 				if (error.invalidPassword) {
-					errors = [
-						...errors,
-						"كلمة المرور يجب ان تكون مكونة من 8 رموز كحد أدنى",
-					];
+					errors = [...errors, dict.invalidPassowrd];
 				} else if (error.emailUsed) {
-					errors = [...errors, "البريد الألكتروني مستخدم من قبل"];
+					errors = [...errors, dict.emailUsed];
 				}
 
 				setErrors(errors);
 			}}
 		>
 			<input
-				className="w-full h-10 p-1 rounded-sm placeholder:text-right text-black"
-				placeholder="الأسم"
+				className="w-full h-10 p-1 rounded-sm text-black"
+				placeholder={dict.username}
 				type="text"
 				name="name"
 				required
 			/>
 			<input
-				className="w-full h-10 p-1 rounded-sm placeholder:text-right text-black"
-				placeholder="البريد الألكتروني"
+				className="w-full h-10 p-1 rounded-sm text-black"
+				placeholder={dict.email}
 				type="email"
 				name="email"
 				required
 			/>
 			<input
-				className="w-full h-10 p-1 rounded-sm placeholder:text-right text-black"
-				placeholder="كلمة السر"
+				className="w-full h-10 p-1 rounded-sm text-black"
+				placeholder={dict.password}
 				type="password"
 				name="password"
 				required
@@ -62,14 +64,12 @@ export default function LoginForm() {
 				className="w-full h-10 p-1 rounded-sm drop-shadow-md bg-primary text-white disabled:bg-primarytext transition duration-500"
 				fallback={null}
 			>
-				تسجيل
+				{dict.register}
 			</SubmitButton>
 
 			{errors.length > 0 &&
 				errors.map((error) => (
-					<label className="text-sm text-red-500 w-full text-right mb-4">
-						{error}
-					</label>
+					<label className="text-sm text-red-500 w-full mb-4">{error}</label>
 				))}
 		</form>
 	);

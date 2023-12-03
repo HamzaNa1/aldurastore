@@ -26,7 +26,7 @@ export default async function ViewOrderPage({ params }: ViewOrderPageProps) {
 	}
 
 	return (
-		<div className="container flex py-10 text-zinc-800">
+		<div dir="ltr" className="container flex py-10 text-zinc-800">
 			<Suspense fallback={<h1 className="m-auto text-4xl">LOADING...</h1>}>
 				<OrderView orderId={params.id} />
 			</Suspense>

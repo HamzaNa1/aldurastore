@@ -19,6 +19,7 @@ import { redirect } from "next/navigation";
 import getCountry from "@/lib/country";
 import { CheckoutEmail } from "@/lib/emails";
 import sendEmail from "@/lib/Utils/emailUtils";
+import { Language } from "@/lib/languages/dictionaries";
 
 export async function AddCartItem(
 	productId: string,
@@ -82,6 +83,13 @@ export async function SelectLocation(country: string) {
 	revalidatePath("/");
 }
 
+export async function SelectLanguage(language: Language) {
+	const cookiesStore = cookies();
+	cookiesStore.set("language", language);
+
+	revalidatePath("/");
+}
+
 interface OrderDetails {
 	firstName: string;
 	lastName: string;
@@ -115,8 +123,8 @@ export async function CreateOrder(orderDetails: OrderDetails) {
 		address: orderDetails.address,
 	};
 
-	const successful = await db.transaction(async (tx) => {
-		try {
+	try {
+		await db.transaction(async (tx) => {
 			const items = await tx.query.cartItems.findMany({
 				where: (item, { eq }) => eq(item.userId, user.id),
 				with: {
@@ -131,8 +139,8 @@ export async function CreateOrder(orderDetails: OrderDetails) {
 			});
 
 			if (items.length == 0) {
-				await tx.rollback();
-				return false;
+				tx.rollback();
+				return;
 			}
 
 			await tx.insert(orders).values(order);
@@ -158,25 +166,19 @@ export async function CreateOrder(orderDetails: OrderDetails) {
 					);
 
 				if (query.rowsAffected == 0) {
-					await tx.rollback();
-					return false;
+					tx.rollback();
+					return;
 				}
 			}
-
-			return true;
-		} catch (ex) {
-			return false;
-		}
-	});
-
-	if (!successful) {
+		});
+	} catch {
 		return false;
 	}
 
 	if (process.env.NODE_ENV == "production") {
-		const email = CheckoutEmail({ orderId: order.id });
+		const email = CheckoutEmail({ order: order });
 		await sendEmail("info@aldurastore.com", "طلب جديد", email);
 	}
 
-	redirect("/thank-you");
+	return true;
 }

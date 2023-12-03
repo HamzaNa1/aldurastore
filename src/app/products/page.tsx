@@ -1,6 +1,10 @@
 import ProductView, { ProductViewSkeleton } from "@/components/ProductView";
 import getCountry from "@/lib/country";
 import db from "@/lib/db";
+import { getDictionary } from "@/lib/languages/dictionaries";
+import getLanguage from "@/lib/languages/language";
+import { products } from "@/lib/schema";
+import { sql } from "drizzle-orm";
 import { Suspense } from "react";
 
 export default async function Products() {
@@ -15,8 +19,16 @@ export default async function Products() {
 
 async function ProductSection() {
 	const country = getCountry();
+	const language = getLanguage();
+	const dict = (await getDictionary(language)).productView;
 
-	const products = await db.query.products.findMany({
+	const activeProducts = await db.query.products.findMany({
+		extras:
+			language == "en"
+				? {
+						name: sql<string>`${products.nameEN}`.as("name"),
+				  }
+				: undefined,
 		where: (product, { and, eq }) => and(eq(product.activated, true)),
 		with: {
 			productPrices: {
@@ -27,9 +39,9 @@ async function ProductSection() {
 
 	return (
 		<>
-			{products.map((product, i) => (
+			{activeProducts.map((product, i) => (
 				<div key={i} className="w-[47%] max-w-[375px]">
-					<ProductView product={product}></ProductView>
+					<ProductView product={product} dict={dict}></ProductView>
 				</div>
 			))}
 		</>

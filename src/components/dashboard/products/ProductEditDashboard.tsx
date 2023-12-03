@@ -32,10 +32,19 @@ export default function ProductEditDashboard({
 				<div className="flex flex-col gap-2 text-zinc-800">
 					<label>Name</label>
 					<textarea
+						dir="rtl"
 						className="w-96 h-20 px-1"
 						name="name"
 						defaultValue={product.name}
 						required
+					/>
+				</div>
+				<div className="flex flex-col gap-2 text-zinc-800">
+					<label>Name EN</label>
+					<textarea
+						className="w-96 h-20 px-1"
+						name="nameEN"
+						defaultValue={product.nameEN ?? ""}
 					/>
 				</div>
 				<div className="flex flex-col gap-2 text-zinc-800">
@@ -46,6 +55,14 @@ export default function ProductEditDashboard({
 						name="description"
 						defaultValue={product.description}
 						required
+					/>
+				</div>
+				<div className="flex flex-col gap-2 text-zinc-800">
+					<label>Description EN</label>
+					<textarea
+						className="w-96 h-32 px-1"
+						name="descriptionEN"
+						defaultValue={product.descriptionEN ?? ""}
 					/>
 				</div>
 				<div className="flex flex-col gap-2 text-zinc-800">
@@ -132,10 +149,15 @@ function UpdateButton({ productId }: { productId: string }) {
 		<button
 			type="submit"
 			formAction={async (formData: FormData) => {
+				const nameEN = formData.get("nameEN") as string;
+				const descriptionEN = formData.get("descriptionEN") as string;
+
 				let newProduct: Product = {
 					id: productId,
 					name: formData.get("name") as string,
+					nameEN: nameEN == "" ? null : nameEN,
 					description: formData.get("description") as string,
+					descriptionEN: descriptionEN == "" ? null : descriptionEN,
 					type: formData.get("type") as "women" | "men",
 					activated: (formData.get("active") as string) == "true",
 					showOnMain:
