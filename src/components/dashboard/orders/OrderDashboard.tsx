@@ -1,19 +1,24 @@
 "use client";
 
-import { Order } from "@/lib/schema";
+import { Order, OrdersToProducts, Product } from "@/lib/schema";
 import OrderBanner from "./OrderBanner";
 import { useEffect, useState } from "react";
 import Slider from "../Slider";
+import { IoDownloadOutline } from "react-icons/io5";
+
+type OrderWithProducts = Order & {
+	ordersToProducts: OrdersToProducts[];
+};
 
 interface OrderDashboardProps {
 	action: (
 		boughtTimestamp: number | null,
 		processed: boolean
-	) => Promise<Order[] | undefined>;
+	) => Promise<OrderWithProducts[] | undefined>;
 }
 
 export default function OrderDashboard({ action }: OrderDashboardProps) {
-	const [orders, setOrders] = useState<Order[]>([]);
+	const [orders, setOrders] = useState<OrderWithProducts[]>([]);
 	const [processed, setProcessed] = useState(true);
 
 	const [date, setDate] = useState<Date | null>(null);
@@ -33,6 +38,37 @@ export default function OrderDashboard({ action }: OrderDashboardProps) {
 
 		return () => controller.abort("cancel");
 	}, [date, processed]);
+
+	const handleDownloadOrders = () => {
+		let csv = [
+			"order id,user id,currency,price,product amount,date,is processed,process date,first name,last name,phone number,location,region,area,address",
+		];
+
+		orders.forEach(
+			(x) =>
+				(csv = [
+					...csv,
+					`${x.id},${x.userId},${x.country},${x.ordersToProducts
+						.reduce((acc, x) => acc + x.cost, 0)
+						.toFixed(2)},${
+						x.ordersToProducts.length
+					},\"${x.boughtDate.toLocaleString()}\",${x.isProcessed},\"${
+						x.fulfilledDate?.toLocaleString() ?? ""
+					}\",${x.firstname},${x.lastname},${x.phonenumber},${x.location},${
+						x.region
+					},${x.area},${x.address}`,
+				])
+		);
+
+		const file = new Blob(["\ufeff", csv.join("\n")], { type: "text/plain" });
+		const url = URL.createObjectURL(file);
+		const link = document.createElement("a");
+		link.href = url;
+		link.download = `${date?.toDateString() ?? "orders"}.csv`;
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+	};
 
 	return (
 		<>
@@ -56,6 +92,9 @@ export default function OrderDashboard({ action }: OrderDashboardProps) {
 					<input onChange={() => {}} checked={processed} type="checkbox" />
 					<label> Show Unprocessed Only </label>
 				</div>
+				<button onClick={handleDownloadOrders} className="h-full aspect-square">
+					<IoDownloadOutline className="w-full h-full fill-zinc-800" />
+				</button>
 			</div>
 			<div className="h-screen">
 				{orders.length > 0 && (
