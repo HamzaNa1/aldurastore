@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import "./globals.css";
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { Cairo } from "next/font/google";
 import Footer from "@/components/Footer";
 import { Toaster } from "sonner";
@@ -10,10 +10,18 @@ import getLanguage, { getDirection } from "@/lib/languages/language";
 
 const inter = Cairo({ subsets: ["arabic", "latin"] });
 
-export const metadata: Metadata = {
-	title: "Aldura Store",
-	description: "",
-};
+// export const metadata: Metadata = {
+// 	title: "Aldura Store",
+// 	description: "",
+// };
+
+export async function generateMetadata(): Promise<Metadata> {
+	const lang = getLanguage();
+
+	return {
+		title: lang == "ar" ? "متجر الدرة" : "Aldura Store",
+	};
+}
 
 export default async function RootLayout({
 	children,
