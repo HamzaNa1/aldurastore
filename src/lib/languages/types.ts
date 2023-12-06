@@ -49,3 +49,9 @@ export interface CheckoutFormDict {
 	buy: string;
 	fail: string;
 }
+
+export interface MenuDict {
+	home: string;
+	products: string;
+	aldurastore: string;
+}

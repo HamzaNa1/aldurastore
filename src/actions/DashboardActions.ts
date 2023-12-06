@@ -271,12 +271,18 @@ export async function GetOrders(
 					onlyNotProcessed ? eq(order.isProcessed, false) : undefined,
 					between(orders.boughtDate, boughtDate, nextDay)
 				),
+			with: {
+				ordersToProducts: { with: { product: true } },
+			},
 			orderBy: (order, { desc }) => desc(order.boughtDate),
 		});
 	} else {
 		return await db.query.orders.findMany({
 			where: (order, { eq }) =>
 				onlyNotProcessed ? eq(order.isProcessed, false) : undefined,
+			with: {
+				ordersToProducts: { with: { product: true } },
+			},
 			orderBy: (order, { desc }) => desc(order.boughtDate),
 			limit: 10,
 		});

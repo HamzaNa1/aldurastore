@@ -1,7 +1,8 @@
 {
 	"navbar": {
 		"home": "Home",
-		"products": "All Products"
+		"products": "All Products",
+		"aldurastore": "Aldura Store"
 	},
 	"footer": {
 		"pages": "Pages",

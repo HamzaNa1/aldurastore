@@ -33,8 +33,8 @@ export default async function Navbar() {
 				/>
 			</Link>
 			<div className="flex justify-center items-center p-2 md:p-0 gap-1 self-start h-full">
-				<div className="aspect-square h-full md:hidden">
-					<Menu />
+				<div dir={dir} className="aspect-square h-full md:hidden">
+					<Menu dict={navbarDict} dir={dir} />
 				</div>
 				<CountrySelector country={country} />
 			</div>

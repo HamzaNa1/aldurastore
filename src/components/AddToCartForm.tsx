@@ -32,25 +32,27 @@ export default function AddToCartForm({ settings, dict }: AddToCartProps) {
   </div> */}
 				<div className="flex flex-col gap-2">
 					<span className="font-bold text-lg sm:text-xl">{dict.size}:</span>
-					<div className="flex flex-row flex-wrap gap-2">
-						{settings.map((size, i) => (
-							<button
-								key={size.id}
-								className={
-									"w-16 rounded-md bg-[#D9D9D9] py-1 hover:brightness-90 transition duration-300 border " +
-									(settingsIdx == i ? "border-primary" : "border-transparent")
-								}
-								onClick={() => {
-									setSettingsIdx(i);
-
-									if (size.quantity <= 0) {
-										setShowError(true);
+					<div className="w-fit">
+						<div dir="ltr" className="flex flex-row flex-wrap gap-2">
+							{settings.map((size, i) => (
+								<button
+									key={size.id}
+									className={
+										"w-16 rounded-md bg-[#D9D9D9] py-1 hover:brightness-90 transition duration-300 border " +
+										(settingsIdx == i ? "border-primary" : "border-transparent")
 									}
-								}}
-							>
-								{size.size}
-							</button>
-						))}
+									onClick={() => {
+										setSettingsIdx(i);
+
+										if (size.quantity <= 0) {
+											setShowError(true);
+										}
+									}}
+								>
+									{size.size}
+								</button>
+							))}
+						</div>
 					</div>
 				</div>
 
