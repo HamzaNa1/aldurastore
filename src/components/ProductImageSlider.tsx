@@ -38,7 +38,6 @@ export default function ProductImageSlider({
 										<img
 											src={url}
 											alt=""
-											loading={i == 0 ? "eager" : "lazy"}
 											className="w-full h-full object-center object-contain"
 										/>
 									</div>

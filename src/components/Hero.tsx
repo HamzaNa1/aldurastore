@@ -90,7 +90,6 @@ export default function Hero({ images }: HeroComponentProps) {
 								<img
 									src={src}
 									className="w-full h-full object-center object-contain"
-									loading={i <= 1 ? "eager" : "lazy"}
 								/>
 							</div>
 						))}

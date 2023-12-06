@@ -19,7 +19,7 @@ export default async function Footer() {
 							<div className="flex flex-col w-48 shrink ">
 								<img
 									className="w-full aspect-square"
-									src="/High Quality white bg.jpg"
+									src="/logobg.jpg"
 									alt="aldurastore"
 								/>
 								<div className="flex flex-row gap-5 p-3 items-center justify-center">
