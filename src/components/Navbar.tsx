@@ -9,6 +9,8 @@ import getCountry from "@/lib/country";
 import Menu from "./Menu";
 import getLanguage, { getDirection } from "@/lib/languages/language";
 import { getDictionary } from "@/lib/languages/dictionaries";
+import Image from "next/image";
+import logo from "@/images/logo.png";
 
 export default async function Navbar() {
 	const user = getServerSession();
@@ -26,11 +28,7 @@ export default async function Navbar() {
 				href="/"
 				className="absolute md:relative max-md:left-1/2 max-md:top-1/2 max-md:transform max-md:-translate-x-1/2 max-md:-translate-y-1/2 min-w-fit aspect-square h-full z-50"
 			>
-				<img
-					src="/logo.png"
-					alt=""
-					className="absolute w-full h-full object-center object-contain p-1 md:p-0"
-				/>
+				<Image src={logo} alt="" className="p-1 md:p-0" fill />
 			</Link>
 			<div className="flex justify-center items-center p-2 md:p-0 gap-1 self-start h-full">
 				<div dir={dir} className="aspect-square h-full md:hidden">

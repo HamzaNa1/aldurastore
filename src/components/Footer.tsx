@@ -5,6 +5,8 @@ import Link from "next/link";
 import { SelectLanguage } from "@/actions/GeneralActions";
 import getLanguage from "@/lib/languages/language";
 import { getDictionary } from "@/lib/languages/dictionaries";
+import Image from "next/image";
+import logo from "@/images/logobg.jpg";
 
 export default async function Footer() {
 	const language = getLanguage();
@@ -17,11 +19,14 @@ export default async function Footer() {
 					<div className="w-full flex flex-row py-16 lg:py-40 px-5 gap-y-16 gap-x-8 flex-wrap justify-center">
 						<div className="flex justify-center flex-1">
 							<div className="flex flex-col w-48 shrink ">
-								<img
-									className="w-full aspect-square"
-									src="/logobg.jpg"
-									alt="aldurastore"
-								/>
+								<div className="relative w-full aspect-square">
+									<Image
+										src={logo}
+										alt="aldurastore"
+										className="absolute"
+										fill
+									/>
+								</div>
 								<div className="flex flex-row gap-5 p-3 items-center justify-center">
 									<Link
 										href="https://www.facebook.com/aldurrastore?mibextid=LQQJ4d"

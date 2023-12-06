@@ -62,6 +62,8 @@ export default function ProductImageSlider({
 										src={url}
 										alt=""
 										className="w-full h-full object-center object-contain"
+										loading="lazy"
+										decoding="async"
 									/>
 								</div>
 							</button>
@@ -79,6 +81,8 @@ export default function ProductImageSlider({
 							src={imageUrls[currentImage]}
 							alt=""
 							className="w-full h-full object-center object-contain"
+							loading="lazy"
+							decoding="async"
 						/>
 					</div>
 				</div>
