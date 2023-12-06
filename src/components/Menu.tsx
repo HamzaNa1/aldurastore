@@ -3,8 +3,7 @@
 import { MenuDict } from "@/lib/languages/types";
 import Link from "next/link";
 import { useState } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { IoReturnDownBack } from "react-icons/io5";
+import { IoMenuSharp, IoReturnDownBack } from "react-icons/io5";
 
 interface MenuProps {
 	dict: MenuDict;
@@ -27,7 +26,7 @@ export default function Menu({ dict, dir }: MenuProps) {
 	return (
 		<>
 			<button className="w-full h-full" onClick={() => ShowSetter(true)}>
-				<GiHamburgerMenu className="w-full h-full fill-zinc-800 rounded-full" />
+				<IoMenuSharp className="w-full h-full fill-zinc-800 rounded-full" />
 			</button>
 			{show && (
 				<div
@@ -36,7 +35,7 @@ export default function Menu({ dict, dir }: MenuProps) {
 				>
 					<div
 						dir={dir}
-						className="shrink-0 min-w-fit w-[70%] h-full bg-secondary"
+						className="shrink-0 min-w-fit w-[70%] h-full bg-secondary z-[98]"
 					>
 						<DropdownMenu handleClick={() => ShowSetter(false)} dict={dict} />
 					</div>
