@@ -2,6 +2,7 @@ import { localizePrice } from "@/lib/Utils/locationUtils";
 import { ProductViewDict } from "@/lib/languages/types";
 import { Product, ProductPrice } from "@/lib/schema";
 import Link from "next/link";
+import Image from "next/image";
 
 interface ProductViewProp {
 	product: Product & {
@@ -17,10 +18,11 @@ export default function ProductView({ product, dict }: ProductViewProp) {
 			className="w-full flex flex-col rounded-md drop-shadow-xl pb-1 hover:shadow-inside hover:shadow-[#39777A]/60 bg-white transition duration-300"
 		>
 			<div className="relative w-full aspect-square">
-				<img
+				<Image
 					src={product.imageURL}
 					alt={product.name}
 					className="absolute w-full h-full object-center object-contain"
+					fill
 				/>
 			</div>
 

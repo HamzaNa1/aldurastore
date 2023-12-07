@@ -2,6 +2,7 @@
 
 import useEmblaCarousel from "embla-carousel-react";
 import { useState } from "react";
+import Image from "next/image";
 
 interface ProductImageSliderProps {
 	imageUrls: string[];
@@ -34,11 +35,13 @@ export default function ProductImageSlider({
 									className="flex-[0_0_100%] bg-white cursor-zoom-in"
 									onClick={() => setCurrentImage(i)}
 								>
-									<div className="h-full aspect-square">
-										<img
+									<div className="relative h-full aspect-square">
+										<Image
 											src={url}
 											alt=""
-											className="w-full h-full object-center object-contain"
+											className="absolute object-contain"
+											fill
+											priority={i == 0}
 										/>
 									</div>
 								</button>
@@ -46,24 +49,20 @@ export default function ProductImageSlider({
 						</div>
 					</div>
 				</div>
-				<div
-					ref={sliderRef}
-					className="relative h-[13%] w-full overflow-hidden"
-				>
+				<div ref={sliderRef} className="relative w-full overflow-hidden">
 					<div className="flex flex-row w-full h-full ">
 						{imageUrls.map((url, i) => (
 							<button
 								key={i}
-								className="flex-[0_0_13%] mx-1 bg-white"
+								className="flex-[0_0_15%] mx-1"
 								onClick={() => mainSliderInstance?.scrollTo(i)}
 							>
-								<div className="h-full aspect-square">
-									<img
+								<div className="relative w-full aspect-square bg-white">
+									<Image
 										src={url}
 										alt=""
-										className="w-full h-full object-center object-contain"
-										loading="lazy"
-										decoding="async"
+										className="absolute object-contain"
+										fill
 									/>
 								</div>
 							</button>
@@ -81,8 +80,6 @@ export default function ProductImageSlider({
 							src={imageUrls[currentImage]}
 							alt=""
 							className="w-full h-full object-center object-contain"
-							loading="lazy"
-							decoding="async"
 						/>
 					</div>
 				</div>

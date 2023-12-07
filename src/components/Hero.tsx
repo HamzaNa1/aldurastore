@@ -2,10 +2,10 @@
 
 import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel, { EmblaCarouselType } from "embla-carousel-react";
-
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { GoDot, GoDotFill } from "react-icons/go";
+import Image from "next/image";
 
 interface HeroComponentProps {
 	images: string[];
@@ -87,11 +87,15 @@ export default function Hero({ images }: HeroComponentProps) {
 					<div className="flex flex-row w-full h-full">
 						{images.map((src, i) => (
 							<div key={i} className="flex-[0_0_100%]">
-								<img
-									src={src}
-									className="w-full h-full object-center object-contain"
-									loading="lazy"
-								/>
+								<div className="w-full h-full relative">
+									<Image
+										src={src}
+										className="absolute w-full h-full object-center object-contain"
+										alt=""
+										fill
+										priority={i == 0}
+									/>
+								</div>
 							</div>
 						))}
 					</div>

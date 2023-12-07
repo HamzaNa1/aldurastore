@@ -6,6 +6,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import getLanguage from "@/lib/languages/language";
 import { getDictionary } from "@/lib/languages/dictionaries";
+import Image from "next/image";
 
 interface ViewOrderPageProps {
 	params: {
@@ -145,7 +146,7 @@ function CartItemsTable({
 }) {
 	return (
 		<tbody>
-			{items.map((x, i) => (
+			{items.map((item, i) => (
 				<tr
 					key={i}
 					className="text-xs md:text-sm outline outline-[0.5px] last:rounded-b-sm bg-white outline-zinc-400 h-fit"
@@ -153,21 +154,22 @@ function CartItemsTable({
 					<td className="pl-1 py-2">
 						<Link
 							className="text-primarytext underline hover:brightness-50"
-							href={"/products/" + x.productId}
+							href={"/products/" + item.productId}
 						>
-							{x.product.name}
+							{item.product.name}
 						</Link>
 					</td>
-					<td className="pl-1">{x.productSettings.size}</td>
+					<td className="pl-1">{item.productSettings.size}</td>
 					<td className="pl-1 font-semibold">
-						{localizePrice(x.cost, country)}
+						{localizePrice(item.cost, country)}
 					</td>
 					<td className="relative flex items-center justify-center h-full aspect-square">
 						<div className="absolute w-full h-full p-1 flex justify-center items-center">
-							<img
-								src={x.product.imageURL}
-								alt={x.product.name}
-								className="h-full object-center object-contain"
+							<Image
+								src={item.product.imageURL}
+								alt={item.product.name}
+								className="absolute h-full object-center object-contain"
+								fill
 							/>
 						</div>
 					</td>

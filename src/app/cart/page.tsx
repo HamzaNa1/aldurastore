@@ -10,6 +10,7 @@ import { SubmitButton } from "@/components/ui/SubmitButton";
 import { FaSquareXmark } from "react-icons/fa6";
 import getLanguage, { getDirection } from "@/lib/languages/language";
 import { getDictionary } from "@/lib/languages/dictionaries";
+import Image from "next/image";
 
 export default async function Cart() {
 	const user = getServerSession();
@@ -147,10 +148,11 @@ export default async function Cart() {
 									</td>
 									<td className="relative flex items-center justify-center h-full aspect-square">
 										<div className="absolute w-full h-full p-1 flex justify-center items-center">
-											<img
+											<Image
 												src={item.product.imageURL}
 												alt={item.product.name}
-												className="h-full object-center object-contain"
+												className="absolute h-full object-center object-contain"
+												fill
 											/>
 										</div>
 									</td>
