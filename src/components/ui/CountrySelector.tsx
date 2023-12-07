@@ -2,14 +2,19 @@
 import { SelectLocation } from "@/actions/GeneralActions";
 import { locations } from "@/lib/Utils/locationUtils";
 import { countryToFlag } from "@/lib/flags";
+import { CountryDict } from "@/lib/languages/types";
 import React, { useEffect, useRef, useState } from "react";
 import { IoIosGlobe } from "react-icons/io";
 
 interface CountrySelectorProps {
 	country: string;
+	dict: CountryDict;
 }
 
-export default function CountrySelector({ country }: CountrySelectorProps) {
+export default function CountrySelector({
+	country,
+	dict,
+}: CountrySelectorProps) {
 	const [hover, setHover] = useState(false);
 	const [focus, setFocus] = useState(false);
 
@@ -60,6 +65,7 @@ export default function CountrySelector({ country }: CountrySelectorProps) {
 						setHover={setHover}
 						setFocus={setFocus}
 						country={country}
+						dict={dict}
 					/>
 				</div>
 			)}
@@ -71,10 +77,12 @@ function DropdownMenu({
 	setHover,
 	setFocus,
 	country,
+	dict,
 }: {
 	setHover: React.Dispatch<React.SetStateAction<boolean>>;
 	setFocus: React.Dispatch<React.SetStateAction<boolean>>;
 	country: string;
+	dict: CountryDict;
 }) {
 	const [select, setSelect] = useState(
 		locations.findIndex((x) => x.code == country) ?? 0
@@ -88,7 +96,7 @@ function DropdownMenu({
 					onClick={() => setShow(true)}
 					className="w-full h-full bg-zinc-100 text-zinc-800"
 				>
-					<span className="w-full text-zinc-800">العملات</span>
+					<span className="w-full text-zinc-800">{dict.currencies}</span>
 				</button>
 				{show && (
 					<div className="top-0 absolute w-full bg-zinc-100 drop-shadow-lg">

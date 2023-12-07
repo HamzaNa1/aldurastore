@@ -55,3 +55,7 @@ export interface MenuDict {
 	products: string;
 	aldurastore: string;
 }
+
+export interface CountryDict {
+	currencies: string;
+}

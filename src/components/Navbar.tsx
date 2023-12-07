@@ -34,7 +34,7 @@ export default async function Navbar() {
 				<div dir={dir} className="aspect-square h-full md:hidden">
 					<Menu dict={navbarDict} dir={dir} />
 				</div>
-				<CountrySelector country={country} />
+				<CountrySelector country={country} dict={navbarDict.country} />
 			</div>
 			<div dir={dir} className="hidden md:block h-full flex-1">
 				<div className="absolute top-0 py-1 w-screen h-16 flex gap-12 left-[50%] -translate-x-[50%] justify-center items-center text-black text-xl select-none">

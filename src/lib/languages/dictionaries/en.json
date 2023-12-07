@@ -2,7 +2,10 @@
 	"navbar": {
 		"home": "Home",
 		"products": "All Products",
-		"aldurastore": "Aldura Store"
+		"aldurastore": "Aldura Store",
+		"country": {
+			"currencies": "Currencies"
+		}
 	},
 	"footer": {
 		"pages": "Pages",

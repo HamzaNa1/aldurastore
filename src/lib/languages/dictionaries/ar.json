@@ -2,7 +2,10 @@
 	"navbar": {
 		"home": "الصفحة الرئيسية",
 		"products": "جميع المنتجات",
-		"aldurastore": "متجر الدرة"
+		"aldurastore": "متجر الدرة",
+		"country": {
+			"currencies": "العملات"
+		}
 	},
 	"footer": {
 		"pages": "الصفحات",
