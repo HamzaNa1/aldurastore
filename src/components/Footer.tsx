@@ -108,7 +108,9 @@ export default async function Footer() {
 							<div className="text-black flex flex-col gap-4">
 								<span className="font-bold">{footerDict.contact}</span>
 								<span>info@aldurastore.com</span>
-								<span>+968 77468122 </span>
+								<div>
+									<span dir="ltr">+968 77468122</span>
+								</div>
 							</div>
 						</div>
 					</div>
