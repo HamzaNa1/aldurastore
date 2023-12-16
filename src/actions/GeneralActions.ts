@@ -20,6 +20,7 @@ import getCountry from "@/lib/country";
 import { CheckoutEmail } from "@/lib/emails";
 import sendEmail from "@/lib/Utils/emailUtils";
 import { Language } from "@/lib/languages/dictionaries";
+import { ValidateRecaptchaAsync } from "@/lib/Utils/authUtils";
 
 export async function AddCartItem(
 	productId: string,
@@ -91,6 +92,7 @@ export async function SelectLanguage(language: Language) {
 }
 
 interface OrderDetails {
+	token: string;
 	firstName: string;
 	lastName: string;
 	phoneNumber: string;
@@ -105,6 +107,11 @@ export async function CreateOrder(orderDetails: OrderDetails) {
 
 	if (!user) {
 		redirect("/");
+	}
+
+	const success = await ValidateRecaptchaAsync(orderDetails.token);
+	if (!success) {
+		return false;
 	}
 
 	const country = getCountry();
@@ -160,7 +167,7 @@ export async function CreateOrder(orderDetails: OrderDetails) {
 					.set({ quantity: sql`${productSettings.quantity} - 1` })
 					.where(
 						and(
-							eq(productSettings.productId, items[i].productId),
+							eq(productSettings.id, items[i].productSettingsId),
 							gt(productSettings.quantity, 0)
 						)
 					);

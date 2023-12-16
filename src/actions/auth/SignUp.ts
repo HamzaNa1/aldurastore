@@ -3,6 +3,7 @@
 import db from "@/lib/db";
 import hash from "@/lib/salt";
 import { NewUser, users } from "@/lib/schema";
+import { ValidateRecaptchaAsync } from "@/lib/Utils/authUtils";
 import { sendEmailConfirmationAsync } from "@/lib/Utils/userUtils";
 import { isEmailValid } from "@/lib/Utils/utils";
 import { randomUUID } from "crypto";
@@ -12,19 +13,33 @@ interface SignUpProps {
 	name: string;
 	email: string;
 	password: string;
+	token: string;
 }
 
 export interface SignUpError {
 	invalidEmail: boolean;
 	invalidPassword: boolean;
 	emailUsed: boolean;
+	unexpectedError: boolean;
 }
 
 export default async function SignUp({
 	name,
 	email,
 	password,
+	token,
 }: SignUpProps): Promise<SignUpError | undefined> {
+	const success = await ValidateRecaptchaAsync(token);
+
+	if (!success) {
+		return {
+			invalidEmail: false,
+			invalidPassword: false,
+			emailUsed: false,
+			unexpectedError: true,
+		};
+	}
+
 	const emailInvalid = !isEmailValid(email);
 	const passwordInvalid = password.length < 8;
 	if (emailInvalid || passwordInvalid) {
@@ -32,6 +47,7 @@ export default async function SignUp({
 			invalidEmail: emailInvalid,
 			invalidPassword: passwordInvalid,
 			emailUsed: false,
+			unexpectedError: false,
 		};
 	}
 
@@ -47,7 +63,12 @@ export default async function SignUp({
 	try {
 		await db.insert(users).values(newUser);
 	} catch {
-		return { invalidEmail: false, invalidPassword: false, emailUsed: true };
+		return {
+			invalidEmail: false,
+			invalidPassword: false,
+			emailUsed: true,
+			unexpectedError: false,
+		};
 	}
 
 	if (!process.env.JWT_KEY) {

@@ -85,7 +85,11 @@ export default async function Checkout() {
 					<span className="text-primarytext text-3xl font-bold w-full h-10">
 						{checkoutDict.addressDetails}
 					</span>
-					<CheckoutForm dict={checkoutDict.locationForm} dir={dir} />
+					<CheckoutForm
+						dict={checkoutDict.locationForm}
+						dir={dir}
+						sitekey={process.env.RECAPTCHA_PUBLIC_KEY ?? ""}
+					/>
 				</div>
 			</div>
 		</>

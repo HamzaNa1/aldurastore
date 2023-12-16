@@ -5,6 +5,7 @@ import OrderBanner from "./OrderBanner";
 import { useEffect, useState } from "react";
 import Slider from "../Slider";
 import { IoDownloadOutline } from "react-icons/io5";
+import { toast } from "sonner";
 
 type OrderWithProducts = Order & {
 	ordersToProducts: OrdersToProducts[];
@@ -40,23 +41,28 @@ export default function OrderDashboard({ action }: OrderDashboardProps) {
 	}, [date, processed]);
 
 	const handleDownloadOrders = () => {
+		if (orders.length == 0) {
+			toast.error("No orders to download");
+			return;
+		}
+
 		let csv = [
 			"order id,user id,currency,price,product amount,date,is processed,process date,first name,last name,phone number,location,region,area,address",
 		];
 
 		orders.forEach(
-			(x) =>
+			(order) =>
 				(csv = [
 					...csv,
-					`${x.id},${x.userId},${x.country},${x.ordersToProducts
+					`${order.id},${order.userId},${order.country},${order.ordersToProducts
 						.reduce((acc, x) => acc + x.cost, 0)
 						.toFixed(2)},${
-						x.ordersToProducts.length
-					},\"${x.boughtDate.toLocaleString()}\",${x.isProcessed},\"${
-						x.fulfilledDate?.toLocaleString() ?? ""
-					}\",${x.firstname},${x.lastname},${x.phonenumber},${x.location},${
-						x.region
-					},${x.area},${x.address}`,
+						order.ordersToProducts.length
+					},\"${order.boughtDate.toLocaleString()}\",${order.isProcessed},\"${
+						order.fulfilledDate?.toLocaleString() ?? ""
+					}\",${order.firstname},${order.lastname},${order.phonenumber},${
+						order.location
+					},${order.region},${order.area},${order.address}`,
 				])
 		);
 
@@ -97,7 +103,7 @@ export default function OrderDashboard({ action }: OrderDashboardProps) {
 				</button>
 			</div>
 			<div className="h-screen">
-				{orders.length > 0 && (
+				{orders.length > 0 ? (
 					<Slider>
 						{orders.map((order, i) => (
 							<div key={i} className="flex-[0_0_10%]">
@@ -105,6 +111,10 @@ export default function OrderDashboard({ action }: OrderDashboardProps) {
 							</div>
 						))}
 					</Slider>
+				) : (
+					<div className="flex h-full justify-center items-center">
+						<span className="text-6xl">No Orders</span>
+					</div>
 				)}
 			</div>
 		</>

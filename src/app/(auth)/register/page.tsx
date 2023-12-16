@@ -17,7 +17,10 @@ export default async function Login() {
 
 	return (
 		<div className="w-full flex flex-col justify-center items-center bg-secondary gap-2 py-10">
-			<RegisterForm dict={registerDict.registerForm} />
+			<RegisterForm
+				dict={registerDict.registerForm}
+				sitekey={process.env.RECAPTCHA_PUBLIC_KEY ?? ""}
+			/>
 			<Link className="text-black w-64" href="/login">
 				{registerDict.alreadyRegistered}
 			</Link>
