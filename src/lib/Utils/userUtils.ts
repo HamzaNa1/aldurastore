@@ -41,10 +41,6 @@ export async function sendEmailConfirmationAsync(
 	userId: string,
 	emailAddress: string
 ) {
-	if (process.env.NODE_ENV != "production") {
-		return;
-	}
-
 	const confirmation = await db.query.emailConfirmations.findFirst({
 		where: (confirmation, { eq }) => eq(confirmation.id, userId),
 	});
@@ -70,6 +66,10 @@ export async function sendEmailConfirmationAsync(
 
 		const key = generateKey();
 		await tx.insert(emailConfirmations).values({ id: userId, key: key });
+
+		if (process.env.NODE_ENV != "production") {
+			return;
+		}
 
 		const email = ConfirmationEmail(language, { code: key });
 
