@@ -79,14 +79,18 @@ export async function SelectLocation(country: string) {
 	}
 
 	const cookiesStore = cookies();
-	cookiesStore.set("country", country);
+	cookiesStore.set("country", country, {
+		maxAge: new Date().setFullYear(new Date().getFullYear() + 1),
+	});
 
 	revalidatePath("/");
 }
 
 export async function SelectLanguage(language: Language) {
 	const cookiesStore = cookies();
-	cookiesStore.set("language", language);
+	cookiesStore.set("language", language, {
+		maxAge: new Date().setFullYear(new Date().getFullYear() + 1),
+	});
 
 	revalidatePath("/");
 }
