@@ -148,5 +148,8 @@
 			"processDate": "Processing Date",
 			"processing": "Processing..."
 		}
+	},
+	"banner": {
+		"label": "Shipping and delivery are free to all Gulf Cooperation Council countries within 7 days"
 	}
 }

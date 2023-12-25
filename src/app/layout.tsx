@@ -8,6 +8,7 @@ import Renewer from "@/components/Renewer";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import getLanguage, { getDirection } from "@/lib/languages/language";
+import Banner from "@/components/Banner";
 
 const inter = Cairo({ subsets: ["arabic", "latin"] });
 
@@ -40,6 +41,7 @@ export default async function RootLayout({
 			/>
 			<body className={inter.className + " no-scrollbar"}>
 				<div className="min-h-screen w-screen flex flex-col">
+					<Banner />
 					<div className="h-fit w-full justify-self-start flex-shrink-0">
 						<Navbar />
 					</div>
