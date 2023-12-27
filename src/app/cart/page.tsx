@@ -11,13 +11,18 @@ import { FaSquareXmark } from "react-icons/fa6";
 import getLanguage, { getDirection } from "@/lib/languages/language";
 import { getDictionary } from "@/lib/languages/dictionaries";
 import Image from "next/image";
+import {
+	DeleteCookiesCart,
+	GetCookiesCartAsync,
+} from "@/lib/Utils/cookiesCartUtils";
 
 export default async function Cart() {
-	const user = getServerSession();
 	const country = getCountry();
 
 	const language = getLanguage();
 	const cartDict = (await getDictionary(language)).cart;
+
+	const user = getServerSession();
 
 	const cartItems = user
 		? await db.query.cartItems.findMany({
@@ -33,9 +38,9 @@ export default async function Cart() {
 					productSettings: true,
 				},
 		  })
-		: [];
+		: await GetCookiesCartAsync(country);
 
-	if (cartItems.length == 0) {
+	if (!cartItems || cartItems.length == 0) {
 		return (
 			<div className="flex flex-col gap-4 place-self-center items-center py-20">
 				<span className="text-zinc-800 text-3xl font-semibold place-self-center">
@@ -74,14 +79,14 @@ export default async function Cart() {
 							<tr className="text-black text-sm outline outline-zinc-300 bg-white rounded-sm">
 								<td className="px-1">
 									{localizePrices(
-										cartItems.map((x) => x.product.productPrices[0].cost),
+										cartItems.map((item) => item.product.productPrices[0].cost),
 										country
 									)}
 								</td>
 							</tr>
 						</tbody>
 					</table>
-					{cartItems.find((x) => x.productSettings.quantity <= 0) ? (
+					{cartItems.find((item) => item.productSettings.quantity <= 0) ? (
 						<div className="bg-red-500 text-white h-7 w-full rounded-md text-center">
 							{cartDict.cantcontinue}
 						</div>
@@ -117,7 +122,7 @@ export default async function Cart() {
 							</tr>
 						</thead>
 						<tbody>
-							{cartItems.map((item) => (
+							{cartItems.map((item, i) => (
 								<tr
 									key={item.id}
 									className={
@@ -134,7 +139,7 @@ export default async function Cart() {
 														: " left-0 rounded-br-md pr-1")
 												}
 											>
-												{cartDict.nostock}
+												{cartDict.cartTable.nostock}
 											</div>
 										)}
 										{item.product.name}
@@ -165,7 +170,11 @@ export default async function Cart() {
 														return;
 													}
 
-													await DeleteCartItem(item.id);
+													if (user) {
+														await DeleteCartItem(item.id);
+													} else {
+														DeleteCookiesCart(i);
+													}
 												}}
 											>
 												<SubmitButton

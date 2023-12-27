@@ -59,3 +59,10 @@ export interface MenuDict {
 export interface CountryDict {
 	currencies: string;
 }
+
+export interface CartTableDict {
+	product: string;
+	size: string;
+	price: string;
+	nostock: string;
+}

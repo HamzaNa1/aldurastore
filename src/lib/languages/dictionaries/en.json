@@ -85,14 +85,14 @@
 		"cartTable": {
 			"product": "Product",
 			"size": "Size",
-			"price": "Price"
+			"price": "Price",
+			"nostock": "Out of Stock"
 		},
 		"cartDetails": "Bill Details",
 		"totalCost": "Total Value",
 		"continue": "Continue Shopping",
 		"back": "Back to Shopping",
-		"cantcontinue": "There are out of stock products in cart",
-		"nostock": "Out of Stock"
+		"cantcontinue": "There are out of stock products in cart"
 	},
 	"checkout": {
 		"addressDetails": "Address Details",

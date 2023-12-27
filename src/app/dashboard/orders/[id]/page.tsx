@@ -94,9 +94,9 @@ async function OrderView({ orderId }: { orderId: string }) {
 					</form>
 				</div>
 				<div className="flex flex-col flex-1 flex-shrink">
-					<span>User Id: {order.userId}</span>
-					<span>Username: {order.user.name}</span>
-					<span>Email: {order.user.email}</span>
+					{order.userId && <span>User Id: {order.userId}</span>}
+					<span>Username: {order?.user?.name ?? "Guest User"}</span>
+					{order.userId && <span>Email: {order?.user?.email}</span>}
 					<span>First Name: {order.firstname}</span>
 					<span>Last Name: {order.lastname}</span>
 					<span>Phone Number: {order.phonenumber}</span>

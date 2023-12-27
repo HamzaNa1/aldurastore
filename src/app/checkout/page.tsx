@@ -8,13 +8,11 @@ import { and, eq, sql } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import getLanguage, { getDirection } from "@/lib/languages/language";
 import { getDictionary } from "@/lib/languages/dictionaries";
+import { GetCookiesCartAsync } from "@/lib/Utils/cookiesCartUtils";
+import { cookies } from "next/headers";
 
 export default async function Checkout() {
 	const user = getServerSession();
-
-	if (!user) {
-		redirect("/login");
-	}
 
 	const country = getCountry();
 
@@ -22,20 +20,22 @@ export default async function Checkout() {
 	const checkoutDict = (await getDictionary(language)).checkout;
 	const dir = getDirection();
 
-	const total = (
-		await db
-			.select({ total: sql<number>`sum(${productPrices.cost})` })
-			.from(cartItems)
-			// .innerJoin(products, eq(cartItems.productId, products.id))
-			.innerJoin(
-				productPrices,
-				and(
-					eq(cartItems.productId, productPrices.productId),
-					eq(productPrices.country, country)
-				)
-			)
-			.where(eq(cartItems.userId, user.id))
-	)[0].total;
+	const total = user
+		? (
+				await db
+					.select({ total: sql<number>`sum(${productPrices.cost})` })
+					.from(cartItems)
+					// .innerJoin(products, eq(cartItems.productId, products.id))
+					.innerJoin(
+						productPrices,
+						and(
+							eq(cartItems.productId, productPrices.productId),
+							eq(productPrices.country, country)
+						)
+					)
+					.where(eq(cartItems.userId, user.id))
+		  )[0].total
+		: await GetCookiesTotalAsync(country);
 
 	if (!total) {
 		redirect("/cart");
@@ -94,4 +94,18 @@ export default async function Checkout() {
 			</div>
 		</>
 	);
+}
+
+async function GetCookiesTotalAsync(country: string) {
+	const cookiesCart = await GetCookiesCartAsync(country);
+
+	if (!cookiesCart) {
+		return;
+	}
+
+	const price = cookiesCart
+		.map((x) => x.product.productPrices[0])
+		.reduce((a, b) => a + b.cost, 0);
+
+	return price;
 }

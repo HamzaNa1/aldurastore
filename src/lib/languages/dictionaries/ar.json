@@ -84,14 +84,14 @@
 		"cartTable": {
 			"product": "المنتج",
 			"size": "المقاس",
-			"price": "السعر"
+			"price": "السعر",
+			"nostock": "غير متوفر"
 		},
 		"cartDetails": "تفاصيل الفاتورة",
 		"totalCost": "القيمة الكلية",
 		"continue": "متابعة الشراء",
 		"back": "العودة للتسوق",
-		"cantcontinue": "يوجد منتجات غير متوفرة في السلة",
-		"nostock": "غير متوفر"
+		"cantcontinue": "يوجد منتجات غير متوفرة في السلة"
 	},
 	"checkout": {
 		"addressDetails": "تفاصيل العنوان",

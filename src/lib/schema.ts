@@ -109,7 +109,7 @@ export const cartItems = mysqlTable(
 
 export const orders = mysqlTable("orders", {
 	id: varchar("id", { length: 255 }).notNull().unique().primaryKey(),
-	userId: varchar("userId", { length: 255 }).notNull(),
+	userId: varchar("userId", { length: 255 }),
 	country: varchar("country", { length: 255 }).notNull(),
 	firstname: varchar("firstname", { length: 255 }).notNull(),
 	lastname: varchar("lastname", { length: 255 }).notNull(),

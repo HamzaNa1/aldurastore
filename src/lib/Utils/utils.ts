@@ -26,6 +26,11 @@ export function isEmailValid(email: string) {
 	return true;
 }
 
+export function getNextYear() {
+	const date = new Date();
+	return date.setFullYear(date.getFullYear() + 1);
+}
+
 export function sortClothingSizes(sizeA: string, sizeB: string) {
 	const order = [
 		"3XS",
