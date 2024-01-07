@@ -5,6 +5,7 @@ import { SubmitButton } from "./ui/SubmitButton";
 import { AddCartItem } from "@/actions/GeneralActions";
 import { useState } from "react";
 import { AddToCartFormDict } from "@/lib/languages/types";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 interface AddToCartProps {
 	settings: ProductSettings[];
@@ -12,8 +13,11 @@ interface AddToCartProps {
 }
 
 export default function AddToCartForm({ settings, dict }: AddToCartProps) {
-	const [settingsIdx, setSettingsIdx] = useState(-1);
 	const [showError, setShowError] = useState(false);
+
+	const pathname = usePathname();
+	const searchParams = useSearchParams();
+	const router = useRouter();
 
 	return (
 		<div className="flex flex-col gap-16">
@@ -34,22 +38,31 @@ export default function AddToCartForm({ settings, dict }: AddToCartProps) {
 					<span className="font-bold text-lg sm:text-xl">{dict.size}:</span>
 					<div className="w-fit">
 						<div dir="ltr" className="flex flex-row flex-wrap gap-2">
-							{settings.map((size, i) => (
+							{settings.map((setting) => (
 								<button
-									key={size.id}
+									key={setting.id}
 									className={
 										"w-16 rounded-md bg-[#D9D9D9] py-1 hover:brightness-90 transition duration-300 border " +
-										(settingsIdx == i ? "border-primary" : "border-transparent")
+										(searchParams.get("size") == setting.size
+											? "border-primary"
+											: "border-transparent")
 									}
 									onClick={() => {
-										setSettingsIdx(i);
+										const newParams = new URLSearchParams(
+											searchParams.toString()
+										);
+										newParams.set("size", setting.size);
 
-										if (size.quantity <= 0) {
+										router.push(`${pathname}?${newParams.toString()}`, {
+											scroll: false,
+										});
+
+										if (setting.quantity <= 0) {
 											setShowError(true);
 										}
 									}}
 								>
-									{size.size}
+									{setting.size}
 								</button>
 							))}
 						</div>
@@ -64,13 +77,14 @@ export default function AddToCartForm({ settings, dict }: AddToCartProps) {
 			<div className="flex flex-row gap-10">
 				<form
 					action={async () => {
-						if (settingsIdx == -1) {
+						const settingSize = searchParams.get("size");
+						const setting = settings.find((x) => x.size == settingSize);
+
+						if (!setting) {
 							return;
 						}
 
-						const currSettings = settings[settingsIdx];
-
-						await AddCartItem(currSettings.productId, currSettings.id, 1);
+						await AddCartItem(setting.productId, setting.id, 1);
 					}}
 				>
 					<SubmitButton
