@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import "./globals.css";
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
 import Footer from "@/components/Footer";
 import { Toaster } from "sonner";
