@@ -3,7 +3,7 @@
 import { ProductSettings } from "@/lib/schema";
 import { SubmitButton } from "./ui/SubmitButton";
 import { AddCartItem } from "@/actions/GeneralActions";
-import { useState } from "react";
+import { useEffect, useOptimistic, useState } from "react";
 import { AddToCartFormDict } from "@/lib/languages/types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -18,6 +18,13 @@ export default function AddToCartForm({ settings, dict }: AddToCartProps) {
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
 	const router = useRouter();
+
+	const [sizeOptimistic, updateSize] = useOptimistic({
+		size: searchParams.get("size"),
+		isOptimized: false,
+	});
+
+	const submitDisabled = showError || sizeOptimistic.isOptimized;
 
 	return (
 		<div className="flex flex-col gap-16">
@@ -43,16 +50,20 @@ export default function AddToCartForm({ settings, dict }: AddToCartProps) {
 									key={setting.id}
 									className={
 										"w-16 rounded-md bg-[#D9D9D9] py-1 hover:brightness-90 transition duration-300 border " +
-										(searchParams.get("size") == setting.size
+										(sizeOptimistic.size == setting.size
 											? "border-primary"
 											: "border-transparent")
 									}
 									onClick={() => {
+										updateSize({
+											size: setting.size,
+											isOptimized: true,
+										});
+
 										const newParams = new URLSearchParams(
 											searchParams.toString()
 										);
 										newParams.set("size", setting.size);
-
 										router.push(`${pathname}?${newParams.toString()}`, {
 											scroll: false,
 										});
@@ -89,10 +100,9 @@ export default function AddToCartForm({ settings, dict }: AddToCartProps) {
 				>
 					<SubmitButton
 						className={
-							"py-2 px-12 bg-primary rounded-md drop-shadow-lg brightness-100 hover:brightness-90 transition duration-300 disabled:brightness-90" +
-							(showError ? " cursor-not-allowed" : "")
+							"py-2 px-12 bg-primary rounded-md drop-shadow-lg brightness-100 hover:brightness-90 transition duration-300 disabled:brightness-90 disabled:cursor-not-allowed"
 						}
-						fallback={null}
+						disabled={submitDisabled}
 					>
 						<span>{dict.cart}</span>
 					</SubmitButton>
