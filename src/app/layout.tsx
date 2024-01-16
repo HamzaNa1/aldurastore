@@ -5,10 +5,9 @@ import { Cairo } from "next/font/google";
 import Footer from "@/components/Footer";
 import { Toaster } from "sonner";
 import Renewer from "@/components/Renewer";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/react";
 import getLanguage, { getDirection } from "@/lib/languages/language";
 import Banner from "@/components/Banner";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 const inter = Cairo({ subsets: ["arabic", "latin"] });
 
@@ -53,9 +52,8 @@ export default async function RootLayout({
 					</div>
 				</div>
 				<Renewer />
-				<Analytics />
-				<SpeedInsights />
 			</body>
+			<GoogleTagManager gtmId="AW-11394561500" />
 		</html>
 	);
 }
