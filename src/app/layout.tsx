@@ -7,7 +7,7 @@ import { Toaster } from "sonner";
 import Renewer from "@/components/Renewer";
 import getLanguage, { getDirection } from "@/lib/languages/language";
 import Banner from "@/components/Banner";
-import { GoogleTagManager } from "@next/third-parties/google";
+import Script from "next/script";
 
 const inter = Cairo({ subsets: ["arabic", "latin"] });
 
@@ -53,7 +53,16 @@ export default async function RootLayout({
 				</div>
 				<Renewer />
 			</body>
-			<GoogleTagManager gtmId="AW-11394561500" />
+			<Script src="https://www.googletagmanager.com/gtag/js?id=AW-11394561500" />
+			<Script id="google-ads">
+				{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+ 
+          gtag('config', 'AW-11394561500');
+        `}
+			</Script>
 		</html>
 	);
 }
