@@ -53,14 +53,14 @@ export default async function RootLayout({
 				</div>
 				<Renewer />
 			</body>
-			<Script src="https://www.googletagmanager.com/gtag/js?id=AW-11394561500" />
+			<Script src="https://www.googletagmanager.com/gtag/js?id=AW-11394477421" />
 			<Script id="google-ads">
 				{`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
  
-          gtag('config', 'AW-11394561500');
+          gtag('config', 'AW-11394477421');
         `}
 			</Script>
 		</html>
