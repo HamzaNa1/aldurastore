@@ -5,9 +5,7 @@ import { getServerSession } from "@/lib/Utils/userUtils";
 import { SignToken, ValidateToken } from "@/lib/Utils/authUtils";
 import { cookies } from "next/headers";
 
-interface RenewUserProps {}
-
-export default async function RenewUser({}: RenewUserProps): Promise<UserToken | null> {
+export default async function RenewUser(): Promise<UserToken | null> {
 	const user = getServerSession();
 
 	if (!user || !ValidateToken(user.token)) {

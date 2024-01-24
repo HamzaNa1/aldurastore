@@ -9,7 +9,7 @@ export default function Renewer() {
 
 	useEffect(() => {
 		async function renew() {
-			await RenewUser({});
+			await RenewUser();
 		}
 
 		renew();
