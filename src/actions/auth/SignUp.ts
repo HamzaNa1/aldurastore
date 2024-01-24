@@ -16,7 +16,7 @@ interface SignUpProps {
 	token: string;
 }
 
-export interface SignUpError {
+interface SignUpError {
 	invalidEmail: boolean;
 	invalidPassword: boolean;
 	emailUsed: boolean;

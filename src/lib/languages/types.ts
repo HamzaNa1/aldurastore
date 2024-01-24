@@ -60,7 +60,7 @@ export interface CountryDict {
 	currencies: string;
 }
 
-export interface CartTableDict {
+interface CartTableDict {
 	product: string;
 	size: string;
 	price: string;

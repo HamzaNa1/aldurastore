@@ -1,4 +1,4 @@
-export default interface UserToken {
+interface UserToken {
 	id: string;
 	name: string;
 	email: string;

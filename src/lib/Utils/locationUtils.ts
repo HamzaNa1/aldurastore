@@ -1,4 +1,4 @@
-export type Location = {
+type Location = {
 	name: string;
 	code: string;
 	currency: string;

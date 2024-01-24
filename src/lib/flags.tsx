@@ -1,4 +1,4 @@
-export const AE = ({ className }: { className?: string }) => {
+const AE = ({ className }: { className?: string }) => {
 	return (
 		<svg
 			className={className}
@@ -14,7 +14,7 @@ export const AE = ({ className }: { className?: string }) => {
 	);
 };
 
-export const BH = ({ className }: { className?: string }) => {
+const BH = ({ className }: { className?: string }) => {
 	return (
 		<svg
 			className={className}
@@ -31,7 +31,7 @@ export const BH = ({ className }: { className?: string }) => {
 	);
 };
 
-export const KW = ({ className }: { className?: string }) => {
+const KW = ({ className }: { className?: string }) => {
 	return (
 		<svg
 			className={className}
@@ -59,7 +59,7 @@ export const KW = ({ className }: { className?: string }) => {
 	);
 };
 
-export const OM = ({ className }: { className?: string }) => {
+const OM = ({ className }: { className?: string }) => {
 	return (
 		<svg
 			className={className}
@@ -688,7 +688,7 @@ export const OM = ({ className }: { className?: string }) => {
 	);
 };
 
-export const QA = ({ className }: { className?: string }) => {
+const QA = ({ className }: { className?: string }) => {
 	return (
 		<svg
 			className={className}
@@ -705,7 +705,7 @@ export const QA = ({ className }: { className?: string }) => {
 	);
 };
 
-export const SA = ({ className }: { className?: string }) => {
+const SA = ({ className }: { className?: string }) => {
 	return (
 		<svg
 			className={className}
