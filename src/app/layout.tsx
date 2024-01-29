@@ -39,7 +39,7 @@ export default async function RootLayout({
 				position={dir == "rtl" ? "bottom-right" : "bottom-left"}
 			/>
 			<body className={inter.className + " no-scrollbar text-white"}>
-				<div className="min-h-screen w-screen flex flex-col">
+				<div className="min-h-screen flex flex-col">
 					<Banner />
 					<div className="h-fit w-full justify-self-start flex-shrink-0">
 						<Navbar />

@@ -37,7 +37,7 @@ export default async function Navbar() {
 				<CountrySelector country={country} dict={navbarDict.country} />
 			</div>
 			<div dir={dir} className="hidden md:block h-full flex-1">
-				<div className="absolute top-0 py-1 w-screen h-16 flex gap-12 left-[50%] -translate-x-[50%] justify-center items-center text-black text-xl select-none">
+				<div className="absolute top-0 py-1 w-full h-16 flex gap-12 left-[50%] -translate-x-[50%] justify-center items-center text-black text-xl select-none">
 					<Link href="/">
 						<span className="hover:text-primarytext transition">
 							{navbarDict.home}

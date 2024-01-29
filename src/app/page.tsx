@@ -16,7 +16,7 @@ export default async function Home() {
 	const mainDict = dict.main;
 
 	return (
-		<main className="w-screen bg-secondary">
+		<main className="w-full bg-secondary">
 			<div dir="ltr" className="flex items-center justify-center py-20">
 				<div className="w-full h-full max-w-5xl px-1">
 					<Suspense fallback={<HeroSkeleton />}>

@@ -31,7 +31,7 @@ export default function Menu({ dict, dir }: MenuProps) {
 			{show && (
 				<div
 					dir="ltr"
-					className="fixed flex h-screen w-screen left-0 top-0 bg-black/30 z-[99]"
+					className="fixed flex h-screen w-full left-0 top-0 bg-black/30 z-[99]"
 				>
 					<div
 						dir={dir}
