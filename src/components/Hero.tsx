@@ -1,11 +1,12 @@
 "use client";
 
 import Autoplay from "embla-carousel-autoplay";
-import useEmblaCarousel, { EmblaCarouselType } from "embla-carousel-react";
+import useEmblaCarousel from "embla-carousel-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { GoDot, GoDotFill } from "react-icons/go";
 import Image from "next/image";
+import { EmblaCarouselType } from "embla-carousel";
 
 interface HeroComponentProps {
 	images: string[];
