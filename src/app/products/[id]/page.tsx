@@ -10,6 +10,7 @@ import getLanguage, { getDirection } from "@/lib/languages/language";
 import { getDictionary } from "@/lib/languages/dictionaries";
 import { sql } from "drizzle-orm";
 import { products } from "@/lib/schema";
+import { Suspense } from "react";
 
 interface ProductPageProps {
 	params: {
@@ -85,12 +86,14 @@ export default async function Product({ params: { id } }: ProductPageProps) {
 						</span>
 					</div>
 					<div className="w-full flex flex-col gap-5">
-						<AddToCartForm
-							settings={product.productSettings.sort((a, b) =>
-								sortClothingSizes(a.size, b.size)
-							)}
-							dict={productDict.addToCartForm}
-						/>
+						<Suspense>
+							<AddToCartForm
+								settings={product.productSettings.sort((a, b) =>
+									sortClothingSizes(a.size, b.size)
+								)}
+								dict={productDict.addToCartForm}
+							/>
+						</Suspense>
 						<div className="flex flex-row items-center gap-1 p-1">
 							<LiaShippingFastSolid className="fill-zinc-400 w-4 h-4" />
 							<span className="text-zinc-400 text-xs">{productDict.label}</span>

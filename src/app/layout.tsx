@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import "./globals.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cairo } from "next/font/google";
 import Footer from "@/components/Footer";
 import { Toaster } from "sonner";
@@ -21,8 +21,21 @@ export async function generateMetadata(): Promise<Metadata> {
 
 	return {
 		title: lang == "ar" ? "متجر الدرة" : "Aldura Store",
+		metadataBase: new URL("https://aldurastore.com"),
+		applicationName: lang == "ar" ? "متجر الدرة" : "Aldura Store",
+		referrer: "origin-when-cross-origin",
+		category: "store",
+		publisher: "Deveopix",
+		openGraph: {
+			images: [{ url: "/opengraph-image.png" }],
+		},
 	};
 }
+
+export const viewport: Viewport = {
+	themeColor: "#e5e7eb",
+	colorScheme: "only light",
+};
 
 export default async function RootLayout({
 	children,
