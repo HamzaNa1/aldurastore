@@ -31,8 +31,6 @@ export function middleware(request: NextRequest) {
 			.filter((x) => x.length == 2)
 			.map((x) => x[1].toLowerCase());
 
-		console.log(codes);
-
 		const code = locations.find((x) => codes.includes(x.code))?.code ?? "sa";
 
 		response.cookies.set("country", code);
@@ -44,8 +42,6 @@ export function middleware(request: NextRequest) {
 			.map((x) => x.split(";"))
 			.map((x) => x[0].split("-"))
 			.map((x) => x[0].toLowerCase());
-
-		console.log(languages);
 
 		const language = languages.find((x) => x == "en" || x == "ar") ?? "ar";
 
