@@ -66,3 +66,7 @@ interface CartTableDict {
 	price: string;
 	nostock: string;
 }
+
+export interface InitialCountrySelectorDict {
+	select: string;
+}

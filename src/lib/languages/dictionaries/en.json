@@ -151,5 +151,8 @@
 	},
 	"banner": {
 		"label": "Shipping and delivery are free to all Gulf Cooperation Council countries within 7 days"
+	},
+	"initialCountrySelector": {
+		"select": "Please select the country"
 	}
 }
