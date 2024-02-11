@@ -7,6 +7,9 @@ import getLanguage from "@/lib/languages/language";
 import { getDictionary } from "@/lib/languages/dictionaries";
 import Image from "next/image";
 import logo from "@/images/logobg.jpg";
+import { FaLocationDot } from "react-icons/fa6";
+import { IoMdMail } from "react-icons/io";
+import { FaPhoneAlt } from "react-icons/fa";
 
 export default async function Footer() {
 	const language = getLanguage();
@@ -107,9 +110,21 @@ export default async function Footer() {
 						<div className="flex justify-center flex-1">
 							<div className="text-black flex flex-col gap-4">
 								<span className="font-bold">{footerDict.contact}</span>
-								<span>info@aldurastore.com</span>
+								<div className="flex items-center gap-2">
+									<IoMdMail size={20} />
+									<span>info@aldurastore.com</span>
+								</div>
 								<div>
-									<span dir="ltr">+968 77468122</span>
+									<div className="flex items-center gap-2">
+										<FaPhoneAlt size={20} />
+										<span dir="ltr">+968 77468122</span>
+									</div>
+								</div>
+								<div>
+									<div className="flex items-center gap-2">
+										<FaLocationDot size={20} />
+										<span dir="ltr">OMAN SALALAH ALWADI </span>
+									</div>
 								</div>
 							</div>
 						</div>
