@@ -10,6 +10,7 @@ import Banner from "@/components/Banner";
 import Script from "next/script";
 import InitialCountrySelector from "@/components/InitialCountrySelector";
 import { cookies } from "next/headers";
+import { getDictionary } from "@/lib/languages/dictionaries";
 
 const inter = Cairo({ subsets: ["arabic", "latin"] });
 
@@ -47,6 +48,7 @@ export default async function RootLayout({
 	const lang = getLanguage();
 	const dir = getDirection();
 	const cookieStore = cookies();
+	const dict = await getDictionary(lang);
 
 	return (
 		<html dir={dir} lang={lang}>
@@ -56,7 +58,9 @@ export default async function RootLayout({
 			/>
 			<body className={inter.className + " no-scrollbar text-white"}>
 				<div className="min-h-screen flex flex-col">
-					{!cookieStore.get("country") && <InitialCountrySelector />}
+					{!cookieStore.get("country") && (
+						<InitialCountrySelector dict={dict.initialCountrySelector} />
+					)}
 					<Banner />
 					<div className="h-fit w-full justify-self-start flex-shrink-0">
 						<Navbar />
