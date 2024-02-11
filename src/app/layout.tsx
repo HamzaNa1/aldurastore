@@ -8,6 +8,8 @@ import Renewer from "@/components/Renewer";
 import getLanguage, { getDirection } from "@/lib/languages/language";
 import Banner from "@/components/Banner";
 import Script from "next/script";
+import InitialCountrySelector from "@/components/InitialCountrySelector";
+import { cookies } from "next/headers";
 
 const inter = Cairo({ subsets: ["arabic", "latin"] });
 
@@ -44,6 +46,7 @@ export default async function RootLayout({
 }) {
 	const lang = getLanguage();
 	const dir = getDirection();
+	const cookieStore = cookies();
 
 	return (
 		<html dir={dir} lang={lang}>
@@ -53,6 +56,7 @@ export default async function RootLayout({
 			/>
 			<body className={inter.className + " no-scrollbar text-white"}>
 				<div className="min-h-screen flex flex-col">
+					{!cookieStore.get("country") && <InitialCountrySelector />}
 					<Banner />
 					<div className="h-fit w-full justify-self-start flex-shrink-0">
 						<Navbar />
