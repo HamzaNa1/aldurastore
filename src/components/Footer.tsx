@@ -10,6 +10,7 @@ import logo from "@/images/logobg.jpg";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdMail } from "react-icons/io";
 import { FaPhoneAlt } from "react-icons/fa";
+import { FaTiktok } from "react-icons/fa";
 
 export default async function Footer() {
 	const language = getLanguage();
@@ -44,7 +45,7 @@ export default async function Footer() {
 									</Link>
 
 									<Link
-										href="https://www.instagram.com/aldurra__store?igshid=NGVhN2U2NjQ0Yg%3D%3D"
+										href="https://www.instagram.com/aldurra.store?igsh=eWhyd3VzMm40aGgx"
 										rel="noopener noreferrer"
 										target="_blank"
 										className="group"
@@ -62,6 +63,18 @@ export default async function Footer() {
 										className="group"
 									>
 										<BsWhatsapp
+											size={40}
+											className="fill-zinc-800  group-hover:fill-primary transition duration-200"
+										/>
+									</Link>
+
+									<Link
+										href="https://www.tiktok.com/@aldurra_store?_t=8jzczFVESyj&_r=1"
+										rel="noopener noreferrer"
+										target="_blank"
+										className="group"
+									>
+										<FaTiktok
 											size={40}
 											className="fill-zinc-800  group-hover:fill-primary transition duration-200"
 										/>
@@ -121,10 +134,15 @@ export default async function Footer() {
 									</div>
 								</div>
 								<div>
-									<div className="flex items-center gap-2">
+									<Link
+										className="flex items-center gap-2"
+										href="https://maps.app.goo.gl/XGifRSxKHNknFvyL6"
+										rel="noopener noreferrer"
+										target="_blank"
+									>
 										<FaLocationDot size={20} />
 										<span dir="ltr">OMAN SALALAH ALWADI </span>
-									</div>
+									</Link>
 								</div>
 							</div>
 						</div>
