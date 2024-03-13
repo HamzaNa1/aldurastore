@@ -13,6 +13,6 @@ export default {
 	out: "./src/lib/migrations",
 	driver: "mysql2",
 	dbCredentials: {
-		connectionString: process.env.DATABASE_URL,
+		uri: process.env.DATABASE_URL!,
 	},
 } satisfies Config;

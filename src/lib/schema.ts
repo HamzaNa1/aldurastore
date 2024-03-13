@@ -218,8 +218,8 @@ export const ordersToProductsRelations = relations(
 			references: [products.id],
 		}),
 		productSettings: one(productSettings, {
-			fields: [ordersToProducts.productId],
-			references: [productSettings.productId],
+			fields: [ordersToProducts.productSettingsId],
+			references: [productSettings.id],
 		}),
 	})
 );

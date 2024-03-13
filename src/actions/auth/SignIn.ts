@@ -25,8 +25,8 @@ export default async function SignIn({
 	const saltedPassword = hash(password);
 
 	const user = await db.query.users.findFirst({
-		where: (user, { eq }) =>
-			eq(user.email, email) && eq(user.password, saltedPassword),
+		where: (user, { eq, and }) =>
+			and(eq(user.email, email), eq(user.password, saltedPassword)),
 	});
 
 	if (!user) {
