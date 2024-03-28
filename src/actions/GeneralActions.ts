@@ -178,7 +178,7 @@ export async function CreateOrder(orderDetails: OrderDetails) {
 					cost: items[i].product.productPrices[0].cost,
 				});
 
-				const query = await tx
+				const [query] = await tx
 					.update(productSettings)
 					.set({ quantity: sql`${productSettings.quantity} - 1` })
 					.where(
@@ -188,7 +188,7 @@ export async function CreateOrder(orderDetails: OrderDetails) {
 						)
 					);
 
-				if (query.rowsAffected == 0) {
+				if (query.affectedRows == 0) {
 					tx.rollback();
 					return;
 				}
@@ -248,7 +248,7 @@ async function CreateOrderFromCookes(orderDetails: OrderDetails) {
 					cost: items[i].product.productPrices[0].cost,
 				});
 
-				const query = await tx
+				const [query] = await tx
 					.update(productSettings)
 					.set({ quantity: sql`${productSettings.quantity} - 1` })
 					.where(
@@ -258,7 +258,7 @@ async function CreateOrderFromCookes(orderDetails: OrderDetails) {
 						)
 					);
 
-				if (query.rowsAffected == 0) {
+				if (query.affectedRows == 0) {
 					tx.rollback();
 					return;
 				}
